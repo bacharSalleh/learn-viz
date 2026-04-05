@@ -95,7 +95,7 @@ class LvCallout extends LvBaseElement {
     this._render();
   }
 
-  attributeChangedCallback(_name: string, _old: string | null, _new: string | null) {
+  handleAttributeChange(_name: string, _old: string | null, _new: string | null) {
     if (this.root.querySelector('.callout')) {
       this._render();
     }

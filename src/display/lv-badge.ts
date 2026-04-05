@@ -48,7 +48,7 @@ class LvBadge extends LvBaseElement {
     this._updateColor();
   }
 
-  attributeChangedCallback(_name: string, _old: string | null, _new: string | null) {
+  handleAttributeChange(_name: string, _old: string | null, _new: string | null) {
     if (_name === 'color') {
       this._updateColor();
     }

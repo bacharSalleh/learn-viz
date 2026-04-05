@@ -54,7 +54,7 @@ class LvMetric extends LvBaseElement {
     this._observer = null;
   }
 
-  attributeChangedCallback(_name: string, _old: string | null, _new: string | null) {
+  handleAttributeChange(_name: string, _old: string | null, _new: string | null) {
     if (this.root.querySelector('.val')) {
       this._update();
     }

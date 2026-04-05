@@ -59,7 +59,7 @@ class LvNav extends LvBaseElement {
     this._render();
   }
 
-  attributeChangedCallback() {
+  handleAttributeChange() {
     this._render();
   }
 

@@ -141,7 +141,7 @@ class LvQuiz extends LvBaseElement {
     this._attachListeners();
   }
 
-  attributeChangedCallback() {
+  handleAttributeChange() {
     if (!this._answered) {
       this._render();
       this._attachListeners();

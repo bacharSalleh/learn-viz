@@ -56,7 +56,7 @@ class LvLineChart extends LvBaseElement {
     this._resizeObs = null;
   }
 
-  attributeChangedCallback(_name: string, _old: string | null, _new: string | null) {
+  handleAttributeChange(_name: string, _old: string | null, _new: string | null) {
     if (this._built) {
       this._buildChart();
     }

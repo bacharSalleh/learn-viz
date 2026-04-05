@@ -41,7 +41,7 @@ class LvHeatmap extends LvBaseElement {
     this._buildChart();
   }
 
-  attributeChangedCallback() {
+  handleAttributeChange() {
     if (this.isConnected) {
       this._buildChart();
     }

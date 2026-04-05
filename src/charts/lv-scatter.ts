@@ -74,7 +74,7 @@ class LvScatter extends LvBaseElement {
     super.disconnectedCallback();
   }
 
-  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+  handleAttributeChange(name: string, oldVal: string | null, newVal: string | null) {
     if (oldVal === newVal) return;
     if (name === 'data') {
       this._data = this.jsonAttr<ScatterDatum[]>('data', []);

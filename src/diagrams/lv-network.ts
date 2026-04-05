@@ -93,7 +93,7 @@ class LvNetwork extends LvBaseElement {
     this._cancelAnimation();
   }
 
-  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+  handleAttributeChange(name: string, oldVal: string | null, newVal: string | null) {
     if (oldVal === newVal) return;
     if (this._svg) {
       this._cancelAnimation();

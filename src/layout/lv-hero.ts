@@ -52,7 +52,7 @@ class LvHero extends LvBaseElement {
     this._render();
   }
 
-  attributeChangedCallback() {
+  handleAttributeChange() {
     this._render();
   }
 

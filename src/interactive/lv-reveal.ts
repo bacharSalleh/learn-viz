@@ -112,7 +112,7 @@ class LvReveal extends LvBaseElement {
     }
   }
 
-  attributeChangedCallback(name: string) {
+  handleAttributeChange(name: string) {
     if (name === 'revealed' && this.hasAttribute('revealed') && !this._revealed) {
       this._reveal(true);
     }

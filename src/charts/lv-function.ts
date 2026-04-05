@@ -90,7 +90,7 @@ class LvFunction extends LvBaseElement {
     this._resizeObserver = null;
   }
 
-  attributeChangedCallback(name: string, oldVal: string | null, newVal: string | null) {
+  handleAttributeChange(name: string, oldVal: string | null, newVal: string | null) {
     if (oldVal === newVal) return;
     if (name === 'fn') this._parseFn();
     if (this._svg) {

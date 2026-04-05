@@ -42,7 +42,7 @@ class LvGrid extends LvBaseElement {
     this._render();
   }
 
-  attributeChangedCallback() {
+  handleAttributeChange() {
     if (!this.root.querySelector('.grid')) {
       this._render();
     }

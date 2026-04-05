@@ -67,7 +67,7 @@ class LvMatrix extends LvBaseElement {
     this._render();
   }
 
-  attributeChangedCallback() {
+  handleAttributeChange() {
     if (this.root) {
       this._render();
     }

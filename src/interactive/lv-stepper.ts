@@ -58,7 +58,7 @@ class LvStep extends LvBaseElement {
     this._render();
   }
 
-  attributeChangedCallback() {
+  handleAttributeChange() {
     if (this.root.querySelector('.title')) {
       this._render();
     }

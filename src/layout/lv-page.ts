@@ -30,7 +30,7 @@ class LvPage extends LvBaseElement {
     this._render();
   }
 
-  attributeChangedCallback() {
+  handleAttributeChange() {
     this._render();
   }
 

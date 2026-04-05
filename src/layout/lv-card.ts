@@ -47,28 +47,20 @@ class LvCard extends LvBaseElement {
     return ['variant'];
   }
 
-  private _rendering = false;
-
   connectedCallback() {
     super.connectedCallback();
     this.adoptStyles(css);
     this._render();
   }
 
-  attributeChangedCallback() {
-    if (!this._rendering) {
-      this._render();
-    }
+  handleAttributeChange() {
+    this._render();
   }
 
   private _render() {
-    if (this._rendering) return;
-    this._rendering = true;
-    // Only re-render if shadow root is empty (first time)
     if (!this.root.querySelector('.card')) {
       this.render(`<div class="card"><slot></slot></div>`);
     }
-    this._rendering = false;
   }
 }
 

@@ -28,7 +28,7 @@ class LvTab extends LvBaseElement {
     this.setAttribute('role', 'tabpanel');
   }
 
-  attributeChangedCallback() {
+  handleAttributeChange() {
     // visibility handled by :host([active]) CSS
   }
 }

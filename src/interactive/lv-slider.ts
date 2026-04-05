@@ -126,7 +126,7 @@ class LvSlider extends LvBaseElement {
     this._updateTrack();
   }
 
-  attributeChangedCallback() {
+  handleAttributeChange() {
     if (this._input) {
       this._render();
       this._bind();
