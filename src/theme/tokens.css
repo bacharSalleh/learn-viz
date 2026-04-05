@@ -1,0 +1,87 @@
+/* ============================================================
+   LearnViz Design Tokens
+   All CSS custom properties for the component library.
+   Uses CSS logical properties throughout (inline/block, not left/right).
+   ============================================================ */
+
+:root {
+  /* ── Surface ── */
+  --lv-bg:          #0b0b14;
+  --lv-bg-raised:   #12122a;
+  --lv-bg-card:     #1a1a2e;
+  --lv-bg-hover:    #222244;
+  --lv-border:      #2a2a4a;
+  --lv-border-focus:#3a3a6a;
+
+  /* ── Text ── */
+  --lv-text:        #e4e4ec;
+  --lv-text-dim:    #8888aa;
+  --lv-text-inv:    #0b0b14;
+
+  /* ── Brand ── */
+  --lv-accent:      #00d4ff;
+  --lv-accent-dim:  #00d4ff22;
+  --lv-accent2:     #7b68ee;
+  --lv-accent2-dim: #7b68ee22;
+
+  /* ── Semantic ── */
+  --lv-positive:    #00c853;
+  --lv-positive-dim:#00c85318;
+  --lv-warning:     #ffd93d;
+  --lv-warning-dim: #ffd93d18;
+  --lv-negative:    #ff2d75;
+  --lv-negative-dim:#ff2d7518;
+  --lv-info:        #00d4ff;
+  --lv-orange:      #ff9800;
+
+  /* ── Chart palette (8 distinct colors for data series) ── */
+  --lv-chart-0: #00d4ff;
+  --lv-chart-1: #7b68ee;
+  --lv-chart-2: #00c853;
+  --lv-chart-3: #ff9800;
+  --lv-chart-4: #ff2d75;
+  --lv-chart-5: #ffd93d;
+  --lv-chart-6: #69f0ae;
+  --lv-chart-7: #ff6b9d;
+
+  /* ── Typography ── */
+  --lv-font:      'Inter', 'Segoe UI', Tahoma, Geneva, sans-serif;
+  --lv-font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
+  --lv-fs-xs:   0.72rem;
+  --lv-fs-sm:   0.85rem;
+  --lv-fs-base: 1rem;
+  --lv-fs-md:   1.1rem;
+  --lv-fs-lg:   1.25rem;
+  --lv-fs-xl:   1.5rem;
+  --lv-fs-2xl:  2rem;
+  --lv-fs-3xl:  2.8rem;
+  --lv-fs-hero: 5rem;
+  --lv-lh:      1.7;
+
+  /* ── Spacing (4px grid) ── */
+  --lv-sp-1: 4px;   --lv-sp-2: 8px;   --lv-sp-3: 12px;
+  --lv-sp-4: 16px;  --lv-sp-5: 20px;  --lv-sp-6: 24px;
+  --lv-sp-8: 32px;  --lv-sp-10: 40px; --lv-sp-12: 48px;
+  --lv-sp-16: 64px; --lv-sp-20: 80px;
+
+  /* ── Radius ── */
+  --lv-r-xs: 4px;   --lv-r-sm: 6px;   --lv-r-md: 12px;
+  --lv-r-lg: 16px;  --lv-r-xl: 24px;  --lv-r-full: 9999px;
+
+  /* ── Shadows ── */
+  --lv-shadow-sm:   0 2px 8px rgba(0,0,0,0.3);
+  --lv-shadow-md:   0 4px 20px rgba(0,0,0,0.4);
+  --lv-shadow-lg:   0 8px 40px rgba(0,0,0,0.5);
+  --lv-shadow-glow: 0 0 24px var(--lv-accent-dim);
+
+  /* ── Transitions ── */
+  --lv-ease:     cubic-bezier(0.4, 0, 0.2, 1);
+  --lv-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --lv-ease-in:  cubic-bezier(0.4, 0, 1, 1);
+  --lv-dur:      0.3s;
+  --lv-dur-slow: 0.6s;
+  --lv-dur-chart: 0.8s;
+
+  /* ── Layout ── */
+  --lv-max-w: 920px;
+}

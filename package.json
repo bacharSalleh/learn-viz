@@ -1,0 +1,44 @@
+{
+  "name": "learn-viz",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "./dist/learn-viz.umd.cjs",
+  "module": "./dist/learn-viz.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/learn-viz.js",
+      "require": "./dist/learn-viz.umd.cjs"
+    },
+    "./style.css": "./dist/learn-viz.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vite serve demo",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "d3": "^7",
+    "gsap": "^3.14.2"
+  },
+  "devDependencies": {
+    "@types/d3": "^7.4.3",
+    "typescript": "^5",
+    "vite": "^6"
+  },
+  "peerDependencies": {
+    "highlight.js": "^11",
+    "katex": "^0.16"
+  },
+  "peerDependenciesMeta": {
+    "katex": {
+      "optional": true
+    },
+    "highlight.js": {
+      "optional": true
+    }
+  }
+}

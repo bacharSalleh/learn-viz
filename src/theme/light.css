@@ -1,0 +1,35 @@
+/* ============================================================
+   LearnViz Light Theme Override
+   Apply with data-theme="light" on any ancestor element.
+   Only overrides tokens that differ from the dark defaults.
+   ============================================================ */
+
+[data-theme="light"] {
+  color-scheme: light;
+
+  /* ── Surface ── */
+  --lv-bg:          #f8f8fc;
+  --lv-bg-raised:   #ffffff;
+  --lv-bg-card:     #ffffff;
+  --lv-bg-hover:    #f0f0f8;
+  --lv-border:      #d4d4e0;
+  --lv-border-focus:#a0a0c0;
+
+  /* ── Text ── */
+  --lv-text:        #1a1a2e;
+  --lv-text-dim:    #666688;
+  --lv-text-inv:    #ffffff;
+
+  /* ── Dimmed accent/semantic (lighter for light bg) ── */
+  --lv-accent-dim:  #00d4ff18;
+  --lv-accent2-dim: #7b68ee18;
+  --lv-positive-dim:#00c85312;
+  --lv-warning-dim: #ffd93d12;
+  --lv-negative-dim:#ff2d7512;
+
+  /* ── Shadows (softer on light surfaces) ── */
+  --lv-shadow-sm:   0 2px 8px rgba(0,0,0,0.06);
+  --lv-shadow-md:   0 4px 20px rgba(0,0,0,0.1);
+  --lv-shadow-lg:   0 8px 40px rgba(0,0,0,0.15);
+  --lv-shadow-glow: 0 0 24px rgba(0,212,255,0.1);
+}

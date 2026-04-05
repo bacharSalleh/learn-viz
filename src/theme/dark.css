@@ -1,0 +1,8 @@
+/* ============================================================
+   LearnViz Dark Theme (Default)
+   Dark is the default color scheme. These values match tokens.css.
+   ============================================================ */
+
+:root, [data-theme="dark"] {
+  color-scheme: dark;
+}

@@ -1,0 +1,78 @@
+/* ============================================================
+   LearnViz Utility Classes
+   All layout uses CSS logical properties (inline/block, not left/right).
+   ============================================================ */
+
+/* ── Box reset ── */
+*, *::before, *::after { box-sizing: border-box; }
+
+/* ── Layout ── */
+.lv-container {
+  max-width: var(--lv-max-w);
+  margin-inline: auto;
+  padding-inline: var(--lv-sp-6);
+  padding-block-end: var(--lv-sp-20);
+}
+
+/* ── Grid ── */
+.lv-grid      { display: grid; gap: var(--lv-sp-4); }
+.lv-grid-2    { grid-template-columns: repeat(2, 1fr); }
+.lv-grid-3    { grid-template-columns: repeat(3, 1fr); }
+.lv-grid-4    { grid-template-columns: repeat(4, 1fr); }
+.lv-grid-auto { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+
+@media (max-width: 640px) {
+  .lv-grid-2,
+  .lv-grid-3,
+  .lv-grid-4 { grid-template-columns: 1fr; }
+}
+
+/* ── Flex ── */
+.lv-flex        { display: flex; gap: var(--lv-sp-4); }
+.lv-flex-wrap   { flex-wrap: wrap; }
+.lv-flex-col    { flex-direction: column; }
+.lv-flex-center { align-items: center; justify-content: center; }
+
+/* ── Text ── */
+.lv-text-center  { text-align: center; }
+.lv-text-start   { text-align: start; }
+.lv-text-end     { text-align: end; }
+.lv-text-dim     { color: var(--lv-text-dim); }
+.lv-text-accent  { color: var(--lv-accent); }
+.lv-text-accent2 { color: var(--lv-accent2); }
+.lv-text-pos     { color: var(--lv-positive); }
+.lv-text-warn    { color: var(--lv-warning); }
+.lv-text-neg     { color: var(--lv-negative); }
+.lv-text-mono    { font-family: var(--lv-font-mono); }
+.lv-text-xs      { font-size: var(--lv-fs-xs); }
+.lv-text-sm      { font-size: var(--lv-fs-sm); }
+.lv-text-base    { font-size: var(--lv-fs-base); }
+.lv-text-lg      { font-size: var(--lv-fs-lg); }
+.lv-text-xl      { font-size: var(--lv-fs-xl); }
+.lv-text-2xl     { font-size: var(--lv-fs-2xl); }
+.lv-text-3xl     { font-size: var(--lv-fs-3xl); }
+.lv-bold         { font-weight: 700; }
+.lv-highlight    { color: var(--lv-accent); font-weight: 600; }
+
+/* ── Spacing (logical block margins) ── */
+.lv-mt-4  { margin-block-start: var(--lv-sp-4); }
+.lv-mt-8  { margin-block-start: var(--lv-sp-8); }
+.lv-mt-12 { margin-block-start: var(--lv-sp-12); }
+.lv-mb-4  { margin-block-end: var(--lv-sp-4); }
+.lv-mb-8  { margin-block-end: var(--lv-sp-8); }
+.lv-gap-2 { gap: var(--lv-sp-2); }
+.lv-gap-4 { gap: var(--lv-sp-4); }
+.lv-gap-6 { gap: var(--lv-sp-6); }
+.lv-gap-8 { gap: var(--lv-sp-8); }
+
+/* ── Visibility ── */
+.lv-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
