@@ -1,7 +1,5 @@
 import { LvBaseElement } from '../core/base-element.js';
-import { loadScript } from '../core/utils.js';
-
-const ROUGH_CDN = 'https://cdn.jsdelivr.net/npm/roughjs@4.6.6/bundled/rough.cjs.min.js';
+import rough from 'roughjs';
 
 const css = `
   :host { display: block; margin: var(--lv-sp-4) 0; }
@@ -48,7 +46,7 @@ class LvSketchBar extends LvBaseElement {
     }
   }
 
-  private async _buildChart(): Promise<void> {
+  private _buildChart(): void {
     const data: SketchBarDatum[] = this.jsonAttr('data', []);
     const roughness = parseFloat(this.getAttribute('roughness') || '2');
 
@@ -65,15 +63,9 @@ class LvSketchBar extends LvBaseElement {
       <div class="bar-labels">${data.map(d => `<span>${this._esc(d.label)}</span>`).join('')}</div>
     </div>`);
 
-    try {
-      await loadScript(ROUGH_CDN);
-    } catch {
-      return;
-    }
-
-    const canvas = this.root.querySelector('canvas');
+    const canvas = this.root.querySelector('canvas') as HTMLCanvasElement;
     if (!canvas) return;
-    const rc = (window as any).rough.canvas(canvas);
+    const rc = rough.canvas(canvas);
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 

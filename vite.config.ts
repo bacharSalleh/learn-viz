@@ -11,11 +11,14 @@ export default defineConfig(({ command }) => ({
       fileName: (format) => `learn-viz.${format}.js`,
     },
     rollupOptions: {
-      external: ["katex", "highlight.js"],
+      external: ["katex", "highlight.js", "three", "roughjs", /^three\//],
       output: {
         globals: {
           katex: "katex",
           "highlight.js": "hljs",
+          three: "THREE",
+          "three/examples/jsm/controls/OrbitControls.js": "THREE",
+          roughjs: "rough",
         },
         assetFileNames: "learn-viz.[ext]",
       },

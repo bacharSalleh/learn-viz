@@ -1,8 +1,6 @@
 import { LvBaseElement } from '../core/base-element.js';
-import { loadScript } from '../core/utils.js';
-
-const THREE_CDN = 'https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.min.js';
-const ORBIT_CDN = 'https://cdn.jsdelivr.net/npm/three@0.164.1/examples/js/controls/OrbitControls.js';
+import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 const css = `
   :host { display: block; margin: var(--lv-sp-4) 0; }
@@ -43,7 +41,7 @@ class LvScatter3d extends LvBaseElement {
     if (this.isConnected) this._buildScene();
   }
 
-  private async _buildScene(): Promise<void> {
+  private _buildScene(): void {
     const data: Scatter3dDatum[] = this.jsonAttr('data', []);
     const xLabel = this.getAttribute('x-label') || 'X';
     const yLabel = this.getAttribute('y-label') || 'Y';
@@ -54,16 +52,6 @@ class LvScatter3d extends LvBaseElement {
     this.render(`<div class="scene-container" id="scene"></div>`);
 
     if (!data.length) return;
-
-    try {
-      await loadScript(THREE_CDN);
-      await loadScript(ORBIT_CDN);
-    } catch {
-      return;
-    }
-
-    const THREE = (window as any).THREE;
-    if (!THREE) return;
 
     const container = this.root.getElementById('scene');
     if (!container) return;
@@ -89,7 +77,6 @@ class LvScatter3d extends LvBaseElement {
     this._renderer = renderer;
 
     // Controls
-    const OrbitControls = (THREE as any).OrbitControls || (window as any).THREE.OrbitControls;
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;

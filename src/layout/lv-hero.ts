@@ -37,7 +37,7 @@ const css = /* css */ `
   .subtitle {
     margin-block-start: 12px;
     font-size: 1.1rem;
-    color: var(--lv-dim);
+    color: var(--lv-text-dim);
   }
 `;
 

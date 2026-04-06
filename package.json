@@ -16,7 +16,7 @@
     "dist"
   ],
   "scripts": {
-    "dev": "vite serve demo",
+    "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
   },
@@ -24,7 +24,9 @@
     "@types/d3-sankey": "^0.12.5",
     "d3": "^7",
     "d3-sankey": "^0.12.3",
-    "gsap": "^3.14.2"
+    "gsap": "^3.14.2",
+    "roughjs": "^4.6.6",
+    "three": "^0.164.1"
   },
   "devDependencies": {
     "@types/d3": "^7.4.3",

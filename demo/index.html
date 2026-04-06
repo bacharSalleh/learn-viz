@@ -1,402 +1,530 @@
 <!DOCTYPE html>
-<html dir="rtl" lang="ar">
+<html dir="ltr" lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>LearnViz — Component Catalog</title>
-<script type="module" src="/src/index.ts"></script>
-<style>
-  body { margin: 0; }
-  .code { font-family: var(--lv-font-mono); font-size: var(--lv-fs-sm); background: var(--lv-bg-raised); padding: var(--lv-sp-3) var(--lv-sp-4); border-radius: var(--lv-r-sm); direction: ltr; text-align: left; overflow-x: auto; color: var(--lv-text-dim); margin-block-start: var(--lv-sp-3); }
-  h3 { color: var(--lv-accent2); margin-block: var(--lv-sp-6) var(--lv-sp-3); font-size: var(--lv-fs-lg); }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LearnViz — Component Gallery</title>
+  <script type="module" src="/src/index.ts"></script>
+  <style>
+    body { margin: 0; }
+    .demo-group { margin-bottom: 2rem; }
+    .demo-group h3 {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--lv-text-dim);
+      margin-bottom: 0.5rem;
+    }
+    .theme-btn {
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      border: 1px solid var(--lv-border);
+      background: var(--lv-bg-raised);
+      color: var(--lv-text);
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+    .theme-btn:hover { border-color: var(--lv-accent); color: var(--lv-accent); }
+  </style>
 </head>
 <body>
 
-<lv-page theme="dark" dir="rtl">
+<lv-page theme="dark" dir="ltr">
 
-  <lv-hero number="LV" title="LearnViz" subtitle="مكتبة مكوّنات ويب لبناء صفحات تعليمية تفاعلية"></lv-hero>
+  <lv-hero number="LV" title="LearnViz Gallery" subtitle="All 33 components in one page"></lv-hero>
 
   <div class="lv-container">
 
-    <!-- ═══ Metrics ═══ -->
-    <lv-section title="lv-metric — أرقام كبيرة">
-      <lv-grid cols="4">
-        <lv-metric value="142" label="صور تدريب" suffix="M" color="var(--lv-accent)" animated></lv-metric>
-        <lv-metric value="512" label="بُعد الإمبيدينغ" color="var(--lv-accent2)" animated></lv-metric>
-        <lv-metric value="0.97" label="أعلى تشابه" color="var(--lv-positive)" animated></lv-metric>
-        <lv-metric value="18" label="طبقة عميقة" color="var(--lv-warning)" animated></lv-metric>
-      </lv-grid>
-    </lv-section>
-
-    <!-- ═══ Cards ═══ -->
-    <lv-section title="lv-card — بطاقات المحتوى">
-      <lv-grid cols="4">
-        <lv-card><p style="margin:0">بطاقة عادية</p></lv-card>
-        <lv-card variant="glow"><p style="margin:0">بطاقة متوهجة</p></lv-card>
-        <lv-card variant="outline"><p style="margin:0">بطاقة خطية</p></lv-card>
-        <lv-card variant="flush"><div style="padding:var(--lv-sp-4);background:var(--lv-accent-dim)">بدون حشو</div></lv-card>
-      </lv-grid>
-    </lv-section>
-
-    <!-- ═══ Callouts ═══ -->
-    <lv-section title="lv-callout — مربعات تنبيه">
-      <lv-callout type="info" title="معلومة">الإمبيدينغ هو تمثيل الأشياء بأرقام</lv-callout>
-      <lv-callout type="tip" title="نصيحة">جرّب تغيير الأوزان يدوياً لفهم تأثيرها</lv-callout>
-      <lv-callout type="warning" title="تحذير">معدل تعلم كبير جداً يجعل الشبكة غير مستقرة</lv-callout>
-      <lv-callout type="danger" title="خطأ شائع">لا تنسَ تطبيق دالة التنشيط بعد الجمع المرجّح</lv-callout>
-    </lv-section>
-
-    <!-- ═══ Badges ═══ -->
-    <lv-section title="lv-badge — شارات">
-      <div class="lv-flex lv-flex-wrap" style="gap:var(--lv-sp-2)">
-        <lv-badge>افتراضي</lv-badge>
-        <lv-badge color="var(--lv-positive)">صحيح</lv-badge>
-        <lv-badge color="var(--lv-negative)">خطأ</lv-badge>
-        <lv-badge color="var(--lv-warning)">تحذير</lv-badge>
-        <lv-badge color="var(--lv-accent2)" variant="outline">مخطط</lv-badge>
-        <lv-badge color="var(--lv-positive)" variant="outline">أخضر مخطط</lv-badge>
+    <!-- ═══════════════════════════════════════════
+         THEME SWITCHER
+         ═══════════════════════════════════════════ -->
+    <lv-section title="Theme Switcher">
+      <p class="lv-text-dim lv-mb-4">Click a button to re-skin every component on this page.</p>
+      <div class="lv-flex lv-flex-wrap lv-gap-4">
+        <button class="theme-btn" onclick="document.querySelector('lv-page').setAttribute('theme','dark')">Dark</button>
+        <button class="theme-btn" onclick="document.querySelector('lv-page').setAttribute('theme','light')">Light</button>
+        <button class="theme-btn" onclick="document.querySelector('lv-page').setAttribute('theme','cyberpunk')">Cyberpunk</button>
+        <button class="theme-btn" onclick="document.querySelector('lv-page').setAttribute('theme','academic')">Academic</button>
+        <button class="theme-btn" onclick="document.querySelector('lv-page').setAttribute('theme','forest')">Forest</button>
       </div>
     </lv-section>
 
-    <!-- ═══ Tabs ═══ -->
-    <lv-section title="lv-tabs — ألسنة">
-      <lv-tabs>
-        <lv-tab label="المفهوم">
-          <lv-card><p style="margin:0">الإمبيدينغ = وصف أي شيء بمجموعة أرقام. الأشياء المتشابهة تحصل على أرقام قريبة.</p></lv-card>
-        </lv-tab>
-        <lv-tab label="المثال">
-          <lv-card><p style="margin:0">تفاحة = [0.7, 0.3, 0.5, 0.8] — حلوة، قليلة الحموضة، متوسطة، حمراء</p></lv-card>
-        </lv-tab>
-        <lv-tab label="التطبيق">
-          <lv-card><p style="margin:0">البحث عن صور متشابهة، التوصيات، التعرف على الوجوه</p></lv-card>
-        </lv-tab>
-      </lv-tabs>
+    <!-- ═══════════════════════════════════════════
+         SECTION 1 — LAYOUT
+         ═══════════════════════════════════════════ -->
+    <lv-section title="Layout Components">
+
+      <div class="demo-group">
+        <h3>lv-card — 4 variants</h3>
+        <lv-grid cols="4" gap="md">
+          <lv-card variant="default"><p style="margin:0">Default card</p></lv-card>
+          <lv-card variant="glow"><p style="margin:0">Glow card</p></lv-card>
+          <lv-card variant="outline"><p style="margin:0">Outline card</p></lv-card>
+          <lv-card variant="flush"><div style="padding:var(--lv-sp-4);background:var(--lv-accent-dim)">Flush card</div></lv-card>
+        </lv-grid>
+      </div>
+
+      <div class="demo-group">
+        <h3>lv-grid (cols=3) + lv-metric</h3>
+        <lv-grid cols="3" gap="md">
+          <lv-card><lv-metric value="128" label="Layers" animated></lv-metric></lv-card>
+          <lv-card><lv-metric value="95.4" label="Accuracy" suffix="%" color="var(--lv-positive)" animated></lv-metric></lv-card>
+          <lv-card><lv-metric value="3.2" label="Loss" color="var(--lv-negative)" animated></lv-metric></lv-card>
+        </lv-grid>
+      </div>
+
+      <div class="demo-group">
+        <h3>lv-tabs</h3>
+        <lv-tabs>
+          <lv-tab label="Overview"><lv-card><p style="margin:0">Embeddings represent objects as vectors. Similar things get similar vectors.</p></lv-card></lv-tab>
+          <lv-tab label="Example"><lv-card><p style="margin:0">apple = [0.7, 0.3, 0.5, 0.8] — sweet, low sourness, medium size, red</p></lv-card></lv-tab>
+          <lv-tab label="Code"><lv-card><lv-code language="python">embedding = model.encode("apple")
+print(embedding.shape)  # (512,)</lv-code></lv-card></lv-tab>
+        </lv-tabs>
+      </div>
+
+      <div class="demo-group">
+        <h3>lv-comparison</h3>
+        <lv-comparison>
+          <lv-card variant="outline" style="text-align:center">
+            <h3 style="color:var(--lv-negative)">Before Training</h3>
+            <p>Random weights — the network guesses</p>
+            <lv-metric value="0.49" label="Prediction" color="var(--lv-negative)"></lv-metric>
+          </lv-card>
+          <lv-card variant="outline" style="text-align:center">
+            <h3 style="color:var(--lv-positive)">After Training</h3>
+            <p>Tuned weights — the network knows</p>
+            <lv-metric value="0.98" label="Prediction" color="var(--lv-positive)"></lv-metric>
+          </lv-card>
+        </lv-comparison>
+      </div>
+
     </lv-section>
 
-    <!-- ═══ Comparison ═══ -->
-    <lv-section title="lv-comparison — مقارنة جنب لجنب">
-      <lv-comparison>
-        <lv-card variant="outline" style="text-align:center">
-          <p style="font-size:2.5em;margin:0">🎲</p>
-          <h3 style="color:var(--lv-negative)">قبل التدريب</h3>
-          <p>أوزان عشوائية — الشبكة تخمّن</p>
-          <lv-metric value="0.49" label="التوقع" color="var(--lv-negative)"></lv-metric>
-        </lv-card>
-        <lv-card variant="outline" style="text-align:center">
-          <p style="font-size:2.5em;margin:0">🎓</p>
-          <h3 style="color:var(--lv-positive)">بعد التدريب</h3>
-          <p>أوزان مضبوطة — الشبكة تعرف</p>
-          <lv-metric value="0.98" label="التوقع" color="var(--lv-positive)"></lv-metric>
-        </lv-card>
-      </lv-comparison>
-    </lv-section>
+    <!-- ═══════════════════════════════════════════
+         SECTION 2 — DISPLAY
+         ═══════════════════════════════════════════ -->
+    <lv-section title="Display Components">
 
-    <!-- ═══ Quiz ═══ -->
-    <lv-section title="lv-quiz — اختبار تفاعلي">
-      <lv-quiz
-        question="ماذا تفعل دالة سيغمويد؟"
-        options='["تضاعف الأرقام","تضغط أي رقم ليصبح بين 0 و 1","تحذف الأرقام السالبة","تجمع كل الأرقام"]'
-        correct="1"
-        explanation="سيغمويد تحوّل أي رقم (من −∞ إلى +∞) إلى قيمة بين 0 و 1. هذا مفيد لأن ناتج الشبكة يجب أن يكون احتمال."
-      ></lv-quiz>
-    </lv-section>
+      <div class="demo-group">
+        <h3>lv-metric — animated counters</h3>
+        <lv-grid cols="4" gap="md">
+          <lv-card><lv-metric value="1.2" label="Parameters" suffix="B" color="var(--lv-accent)" animated></lv-metric></lv-card>
+          <lv-card><lv-metric value="97.8" label="Accuracy" suffix="%" color="var(--lv-positive)" animated></lv-metric></lv-card>
+          <lv-card><lv-metric value="0.003" label="Loss" color="var(--lv-negative)" animated></lv-metric></lv-card>
+          <lv-card><lv-metric value="42" label="Epochs" color="var(--lv-accent2)" animated></lv-metric></lv-card>
+        </lv-grid>
+      </div>
 
-    <!-- ═══ Reveal ═══ -->
-    <lv-section title="lv-reveal — إظهار عند الضغط">
-      <lv-reveal label="اضغط لرؤية الإجابة">
-        <lv-callout type="tip" title="الإجابة">
-          الانتشار العكسي يحسب مساهمة كل وزن في الخطأ ثم يعدّل كل وزن بمقدار مسؤوليته.
-        </lv-callout>
-      </lv-reveal>
-    </lv-section>
+      <div class="demo-group">
+        <h3>lv-callout — 4 types</h3>
+        <lv-grid cols="2" gap="md">
+          <lv-callout type="info" title="Info">Batch normalization stabilizes training by normalizing layer inputs.</lv-callout>
+          <lv-callout type="tip" title="Pro Tip">Use learning rate warmup for transformer models.</lv-callout>
+          <lv-callout type="warning" title="Warning">Large learning rates can cause gradient explosion.</lv-callout>
+          <lv-callout type="danger" title="Danger">Never train on your test set!</lv-callout>
+        </lv-grid>
+      </div>
 
-    <!-- ═══ Slider ═══ -->
-    <lv-section title="lv-slider — منزلق تفاعلي">
-      <lv-card>
-        <lv-slider label="معدل التعلم" name="lr" min="0.01" max="2" step="0.01" value="0.5" color="var(--lv-accent)"></lv-slider>
-        <div style="height:var(--lv-sp-4)"></div>
-        <lv-slider label="عدد الدورات" name="epochs" min="10" max="500" step="10" value="100" color="var(--lv-accent2)"></lv-slider>
-        <div style="height:var(--lv-sp-4)"></div>
-        <lv-slider label="عدد الخلايا المخفية" name="hidden" min="1" max="20" step="1" value="3" color="var(--lv-positive)"></lv-slider>
-      </lv-card>
-    </lv-section>
-
-    <!-- ═══ Grid ═══ -->
-    <lv-section title="lv-grid — شبكة متجاوبة">
-      <lv-grid cols="auto">
-        <lv-metric value="١" label="الإمبيدينغ" color="var(--lv-chart-0)"></lv-metric>
-        <lv-metric value="٢" label="الشبكة" color="var(--lv-chart-1)"></lv-metric>
-        <lv-metric value="٣" label="الخسارة" color="var(--lv-chart-2)"></lv-metric>
-        <lv-metric value="٤" label="الانتشار" color="var(--lv-chart-3)"></lv-metric>
-        <lv-metric value="٥" label="التدريب" color="var(--lv-chart-4)"></lv-metric>
-      </lv-grid>
-    </lv-section>
-
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- ═══ D3 CHARTS ═══ -->
-    <!-- ══════════════════════════════════════════════ -->
-
-    <!-- ═══ Bar Chart ═══ -->
-    <lv-section title="lv-bar-chart — رسم أشرطة متحرك (D3)">
-      <lv-bar-chart data='[
-        {"label":"🍎 تفاحة ↔ 🍊 برتقالة","value":0.35,"color":"#00c853","tag":"قريبتان!","tagColor":"#00c853"},
-        {"label":"🍊 برتقالة ↔ 🍌 موز","value":0.44,"color":"#69f0ae","tag":"متشابهتان","tagColor":"#69f0ae"},
-        {"label":"🍋 ليمون ↔ 🫒 جريب فروت","value":0.57,"color":"#ffd93d","tag":"بينهما علاقة","tagColor":"#ffd93d"},
-        {"label":"🍊 برتقالة ↔ 🍋 ليمون","value":0.99,"color":"#ff9800","tag":"مختلفتان","tagColor":"#ff9800"},
-        {"label":"🍎 تفاحة ↔ 🍋 ليمون","value":1.12,"color":"#ff2d75","tag":"مختلفتان جداً!","tagColor":"#ff2d75"},
-        {"label":"🍋 ليمون ↔ 🍌 موز","value":1.17,"color":"#ff2d75","tag":"الأبعد!","tagColor":"#ff2d75"}
-      ]'></lv-bar-chart>
-    </lv-section>
-
-    <!-- ═══ Line Chart ═══ -->
-    <lv-section title="lv-line-chart — منحنى الخسارة (D3)">
-      <lv-card variant="flush">
-        <lv-line-chart
-          data="[0.248,0.220,0.195,0.170,0.145,0.120,0.098,0.078,0.060,0.045,0.033,0.024,0.017,0.012,0.008,0.005,0.004,0.003,0.002,0.002]"
-          x-label="دورات التدريب"
-          y-label="الخسارة"
-          color="#00d4ff"
-          area
-          points
-          tooltip
-        ></lv-line-chart>
-      </lv-card>
-    </lv-section>
-
-    <!-- ═══ Heatmap ═══ -->
-    <lv-section title="lv-heatmap — مصفوفة التشابه (D3)">
-      <lv-heatmap
-        labels='["🍎 تفاحة","🍋 ليمون","🍊 برتقالة","🍌 موز","🫒 جريب فروت"]'
-        values='[[1.0,0.49,0.96,0.84,0.81],[0.49,1.0,0.59,0.36,0.86],[0.96,0.59,1.0,0.93,0.87],[0.84,0.36,0.93,1.0,0.69],[0.81,0.86,0.87,0.69,1.0]]'
-        scale="diverging"
-      ></lv-heatmap>
-    </lv-section>
-
-    <!-- ═══ Function Plotter ═══ -->
-    <lv-section title="lv-function — دوال التنشيط (D3)">
-      <lv-grid cols="2">
-        <lv-card variant="flush">
-          <lv-function fn="sigmoid" interactive></lv-function>
-        </lv-card>
-        <lv-card variant="flush">
-          <lv-function fn="relu" interactive color="var(--lv-positive)"></lv-function>
-        </lv-card>
-      </lv-grid>
-      <lv-grid cols="2">
-        <lv-card variant="flush">
-          <lv-function fn="tanh" color="var(--lv-accent2)"></lv-function>
-        </lv-card>
-        <lv-card variant="flush">
-          <lv-function fn="x => Math.sin(x) * 0.5 + 0.5" color="var(--lv-warning)" range="[-8,8]"></lv-function>
-        </lv-card>
-      </lv-grid>
-    </lv-section>
-
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- ═══ DIAGRAMS ═══ -->
-    <!-- ══════════════════════════════════════════════ -->
-
-    <!-- ═══ Flow Diagram ═══ -->
-    <lv-section title="lv-flow — تدفق العمليات">
-      <lv-flow cyclic>
-        <lv-flow-step icon="①" label="تمرير أمامي" sub="احسب التوقع" color="#00d4ff" active></lv-flow-step>
-        <lv-flow-step icon="②" label="حساب الخسارة" sub="كم أخطأنا؟" color="#ff5252" active></lv-flow-step>
-        <lv-flow-step icon="③" label="انتشار عكسي" sub="من المسؤول؟" color="#ffd93d" active></lv-flow-step>
-        <lv-flow-step icon="④" label="تحديث الأوزان" sub="أصلح الخطأ" color="#00c853" active></lv-flow-step>
-      </lv-flow>
-    </lv-section>
-
-    <!-- ═══ Neural Network ═══ -->
-    <lv-section title="lv-network — شبكة عصبية متحركة">
-      <lv-card variant="flush">
-        <lv-network
-          layers='[["الحلاوة","الحموضة"],["h₁","h₂","h₃"],["حمضي؟"]]'
-          names='["المدخلات","الطبقة المخفية","المخرج"]'
-          animate="forward-pass"
-        ></lv-network>
-      </lv-card>
-    </lv-section>
-
-    <!-- ═══ Timeline ═══ -->
-    <lv-section title="lv-timeline — الجدول الزمني">
-      <lv-timeline>
-        <lv-timeline-item date="الدرس ١" title="الإمبيدينغ" color="#ff2d75">وصف الأشياء بأرقام — الفكرة الأساسية</lv-timeline-item>
-        <lv-timeline-item date="الدرس ٢" title="الشبكة العصبية" color="#7b68ee">أوزان + جمع مرجّح + سيغمويد</lv-timeline-item>
-        <lv-timeline-item date="الدرس ٣" title="دالة الخسارة" color="#ff9800">قياس خطأ الشبكة بـ MSE</lv-timeline-item>
-        <lv-timeline-item date="الدرس ٤" title="الانتشار العكسي" color="#ffd93d">تصحيح الأوزان بقاعدة السلسلة</lv-timeline-item>
-        <lv-timeline-item date="الدرس ٥" title="التدريب الكامل" color="#00c853">حلقة التدريب الكاملة</lv-timeline-item>
-        <lv-timeline-item date="الدرس ٨" title="DINOv2" color="#00d4ff">أحدث نماذج فهم الصور</lv-timeline-item>
-      </lv-timeline>
-    </lv-section>
-
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- ═══ NEW COMPONENTS ═══ -->
-    <!-- ══════════════════════════════════════════════ -->
-
-    <!-- ═══ Scatter Plot ═══ -->
-    <lv-section title="lv-scatter — رسم نقاط (D3)">
-      <lv-scatter
-        data='[
-          {"x":0.1,"y":0.9,"label":"ليمون","cluster":"حمضي"},
-          {"x":0.2,"y":0.8,"label":"جريب فروت","cluster":"حمضي"},
-          {"x":0.8,"y":0.6,"label":"برتقالة","cluster":"حمضي"},
-          {"x":0.7,"y":0.3,"label":"تفاحة","cluster":"غير حمضي"},
-          {"x":0.9,"y":0.1,"label":"موز","cluster":"غير حمضي"},
-          {"x":0.6,"y":0.2,"label":"عنب","cluster":"غير حمضي"},
-          {"x":0.85,"y":0.15,"label":"كمثرى","cluster":"غير حمضي"},
-          {"x":0.15,"y":0.85,"label":"يوسفي","cluster":"حمضي"}
-        ]'
-        x-label="الحلاوة"
-        y-label="الحموضة"
-        clusters
-        tooltip
-      ></lv-scatter>
-    </lv-section>
-
-    <!-- ═══ Pie Chart ═══ -->
-    <lv-section title="lv-pie — رسم دائري (D3)">
-      <lv-grid cols="2">
-        <lv-card variant="flush">
-          <lv-pie
-            data='[{"label":"الإمبيدينغ","value":15},{"label":"الشبكة","value":25},{"label":"الخسارة","value":10},{"label":"الانتشار العكسي","value":30},{"label":"التدريب","value":20}]'
-            donut
-            legend
-          ></lv-pie>
-        </lv-card>
-        <lv-card variant="flush">
-          <lv-pie
-            data='[{"label":"Python","value":45},{"label":"PyTorch","value":30},{"label":"NumPy","value":15},{"label":"D3.js","value":10}]'
-            legend
-          ></lv-pie>
-        </lv-card>
-      </lv-grid>
-    </lv-section>
-
-    <!-- ═══ Decision Tree ═══ -->
-    <lv-section title="lv-tree — شجرة قرار (D3)">
-      <lv-card variant="flush">
-        <lv-tree data='{"label":"هل حموضة > 0.5؟","children":[{"label":"نعم: حمضي","children":[{"label":"ليمون"},{"label":"برتقالة"}]},{"label":"لا: غير حمضي","children":[{"label":"تفاحة"},{"label":"موز"}]}]}'></lv-tree>
-      </lv-card>
-    </lv-section>
-
-    <!-- ═══ Math (KaTeX) ═══ -->
-    <lv-section title="lv-math — صيغ رياضية (KaTeX)">
-      <lv-grid cols="2">
-        <lv-card style="text-align:center">
-          <p style="color:var(--lv-text-dim);margin:0 0 8px">دالة سيغمويد</p>
-          <lv-math display>\sigma(x) = \frac{1}{1 + e^{-x}}</lv-math>
-        </lv-card>
-        <lv-card style="text-align:center">
-          <p style="color:var(--lv-text-dim);margin:0 0 8px">متوسط مربع الخطأ</p>
-          <lv-math display>MSE = \frac{1}{n}\sum_{i=1}^{n}(\hat{y}_i - y_i)^2</lv-math>
-        </lv-card>
-      </lv-grid>
-    </lv-section>
-
-    <!-- ═══ Code ═══ -->
-    <lv-section title="lv-code — كود بألوان">
-      <lv-code language="python" line-numbers>
-def sigmoid(x):
-    return 1 / (1 + math.exp(-x))
-
-# حساب التوقع
-z = w1 * sweetness + w2 * sourness + bias
-prediction = sigmoid(z)
-print(f"التوقع: {prediction:.4f}")
-</lv-code>
-    </lv-section>
-
-    <!-- ═══ Matrix ═══ -->
-    <lv-section title="lv-matrix — مصفوفة أوزان">
-      <lv-grid cols="2">
-        <lv-card style="text-align:center">
-          <p style="color:var(--lv-text-dim);margin:0 0 8px">أوزان الطبقة المخفية</p>
-          <lv-matrix
-            data='[[0.28,-0.95],[-0.45,-0.55],[0.47,0.35]]'
-            labels='{"rows":["h₁","h₂","h₃"],"cols":["w₁","w₂"]}'
-            highlight='[[0,1],[2,0]]'
-          ></lv-matrix>
-        </lv-card>
-        <lv-card style="text-align:center">
-          <p style="color:var(--lv-text-dim);margin:0 0 8px">أوزان المخرج</p>
-          <lv-matrix
-            data='[[-0.94,-0.56,0.01]]'
-            labels='{"rows":["ŷ"],"cols":["h₁","h₂","h₃"]}'
-          ></lv-matrix>
-        </lv-card>
-      </lv-grid>
-    </lv-section>
-
-    <!-- ═══ Stepper ═══ -->
-    <lv-section title="lv-stepper — خطوات">
-      <lv-stepper>
-        <lv-step title="الخطوة ١: المدخلات">
-          <p>نُدخل حلاوة الليمون (0.1) وحموضته (0.9) إلى الشبكة.</p>
-        </lv-step>
-        <lv-step title="الخطوة ٢: الضرب بالأوزان">
-          <p>كل مدخل يُضرب بوزنه: z = w₁×0.1 + w₂×0.9 + b</p>
-        </lv-step>
-        <lv-step title="الخطوة ٣: دالة التنشيط">
-          <p>نطبق سيغمويد: σ(z) = التوقع (بين 0 و 1)</p>
-        </lv-step>
-        <lv-step title="الخطوة ٤: النتيجة">
-          <p>التوقع = 0.98 → الشبكة تقول: نعم، هذه فاكهة حمضية! ✅</p>
-        </lv-step>
-      </lv-stepper>
-    </lv-section>
-
-    <!-- ═══ Playground ═══ -->
-    <lv-section title="lv-playground — ملعب تفاعلي">
-      <lv-playground id="demo-playground">
-        <lv-slider slot="controls" name="w1" min="-3" max="3" step="0.1" value="-1" label="وزن الحلاوة (w₁)"></lv-slider>
-        <lv-slider slot="controls" name="w2" min="-3" max="3" step="0.1" value="2" label="وزن الحموضة (w₂)"></lv-slider>
-        <lv-slider slot="controls" name="bias" min="-3" max="3" step="0.1" value="-0.5" label="الانحياز (b)"></lv-slider>
-        <div slot="output" id="playground-output" style="padding: 20px;">
-          <div style="text-align:center;margin-bottom:16px;">
-            <p style="color:var(--lv-text-dim);margin:0 0 8px">التوقع لليمون (حلاوة=0.1, حموضة=0.9)</p>
-            <div id="pred-value" style="font-size:3em;font-weight:800;color:var(--lv-accent);font-family:var(--lv-font-mono)">0.769</div>
-            <div id="pred-label" style="font-size:1.2em;margin-top:8px;color:var(--lv-positive)">حمضي ✓</div>
-          </div>
-          <div style="text-align:center;color:var(--lv-text-dim);font-size:var(--lv-fs-sm);">
-            <span id="pred-formula">σ(-1×0.1 + 2×0.9 + -0.5) = σ(1.20) = 0.769</span>
-          </div>
+      <div class="demo-group">
+        <h3>lv-badge</h3>
+        <div class="lv-flex lv-flex-wrap lv-gap-4">
+          <lv-badge color="var(--lv-accent)">Deep Learning</lv-badge>
+          <lv-badge color="var(--lv-positive)" variant="outline">Trained</lv-badge>
+          <lv-badge color="var(--lv-warning)">In Progress</lv-badge>
+          <lv-badge color="var(--lv-negative)" variant="outline">Failed</lv-badge>
+          <lv-badge color="var(--lv-accent2)">NLP</lv-badge>
         </div>
-      </lv-playground>
-      <script>
-        {
-          const pg = document.getElementById('demo-playground');
-          const predVal = document.getElementById('pred-value');
-          const predLabel = document.getElementById('pred-label');
-          const predFormula = document.getElementById('pred-formula');
+      </div>
 
-          function sigmoid(x) { return 1 / (1 + Math.exp(-x)); }
+      <div class="demo-group">
+        <h3>lv-math — LaTeX (KaTeX)</h3>
+        <lv-grid cols="2" gap="md">
+          <lv-card style="text-align:center">
+            <p class="lv-text-dim" style="margin:0 0 8px">Sigmoid</p>
+            <lv-math display>\sigma(x) = \frac{1}{1 + e^{-x}}</lv-math>
+          </lv-card>
+          <lv-card style="text-align:center">
+            <p class="lv-text-dim" style="margin:0 0 8px">Cross-Entropy Loss</p>
+            <lv-math display>L = -\frac{1}{n}\sum_{i=1}^{n} y_i \log(\hat{y}_i)</lv-math>
+          </lv-card>
+        </lv-grid>
+      </div>
 
-          function update(params) {
-            const w1 = params.w1 ?? -1;
-            const w2 = params.w2 ?? 2;
-            const bias = params.bias ?? -0.5;
-            const sweetness = 0.1, sourness = 0.9;
-            const z = w1 * sweetness + w2 * sourness + bias;
-            const pred = sigmoid(z);
+      <div class="demo-group">
+        <h3>lv-code — syntax highlighting</h3>
+        <lv-card>
+          <lv-code language="python" line-numbers>
+import torch
+import torch.nn as nn
 
-            predVal.textContent = pred.toFixed(3);
-            predVal.style.color = pred > 0.5 ? 'var(--lv-positive)' : 'var(--lv-negative)';
-            predLabel.textContent = pred > 0.5 ? 'حمضي ✓' : 'غير حمضي ✗';
-            predLabel.style.color = pred > 0.5 ? 'var(--lv-positive)' : 'var(--lv-negative)';
-            predFormula.textContent = `σ(${w1}×0.1 + ${w2}×0.9 + ${bias}) = σ(${z.toFixed(2)}) = ${pred.toFixed(3)}`;
-          }
+class Transformer(nn.Module):
+    def __init__(self, d_model=512, nhead=8, num_layers=6):
+        super().__init__()
+        layer = nn.TransformerEncoderLayer(d_model, nhead)
+        self.encoder = nn.TransformerEncoder(layer, num_layers)
 
-          // Initial computation with default slider values
-          update({ w1: -1, w2: 2, bias: -0.5 });
+    def forward(self, x):
+        return self.encoder(x)
+          </lv-code>
+        </lv-card>
+      </div>
 
-          pg.addEventListener('lv-params-change', (e) => update(e.detail));
-        }
-      </script>
+      <div class="demo-group">
+        <h3>lv-matrix — weight matrix with highlights</h3>
+        <lv-grid cols="2" gap="md">
+          <lv-card style="text-align:center">
+            <p class="lv-text-dim" style="margin:0 0 8px">Hidden Layer Weights</p>
+            <lv-matrix data='[[0.92,-0.15,0.33],[0.44,0.87,-0.62],[-0.28,0.51,0.76]]'
+              labels='{"rows":["w1","w2","w3"],"cols":["x1","x2","x3"]}'
+              highlight='[[0,0],[1,1],[2,2]]'>
+            </lv-matrix>
+          </lv-card>
+          <lv-card style="text-align:center">
+            <p class="lv-text-dim" style="margin:0 0 8px">Output Weights</p>
+            <lv-matrix data='[[-0.94,-0.56,0.01]]'
+              labels='{"rows":["y"],"cols":["h1","h2","h3"]}'>
+            </lv-matrix>
+          </lv-card>
+        </lv-grid>
+      </div>
+
     </lv-section>
 
-    <!-- ═══ Nav ═══ -->
-    <lv-nav prev="#" prev-label="الأعلى" next="#" next-label="المكونات المتقدمة — قريباً"></lv-nav>
+    <!-- ═══════════════════════════════════════════
+         SECTION 3 — D3 CHARTS
+         ═══════════════════════════════════════════ -->
+    <lv-section title="D3 Charts">
+
+      <lv-grid cols="2" gap="md">
+        <div class="demo-group">
+          <h3>lv-bar-chart</h3>
+          <lv-card>
+            <lv-bar-chart data='[
+              {"label":"Python","value":85,"color":"#3776ab","tag":"85%","tagColor":"#3776ab"},
+              {"label":"JavaScript","value":72,"color":"#f7df1e","tag":"72%","tagColor":"#f7df1e"},
+              {"label":"Rust","value":45,"color":"#ce412b","tag":"45%","tagColor":"#ce412b"},
+              {"label":"Go","value":58,"color":"#00add8","tag":"58%","tagColor":"#00add8"},
+              {"label":"TypeScript","value":67,"color":"#3178c6","tag":"67%","tagColor":"#3178c6"}
+            ]' sorted></lv-bar-chart>
+          </lv-card>
+        </div>
+
+        <div class="demo-group">
+          <h3>lv-line-chart</h3>
+          <lv-card>
+            <lv-line-chart data="[0.9,0.65,0.42,0.28,0.15,0.08,0.04,0.02,0.01,0.005]"
+              x-label="Epochs" y-label="Loss" color="#00d4ff" area points tooltip>
+            </lv-line-chart>
+          </lv-card>
+        </div>
+
+        <div class="demo-group">
+          <h3>lv-pie (donut + legend)</h3>
+          <lv-card>
+            <lv-pie data='[
+              {"label":"Training","value":70},
+              {"label":"Validation","value":15},
+              {"label":"Test","value":15}
+            ]' donut legend></lv-pie>
+          </lv-card>
+        </div>
+
+        <div class="demo-group">
+          <h3>lv-scatter (clustered)</h3>
+          <lv-card>
+            <lv-scatter data='[
+              {"x":0.1,"y":0.9,"label":"Lemon","cluster":"citrus"},
+              {"x":0.2,"y":0.85,"label":"Grapefruit","cluster":"citrus"},
+              {"x":0.15,"y":0.7,"label":"Lime","cluster":"citrus"},
+              {"x":0.8,"y":0.1,"label":"Banana","cluster":"sweet"},
+              {"x":0.9,"y":0.15,"label":"Mango","cluster":"sweet"},
+              {"x":0.7,"y":0.3,"label":"Apple","cluster":"sweet"},
+              {"x":0.5,"y":0.5,"label":"Pineapple","cluster":"tropical"},
+              {"x":0.6,"y":0.6,"label":"Passion Fruit","cluster":"tropical"}
+            ]' x-label="Sweetness" y-label="Sourness" clusters tooltip></lv-scatter>
+          </lv-card>
+        </div>
+      </lv-grid>
+
+      <div class="demo-group">
+        <h3>lv-heatmap — similarity matrix</h3>
+        <lv-card>
+          <lv-heatmap labels='["King","Queen","Man","Woman","Prince"]'
+            values='[[1.0,0.85,0.6,0.3,0.7],[0.85,1.0,0.3,0.65,0.55],[0.6,0.3,1.0,0.45,0.75],[0.3,0.65,0.45,1.0,0.4],[0.7,0.55,0.75,0.4,1.0]]'
+            scale="diverging">
+          </lv-heatmap>
+        </lv-card>
+      </div>
+
+      <div class="demo-group">
+        <h3>lv-function — activation functions</h3>
+        <lv-grid cols="3" gap="md">
+          <lv-card><p class="lv-text-accent lv-bold" style="margin:0 0 8px">Sigmoid</p><lv-function fn="sigmoid" interactive></lv-function></lv-card>
+          <lv-card><p class="lv-bold" style="margin:0 0 8px;color:var(--lv-positive)">ReLU</p><lv-function fn="relu" interactive color="var(--lv-positive)"></lv-function></lv-card>
+          <lv-card><p class="lv-bold" style="margin:0 0 8px;color:var(--lv-accent2)">Tanh</p><lv-function fn="tanh" color="var(--lv-accent2)"></lv-function></lv-card>
+        </lv-grid>
+      </div>
+
+    </lv-section>
+
+    <!-- ═══════════════════════════════════════════
+         SECTION 4 — NEW v2 CHARTS
+         ═══════════════════════════════════════════ -->
+    <lv-section title="New Charts (v2)">
+
+      <lv-grid cols="2" gap="md">
+        <div class="demo-group">
+          <h3>lv-confusion-matrix</h3>
+          <lv-card>
+            <lv-confusion-matrix
+              labels='["Cat","Dog","Bird"]'
+              values='[[42,5,3],[8,38,4],[2,6,45]]'
+              normalize show-metrics>
+            </lv-confusion-matrix>
+          </lv-card>
+        </div>
+
+        <div class="demo-group">
+          <h3>lv-train-dashboard</h3>
+          <lv-card>
+            <lv-train-dashboard
+              loss='[0.9,0.65,0.42,0.28,0.18,0.12,0.08,0.05]'
+              accuracy='[0.45,0.62,0.74,0.82,0.88,0.91,0.94,0.96]'
+              lr='[0.01,0.01,0.008,0.005,0.003,0.001,0.0008,0.0005]'>
+            </lv-train-dashboard>
+          </lv-card>
+        </div>
+
+        <div class="demo-group">
+          <h3>lv-sketch-bar (hand-drawn style)</h3>
+          <lv-card>
+            <lv-sketch-bar data='[
+              {"label":"CNN","value":94,"color":"#00d4ff"},
+              {"label":"RNN","value":87,"color":"#ff2d75"},
+              {"label":"MLP","value":76,"color":"#ffd93d"},
+              {"label":"SVM","value":68,"color":"#a78bfa"}
+            ]' roughness="2"></lv-sketch-bar>
+          </lv-card>
+        </div>
+
+        <div class="demo-group">
+          <h3>lv-sketch-line (hand-drawn style)</h3>
+          <lv-card>
+            <lv-sketch-line data="[10,25,18,42,35,60,52,78]"
+              x-label="Week" y-label="Users" color="#ffd93d" area roughness="1.5">
+            </lv-sketch-line>
+          </lv-card>
+        </div>
+      </lv-grid>
+
+      <div class="demo-group">
+        <h3>lv-sankey — flow diagram</h3>
+        <lv-card>
+          <lv-sankey
+            nodes='["Dataset","Train","Val","Test","CNN","Transformer","Ensemble","Predictions"]'
+            links='[
+              {"source":0,"target":1,"value":70},
+              {"source":0,"target":2,"value":15},
+              {"source":0,"target":3,"value":15},
+              {"source":1,"target":4,"value":35},
+              {"source":1,"target":5,"value":35},
+              {"source":4,"target":6,"value":35},
+              {"source":5,"target":6,"value":35},
+              {"source":6,"target":7,"value":70}
+            ]'>
+          </lv-sankey>
+        </lv-card>
+      </div>
+
+      <lv-grid cols="2" gap="md">
+        <div class="demo-group">
+          <h3>lv-scatter-3d (Three.js)</h3>
+          <lv-card>
+            <lv-scatter-3d data='[
+              {"x":1,"y":2,"z":3,"label":"A","cluster":"g1"},
+              {"x":4,"y":1,"z":2,"label":"B","cluster":"g1"},
+              {"x":2,"y":5,"z":1,"label":"C","cluster":"g2"},
+              {"x":5,"y":4,"z":5,"label":"D","cluster":"g2"},
+              {"x":3,"y":3,"z":4,"label":"E","cluster":"g1"},
+              {"x":1,"y":4,"z":5,"label":"F","cluster":"g2"},
+              {"x":6,"y":2,"z":3,"label":"G","cluster":"g3"},
+              {"x":5,"y":6,"z":1,"label":"H","cluster":"g3"}
+            ]' x-label="PC1" y-label="PC2" z-label="PC3" clusters auto-rotate>
+            </lv-scatter-3d>
+          </lv-card>
+        </div>
+
+        <div class="demo-group">
+          <h3>lv-surface-3d (Three.js)</h3>
+          <lv-card>
+            <lv-surface-3d data='[
+              [0.1,0.3,0.5,0.7,0.9,0.7,0.5,0.3],
+              [0.3,0.5,0.7,0.9,1.0,0.9,0.7,0.5],
+              [0.5,0.7,0.9,1.0,0.9,0.7,0.5,0.3],
+              [0.7,0.9,1.0,0.8,0.6,0.4,0.3,0.2],
+              [0.5,0.7,0.8,0.6,0.4,0.3,0.2,0.1],
+              [0.3,0.5,0.6,0.4,0.3,0.2,0.1,0.05],
+              [0.2,0.3,0.4,0.3,0.2,0.15,0.1,0.05],
+              [0.1,0.2,0.3,0.2,0.15,0.1,0.05,0.02]
+            ]' x-label="Learning Rate" y-label="Batch Size" z-label="Loss" auto-rotate>
+            </lv-surface-3d>
+          </lv-card>
+        </div>
+      </lv-grid>
+
+    </lv-section>
+
+    <!-- ═══════════════════════════════════════════
+         SECTION 5 — DIAGRAMS
+         ═══════════════════════════════════════════ -->
+    <lv-section title="Diagrams">
+
+      <div class="demo-group">
+        <h3>lv-flow — process pipeline</h3>
+        <lv-card>
+          <lv-flow>
+            <lv-flow-step icon="1" label="Input" sub="x" color="#00d4ff" active></lv-flow-step>
+            <lv-flow-step icon="2" label="Linear" sub="Wx + b" color="#a78bfa" active></lv-flow-step>
+            <lv-flow-step icon="3" label="Activation" sub="ReLU" color="#ffd93d" active></lv-flow-step>
+            <lv-flow-step icon="4" label="Softmax" sub="probabilities" color="#ff2d75" active></lv-flow-step>
+            <lv-flow-step icon="5" label="Output" sub="prediction" color="#00c853" active></lv-flow-step>
+          </lv-flow>
+        </lv-card>
+      </div>
+
+      <div class="demo-group">
+        <h3>lv-network — neural network (forward-pass animation)</h3>
+        <lv-card>
+          <lv-network layers='[["x1","x2","x3"],["h1","h2","h3","h4"],["h5","h6"],["y"]]'
+            names='["Input","Hidden 1","Hidden 2","Output"]' animate="forward-pass" speed="600">
+          </lv-network>
+        </lv-card>
+      </div>
+
+      <div class="demo-group">
+        <h3>lv-timeline</h3>
+        <lv-card>
+          <lv-timeline>
+            <lv-timeline-item date="1957" title="Perceptron" color="#00d4ff">Frank Rosenblatt introduces the perceptron.</lv-timeline-item>
+            <lv-timeline-item date="1986" title="Backpropagation" color="#a78bfa">Rumelhart, Hinton & Williams popularize backprop.</lv-timeline-item>
+            <lv-timeline-item date="2012" title="AlexNet" color="#ffd93d">Deep learning wins ImageNet, starting the modern AI era.</lv-timeline-item>
+            <lv-timeline-item date="2017" title="Transformers" color="#ff2d75">"Attention Is All You Need" changes NLP forever.</lv-timeline-item>
+          </lv-timeline>
+        </lv-card>
+      </div>
+
+      <lv-grid cols="2" gap="md">
+        <div class="demo-group">
+          <h3>lv-tree — decision tree</h3>
+          <lv-card>
+            <lv-tree data='{"label":"Is furry?","children":[{"label":"Has tail?","children":[{"label":"Cat"},{"label":"Dog"}]},{"label":"Has wings?","children":[{"label":"Bird"},{"label":"Fish"}]}]}'
+              orientation="vertical">
+            </lv-tree>
+          </lv-card>
+        </div>
+
+        <div class="demo-group">
+          <h3>lv-mermaid — Mermaid.js diagrams</h3>
+          <lv-card>
+            <lv-mermaid>
+graph LR
+    A[Data] --> B[Preprocess]
+    B --> C{Split}
+    C -->|80%| D[Train]
+    C -->|20%| E[Test]
+    D --> F[Model]
+    F --> G[Evaluate]
+    E --> G
+            </lv-mermaid>
+          </lv-card>
+        </div>
+      </lv-grid>
+
+    </lv-section>
+
+    <!-- ═══════════════════════════════════════════
+         SECTION 6 — INTERACTIVE
+         ═══════════════════════════════════════════ -->
+    <lv-section title="Interactive Components">
+
+      <div class="demo-group">
+        <h3>lv-quiz</h3>
+        <lv-card>
+          <lv-quiz question="Which activation function maps inputs to [0, 1]?"
+            options='["ReLU","Sigmoid","Tanh","Softmax"]'
+            correct="1" explanation="Sigmoid squashes any real number to [0, 1] via the formula: 1/(1+e^-x).">
+          </lv-quiz>
+        </lv-card>
+      </div>
+
+      <div class="demo-group">
+        <h3>lv-slider</h3>
+        <lv-card>
+          <lv-grid cols="3" gap="md">
+            <lv-slider label="Learning Rate" name="lr" min="0.001" max="1" step="0.001" value="0.01" color="var(--lv-accent)"></lv-slider>
+            <lv-slider label="Epochs" name="epochs" min="1" max="100" step="1" value="50" color="var(--lv-accent2)"></lv-slider>
+            <lv-slider label="Dropout" name="dropout" min="0" max="0.9" step="0.05" value="0.2" color="#ffd93d"></lv-slider>
+          </lv-grid>
+        </lv-card>
+      </div>
+
+      <div class="demo-group">
+        <h3>lv-reveal</h3>
+        <lv-reveal label="What is the derivative of sigmoid?">
+          <lv-card variant="glow">
+            <lv-math display>\sigma'(x) = \sigma(x)(1 - \sigma(x))</lv-math>
+          </lv-card>
+        </lv-reveal>
+      </div>
+
+      <div class="demo-group">
+        <h3>lv-stepper</h3>
+        <lv-card>
+          <lv-stepper>
+            <lv-step title="Initialize Weights">
+              <p>Randomly initialize: <lv-math>W \sim \mathcal{N}(0, 0.01)</lv-math></p>
+            </lv-step>
+            <lv-step title="Forward Pass">
+              <p>Compute prediction: <lv-math>\hat{y} = \sigma(Wx + b)</lv-math></p>
+            </lv-step>
+            <lv-step title="Compute Loss">
+              <p>Measure error: <lv-math>L = -\frac{1}{n}\sum y\log(\hat{y})</lv-math></p>
+            </lv-step>
+            <lv-step title="Backpropagate">
+              <p>Update weights: <lv-math>W \leftarrow W - \alpha \frac{\partial L}{\partial W}</lv-math></p>
+            </lv-step>
+          </lv-stepper>
+        </lv-card>
+      </div>
+
+      <div class="demo-group">
+        <h3>lv-playground — connects sliders to charts</h3>
+        <lv-card>
+          <lv-playground id="demo-playground">
+            <lv-slider slot="controls" name="amplitude" min="0.1" max="3" step="0.1" value="1" label="Amplitude"></lv-slider>
+            <lv-slider slot="controls" name="frequency" min="0.5" max="5" step="0.1" value="1" label="Frequency"></lv-slider>
+            <div slot="output"><lv-line-chart id="playground-chart" data="[0,0.84,0.91,0.14,-0.76,-0.96,-0.28,0.66,0.99,0.41]" x-label="x" y-label="y" color="#a78bfa" area points></lv-line-chart></div>
+          </lv-playground>
+        </lv-card>
+        <script type="module">
+          const chart = document.getElementById('playground-chart');
+          document.getElementById('demo-playground').addEventListener('lv-params-change', e => {
+            const { amplitude, frequency } = e.detail;
+            const data = Array.from({length: 30}, (_, i) => {
+              const x = (i / 30) * Math.PI * 4;
+              return +(amplitude * Math.sin(frequency * x)).toFixed(3);
+            });
+            chart.setAttribute('data', JSON.stringify(data));
+          });
+        </script>
+      </div>
+
+    </lv-section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <lv-nav prev="#" prev-label="Top" next="#" next-label="Top"></lv-nav>
 
   </div>
 </lv-page>

@@ -156,9 +156,12 @@ class LvConfusionMatrix extends LvBaseElement {
     }
 
     // Axis labels
-    svg += `<text class="axis-label" x="${isRtl ? svgW - headerW / 2 : headerW / 2}" y="14"
-      text-anchor="middle">Actual</text>`;
-    svg += `<text class="axis-label" x="${svgW / 2}" y="${svgH - 2}"
+    const actualX = isRtl ? svgW - 12 : 12;
+    const actualY = headerH + gridH / 2;
+    svg += `<text class="axis-label" x="${actualX}" y="${actualY}"
+      text-anchor="middle" dominant-baseline="central"
+      transform="rotate(-90, ${actualX}, ${actualY})">Actual</text>`;
+    svg += `<text class="axis-label" x="${headerW + gridW / 2}" y="${svgH - 2}"
       text-anchor="middle">Predicted</text>`;
 
     this.render(`<div class="cm-container">

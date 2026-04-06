@@ -53,7 +53,7 @@ const tabsCss = /* css */ `
   .tab-btn {
     background: none;
     border: none;
-    color: var(--lv-dim);
+    color: var(--lv-text-dim);
     font-family: inherit;
     font-size: 0.95rem;
     padding: 10px 20px;
