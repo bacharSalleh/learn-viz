@@ -32,7 +32,7 @@
 
 <lv-page theme="dark" dir="ltr">
 
-  <lv-hero number="LV" title="LearnViz Gallery" subtitle="All 33 components in one page"></lv-hero>
+  <lv-hero number="LV" title="LearnViz Gallery" subtitle="All 58 components in one page"></lv-hero>
 
   <div class="lv-container">
 
@@ -519,6 +519,239 @@ graph LR
             chart.setAttribute('data', JSON.stringify(data));
           });
         </script>
+      </div>
+
+    </lv-section>
+
+    <!-- ═══════════════════════════════════════════
+         SECTION 7 — ML VISUALIZATIONS (v3)
+         ═══════════════════════════════════════════ -->
+    <lv-section title="ML Visualizations (v3)">
+
+      <lv-grid cols="2" gap="md">
+        <div class="demo-group">
+          <h3>lv-gradient-descent — optimizer on loss surface</h3>
+          <lv-card>
+            <lv-gradient-descent fn="himmelblau" optimizer="adam" lr="0.05" show-path speed="30"></lv-gradient-descent>
+          </lv-card>
+        </div>
+
+        <div class="demo-group">
+          <h3>lv-decision-boundary — interactive classifier</h3>
+          <lv-card>
+            <lv-decision-boundary
+              data='[{"x":0.2,"y":0.8,"class":0},{"x":0.3,"y":0.9,"class":0},{"x":0.1,"y":0.7,"class":0},{"x":0.4,"y":0.6,"class":0},{"x":0.8,"y":0.2,"class":1},{"x":0.9,"y":0.3,"class":1},{"x":0.7,"y":0.1,"class":1},{"x":0.6,"y":0.4,"class":1},{"x":0.5,"y":0.5,"class":0},{"x":0.55,"y":0.45,"class":1}]'
+              model="quadratic" interactive>
+            </lv-decision-boundary>
+          </lv-card>
+        </div>
+      </lv-grid>
+
+      <div class="demo-group">
+        <h3>lv-attention-map — transformer attention</h3>
+        <lv-card>
+          <lv-attention-map
+            tokens='["The","cat","sat","on","the","mat"]'
+            weights='[[0.1,0.3,0.05,0.05,0.4,0.1],[0.05,0.5,0.1,0.05,0.1,0.2],[0.1,0.15,0.4,0.2,0.05,0.1],[0.05,0.05,0.2,0.3,0.1,0.3],[0.3,0.1,0.05,0.1,0.4,0.05],[0.1,0.2,0.1,0.3,0.05,0.25]]'>
+          </lv-attention-map>
+        </lv-card>
+      </div>
+
+    </lv-section>
+
+    <!-- ═══════════════════════════════════════════
+         SECTION 8 — MATH & CS VISUALIZATIONS
+         ═══════════════════════════════════════════ -->
+    <lv-section title="Math & CS Visualizations">
+
+      <div class="demo-group">
+        <h3>lv-sorting-viz — animated sorting</h3>
+        <lv-card>
+          <lv-sorting-viz data="[38,27,43,3,9,82,10,55,20,45,15,72]" algorithm="quick" speed="80"></lv-sorting-viz>
+        </lv-card>
+      </div>
+
+      <lv-grid cols="2" gap="md">
+        <div class="demo-group">
+          <h3>lv-matrix-transform — linear algebra</h3>
+          <lv-card>
+            <lv-matrix-transform matrix="[[2,1],[0.5,1.5]]" show-grid show-eigen animate></lv-matrix-transform>
+          </lv-card>
+        </div>
+
+        <div class="demo-group">
+          <h3>lv-vector-field — with particles</h3>
+          <lv-card>
+            <lv-vector-field fn="rotation" particles particle-count="60"></lv-vector-field>
+          </lv-card>
+        </div>
+      </lv-grid>
+
+      <div class="demo-group">
+        <h3>lv-graph-algo — BFS traversal</h3>
+        <lv-card>
+          <lv-graph-algo
+            nodes='[{"id":"A"},{"id":"B"},{"id":"C"},{"id":"D"},{"id":"E"},{"id":"F"}]'
+            edges='[{"source":"A","target":"B"},{"source":"A","target":"C"},{"source":"B","target":"D"},{"source":"C","target":"E"},{"source":"D","target":"F"},{"source":"E","target":"F"}]'
+            algorithm="bfs" start="A" speed="500">
+          </lv-graph-algo>
+        </lv-card>
+      </div>
+
+    </lv-section>
+
+    <!-- ═══════════════════════════════════════════
+         SECTION 9 — STATISTICS & DATA
+         ═══════════════════════════════════════════ -->
+    <lv-section title="Statistics & Data">
+
+      <lv-grid cols="2" gap="md">
+        <div class="demo-group">
+          <h3>lv-distribution — normal</h3>
+          <lv-card>
+            <lv-distribution type="normal" params='{"mean":0,"std":1}' shade-from="1" show-stats></lv-distribution>
+          </lv-card>
+        </div>
+
+        <div class="demo-group">
+          <h3>lv-distribution — binomial</h3>
+          <lv-card>
+            <lv-distribution type="binomial" params='{"n":20,"p":0.3}' show-stats></lv-distribution>
+          </lv-card>
+        </div>
+      </lv-grid>
+
+      <div class="demo-group">
+        <h3>lv-regression-fit — interactive polynomial</h3>
+        <lv-card>
+          <lv-regression-fit
+            data='[{"x":1,"y":2.1},{"x":2,"y":3.9},{"x":3,"y":6.2},{"x":4,"y":7.8},{"x":5,"y":11.1},{"x":6,"y":13.5},{"x":7,"y":14.8}]'
+            degree="2" interactive show-r2 show-equation>
+          </lv-regression-fit>
+        </lv-card>
+      </div>
+
+      <div class="demo-group">
+        <h3>lv-data-table — sortable with stats</h3>
+        <lv-card>
+          <lv-data-table
+            data='[{"Model":"CNN","Accuracy":0.943,"Loss":0.182,"Params":"2.3M"},{"Model":"RNN","Accuracy":0.891,"Loss":0.341,"Params":"1.1M"},{"Model":"Transformer","Accuracy":0.967,"Loss":0.098,"Params":"12.4M"},{"Model":"MLP","Accuracy":0.856,"Loss":0.412,"Params":"0.8M"},{"Model":"SVM","Accuracy":0.823,"Loss":0.521,"Params":"N/A"}]'
+            sortable show-stats striped>
+          </lv-data-table>
+        </lv-card>
+      </div>
+
+    </lv-section>
+
+    <!-- ═══════════════════════════════════════════
+         SECTION 10 — NEW DIAGRAMS (v3)
+         ═══════════════════════════════════════════ -->
+    <lv-section title="New Diagrams (v3)">
+
+      <div class="demo-group">
+        <h3>lv-backprop-flow — computational graph</h3>
+        <lv-card>
+          <lv-backprop-flow expression="linear" values='{"x":2,"w":0.5,"b":0.1,"y":1}' speed="600"></lv-backprop-flow>
+        </lv-card>
+      </div>
+
+      <div class="demo-group">
+        <h3>lv-recursion-tree — fibonacci(5)</h3>
+        <lv-card>
+          <lv-recursion-tree fn="fibonacci" n="5" speed="300" show-memo></lv-recursion-tree>
+        </lv-card>
+      </div>
+
+    </lv-section>
+
+    <!-- ═══════════════════════════════════════════
+         SECTION 11 — NEW INTERACTIVE (v3)
+         ═══════════════════════════════════════════ -->
+    <lv-section title="New Interactive (v3)">
+
+      <div class="demo-group">
+        <h3>lv-drag-sort — reorder exercise</h3>
+        <lv-card>
+          <lv-drag-sort
+            items='["Compute Loss","Forward Pass","Initialize Weights","Update Weights","Backpropagate"]'
+            correct='["Initialize Weights","Forward Pass","Compute Loss","Backpropagate","Update Weights"]'
+            label="Order the training steps:">
+          </lv-drag-sort>
+        </lv-card>
+      </div>
+
+      <div class="demo-group">
+        <h3>lv-drag-classify — categorization exercise</h3>
+        <lv-card>
+          <lv-drag-classify
+            items='[{"text":"Linear Regression","category":"Supervised"},{"text":"K-Means","category":"Unsupervised"},{"text":"Random Forest","category":"Supervised"},{"text":"PCA","category":"Unsupervised"},{"text":"SVM","category":"Supervised"},{"text":"DBSCAN","category":"Unsupervised"}]'
+            categories='["Supervised","Unsupervised"]'>
+          </lv-drag-classify>
+        </lv-card>
+      </div>
+
+      <div class="demo-group">
+        <h3>lv-fill-blank — fill in the blanks</h3>
+        <lv-card>
+          <lv-fill-blank>
+            <p>The sigmoid function maps any input to the range <lv-blank answer="[0,1]" accept="0,1|[0, 1]|0 to 1"></lv-blank>.
+            The derivative of sigmoid is <lv-blank answer="sigmoid(x)(1-sigmoid(x))" accept="s(x)(1-s(x))|σ(x)(1-σ(x))"></lv-blank>.</p>
+          </lv-fill-blank>
+        </lv-card>
+      </div>
+
+      <div class="demo-group">
+        <h3>lv-you-draw — prediction exercise</h3>
+        <lv-card>
+          <lv-you-draw
+            data="[10,15,18,24,28,35,42,50,61,75]"
+            reveal-at="5"
+            x-label="Month" y-label="Users (K)">
+          </lv-you-draw>
+        </lv-card>
+      </div>
+
+      <div class="demo-group">
+        <h3>lv-flashcard — spaced repetition</h3>
+        <lv-card>
+          <lv-flashcard cards='[
+            {"front":"What does ReLU do?","back":"Returns max(0, x) — sets negatives to zero"},
+            {"front":"What is overfitting?","back":"Model memorizes training data but fails on new data"},
+            {"front":"What is a loss function?","back":"Measures how wrong the model predictions are"},
+            {"front":"What is gradient descent?","back":"Iteratively adjusts parameters to minimize the loss"}
+          ]' shuffle></lv-flashcard>
+        </lv-card>
+      </div>
+
+      <div class="demo-group">
+        <h3>lv-sandbox — live code editor</h3>
+        <lv-card>
+          <lv-sandbox code="// Try editing this code and click Run
+function sigmoid(x) {
+  return 1 / (1 + Math.exp(-x));
+}
+
+for (let x = -3; x <= 3; x++) {
+  console.log(`sigmoid(${x}) = ${sigmoid(x).toFixed(4)}`);
+}"></lv-sandbox>
+        </lv-card>
+      </div>
+
+      <div class="demo-group">
+        <h3>lv-progress-tracker</h3>
+        <lv-card>
+          <lv-progress-tracker sections='[
+            {"id":"layout","label":"Layout Components"},
+            {"id":"display","label":"Display Components"},
+            {"id":"charts","label":"D3 Charts"},
+            {"id":"ml","label":"ML Visualizations"},
+            {"id":"interactive","label":"Interactive Components"}
+          ]'></lv-progress-tracker>
+          <div class="lv-mt-4">
+            <button class="theme-btn" onclick="document.querySelector('lv-progress-tracker').complete('layout')">Complete "Layout"</button>
+            <button class="theme-btn" onclick="document.querySelector('lv-progress-tracker').complete('charts')">Complete "Charts"</button>
+          </div>
+        </lv-card>
       </div>
 
     </lv-section>
