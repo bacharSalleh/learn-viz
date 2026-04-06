@@ -259,7 +259,7 @@ class LvFlow extends LvBaseElement {
       <svg xmlns="http://www.w3.org/2000/svg"
            width="${svgW}" height="${svgH}"
            viewBox="0 0 ${svgW} ${svgH}"
-           role="img" aria-label="Flow diagram">
+           role="img" aria-label="Process flow">
         ${markerDef}
         ${arrowsHtml}
         ${cardsHtml}

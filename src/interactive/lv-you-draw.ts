@@ -239,7 +239,7 @@ class LvYouDraw extends LvBaseElement {
 
     this.render(`
       <div class="container">
-        <svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet">
+        <svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Draw your prediction chart">
           <g transform="translate(${M.left},${M.top})">
             ${gridHtml}
             <rect class="draw-zone" x="${drawZoneX}" y="0" width="${drawZoneW}" height="${ih}" rx="4" />

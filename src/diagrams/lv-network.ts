@@ -120,6 +120,8 @@ class LvNetwork extends LvBaseElement {
 
   private _initSvg() {
     const svgEl = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svgEl.setAttribute('role', 'img');
+    svgEl.setAttribute('aria-label', 'Neural network');
     this._container!.appendChild(svgEl);
     this._svg = d3.select(svgEl);
 

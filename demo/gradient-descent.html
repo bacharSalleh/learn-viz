@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How Gradient Descent Works — LearnViz</title>
+  <script type="module" src="/src/index.ts"></script>
+  <style>
+    body { margin: 0; }
+    .lesson-text {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: var(--lv-text);
+      max-width: 65ch;
+    }
+    .lesson-text.centered {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .step-heading {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--lv-accent);
+      margin: 0 0 0.75rem 0;
+    }
+    .step-text {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--lv-text);
+    }
+    .optimizer-label {
+      text-align: center;
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--lv-text);
+      margin-bottom: 0.5rem;
+    }
+    .optimizer-desc {
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--lv-text-dim);
+      margin-top: 0.5rem;
+    }
+    .section-intro {
+      font-size: 1.15rem;
+      color: var(--lv-text);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+    .math-block {
+      text-align: center;
+      margin: 2rem 0;
+    }
+    .math-label {
+      font-size: 0.85rem;
+      color: var(--lv-text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+    }
+    .takeaway-number {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--lv-accent);
+      margin-bottom: 0.25rem;
+    }
+    .takeaway-text {
+      font-size: 1rem;
+      color: var(--lv-text);
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+<lv-page theme="dark" dir="ltr">
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 1 — HERO
+       ═══════════════════════════════════════════ -->
+  <lv-hero number="01" title="How Gradient Descent Works" subtitle="The algorithm that trains every neural network"></lv-hero>
+
+  <div class="lv-container">
+
+    <!-- ═══════════════════════════════════════════
+         SECTION 2 — INTRODUCTION: WHAT IS OPTIMIZATION?
+         ═══════════════════════════════════════════ -->
+    <lv-section title="What is Optimization?">
+      <p class="lesson-text">
+        Training a neural network means finding the weights that minimize error.
+        The network makes predictions, we measure how wrong those predictions are,
+        and then we adjust the weights to be a little less wrong. Repeat millions of
+        times, and the network learns.
+      </p>
+
+      <lv-callout type="info" title="What is Loss?">
+        A <strong>loss function</strong> measures how wrong the model is. High loss = bad predictions.
+        Low loss = good predictions. The entire goal of training is to find parameters that
+        make the loss as small as possible. Think of it as a score you want to minimize.
+      </lv-callout>
+
+      <p class="lesson-text" style="margin-top: 1.5rem;">
+        Here is the simplest loss landscape: a quadratic bowl. The minimum is at the bottom.
+        Drag the point along the curve to see how loss changes with the parameter value.
+      </p>
+
+      <lv-card>
+        <lv-function fn="x => x*x" range="[-4, 4]" interactive color="var(--lv-accent)"></lv-function>
+      </lv-card>
+
+      <lv-callout type="tip" title="Try it!">
+        Drag the interactive point to the minimum of the curve. That is exactly what gradient descent does automatically.
+      </lv-callout>
+    </lv-section>
+
+    <!-- ═══════════════════════════════════════════
+         SECTION 3 — THE INTUITION: ROLLING DOWNHILL (SCROLLYTELLING)
+         ═══════════════════════════════════════════ -->
+    <lv-section title="The Intuition — Rolling Downhill">
+      <p class="section-intro">
+        Scroll through the steps below while watching the visualization update on the left.
+      </p>
+
+      <lv-scrolly id="gd-scrolly">
+        <!-- Sticky visualization panel -->
+        <lv-gradient-descent
+          slot="viz"
+          id="gd-viz"
+          fn="quadratic"
+          optimizer="sgd"
+          lr="0.1"
+          show-path
+          speed="60"
+          start="[2.5, 2.5]"
+        ></lv-gradient-descent>
+
+        <!-- Step 1 -->
+        <lv-scrolly-step>
+          <lv-card variant="glow">
+            <div class="step-heading">Step 1: You are Lost in Fog</div>
+            <p class="step-text">
+              Imagine you are standing on a hilly landscape in thick fog.
+              You cannot see the valley floor, but you can <em>feel</em> the slope
+              under your feet. The contour map on the left shows a simple quadratic
+              loss surface. The bright dot is you - starting far from the minimum.
+            </p>
+          </lv-card>
+        </lv-scrolly-step>
+
+        <!-- Step 2 -->
+        <lv-scrolly-step>
+          <lv-card variant="glow">
+            <div class="step-heading">Step 2: Feel the Gradient</div>
+            <p class="step-text">
+              The <strong>gradient</strong> is the direction of steepest <em>ascent</em>.
+              So the <strong>negative gradient</strong> points downhill:
+            </p>
+            <div class="math-block">
+              <lv-math display>-\nabla f(\mathbf{x})</lv-math>
+            </div>
+            <p class="step-text">
+              This is the direction you should step to decrease loss the fastest.
+              Watch the optimizer trace the steepest descent path on the contour plot.
+            </p>
+          </lv-card>
+        </lv-scrolly-step>
+
+        <!-- Step 3 -->
+        <lv-scrolly-step>
+          <lv-card variant="glow">
+            <div class="step-heading">Step 3: Take a Step</div>
+            <p class="step-text">
+              Take a step proportional to the slope. The size of the step is controlled
+              by the <strong>learning rate</strong> <lv-math>\alpha</lv-math>:
+            </p>
+            <div class="math-block">
+              <lv-math display>\theta_{\text{new}} = \theta_{\text{old}} - \alpha \nabla L(\theta)</lv-math>
+            </div>
+            <p class="step-text">
+              Small learning rate = cautious baby steps. Large learning rate = bold leaps.
+              Notice how the ball moves with momentum now - using a slightly larger step size.
+            </p>
+          </lv-card>
+        </lv-scrolly-step>
+
+        <!-- Step 4 -->
+        <lv-scrolly-step>
+          <lv-card variant="glow">
+            <div class="step-heading">Step 4: Reach the Valley</div>
+            <p class="step-text">
+              Repeat the process - compute gradient, take a step, compute gradient, take a step -
+              until you reach a <strong>minimum</strong> where the gradient is nearly zero.
+              The optimizer has now converged to the bottom of the loss surface.
+            </p>
+            <lv-callout type="info">
+              In practice, neural networks have millions of parameters, so this "landscape"
+              exists in millions of dimensions. The intuition is the same: follow the slope downhill.
+            </lv-callout>
+          </lv-card>
+        </lv-scrolly-step>
+      </lv-scrolly>
+
+      <script type="module">
+        const scrolly = document.getElementById('gd-scrolly');
+        const viz = document.getElementById('gd-viz');
+
+        const stepConfigs = [
+          { fn: 'quadratic', optimizer: 'sgd',      lr: '0.1',  start: '[2.5, 2.5]' },
+          { fn: 'quadratic', optimizer: 'sgd',      lr: '0.1',  start: '[2.5, 2.5]' },
+          { fn: 'quadratic', optimizer: 'momentum', lr: '0.08', start: '[2.5, 2.5]' },
+          { fn: 'quadratic', optimizer: 'adam',      lr: '0.15', start: '[2.5, 2.5]' },
+        ];
+
+        scrolly.addEventListener('lv-scrolly-change', (e) => {
+          const step = e.detail.step;
+          const config = stepConfigs[step] || stepConfigs[0];
+          viz.setAttribute('fn', config.fn);
+          viz.setAttribute('optimizer', config.optimizer);
+          viz.setAttribute('lr', config.lr);
+          viz.setAttribute('start', config.start);
+        });
+      </script>
+    </lv-section>
+
+    <!-- ═══════════════════════════════════════════
+         SECTION 4 — THE MATH
+         ═══════════════════════════════════════════ -->
+    <lv-section title="The Math Behind It">
+      <p class="section-intro">
+        The gradient descent update rule is elegant in its simplicity. At every step,
+        we nudge each parameter in the direction that reduces loss.
+      </p>
+
+      <lv-card style="text-align: center; padding: 2rem;">
+        <div class="math-label">The Gradient Descent Update Rule</div>
+        <lv-math display>\theta_{t+1} = \theta_t - \alpha \nabla_\theta L(\theta_t)</lv-math>
+        <div style="margin-top: 1rem;">
+          <lv-grid cols="3" gap="md">
+            <div>
+              <lv-math>\theta</lv-math>
+              <p style="color: var(--lv-text-dim); font-size: 0.85rem; margin: 4px 0 0">Model parameters (weights)</p>
+            </div>
+            <div>
+              <lv-math>\alpha</lv-math>
+              <p style="color: var(--lv-text-dim); font-size: 0.85rem; margin: 4px 0 0">Learning rate (step size)</p>
+            </div>
+            <div>
+              <lv-math>\nabla_\theta L</lv-math>
+              <p style="color: var(--lv-text-dim); font-size: 0.85rem; margin: 4px 0 0">Gradient of the loss</p>
+            </div>
+          </lv-grid>
+        </div>
+      </lv-card>
+
+      <p class="lesson-text" style="margin-top: 2rem;">
+        But how do we compute that gradient? Through <strong>backpropagation</strong> -
+        the chain rule applied systematically through the network. Step through the
+        forward and backward pass below to see gradients flow.
+      </p>
+
+      <lv-card>
+        <p style="color: var(--lv-text-dim); font-size: 0.85rem; margin: 0 0 0.5rem; text-align: center;">
+          Linear model: y&#x0302; = w &middot; x + b &nbsp; (x=2, w=0.5, b=0.1)
+        </p>
+        <lv-backprop-flow expression="linear" values='{"x": 2, "w": 0.5, "b": 0.1, "y": 1}'></lv-backprop-flow>
+      </lv-card>
+
+      <lv-callout type="tip" title="The Chain Rule is Key">
+        Backpropagation is just the chain rule from calculus applied layer by layer.
+        Each node multiplies the incoming gradient by its local gradient and passes
+        it backward. This is what makes training deep networks tractable.
+      </lv-callout>
+    </lv-section>
+
+    <!-- ═══════════════════════════════════════════
+         SECTION 5 — LEARNING RATE MATTERS
+         ═══════════════════════════════════════════ -->
+    <lv-section title="Learning Rate Matters">
+      <p class="section-intro">
+        The learning rate is the single most important hyperparameter.
+        Too small and training crawls. Too large and it explodes. Use the slider
+        to see how loss evolves under different learning rates.
+      </p>
+
+      <lv-card>
+        <lv-playground id="lr-playground">
+          <lv-slider slot="controls" name="lr" min="0.01" max="2.0" step="0.01" value="0.1" label="Learning Rate (alpha)" color="var(--lv-accent)"></lv-slider>
+          <div slot="output">
+            <lv-line-chart id="lr-loss-chart"
+              data="[10, 8, 6.4, 5.1, 4.1, 3.3, 2.6, 2.1, 1.7, 1.4, 1.1, 0.9, 0.7, 0.56, 0.45, 0.36, 0.29, 0.23, 0.18, 0.15]"
+              x-label="Training Step"
+              y-label="Loss"
+              color="var(--lv-accent)"
+              area>
+            </lv-line-chart>
+          </div>
+        </lv-playground>
+      </lv-card>
+
+      <script type="module">
+        const lrPlayground = document.getElementById('lr-playground');
+        const lrChart = document.getElementById('lr-loss-chart');
+
+        lrPlayground.addEventListener('lv-params-change', (e) => {
+          const lr = e.detail.lr;
+          const steps = 20;
+          const data = [];
+          let loss = 10.0;
+          data.push(+loss.toFixed(3));
+
+          for (let i = 1; i < steps; i++) {
+            // Simulate gradient descent on f(x) = x^2
+            // gradient = 2x, so loss update depends on lr
+            const gradient = 2 * Math.sqrt(Math.max(loss, 0));
+            loss = loss - lr * gradient;
+
+            // If lr is too big, loss oscillates or diverges
+            if (lr > 1.0) {
+              loss = loss + (lr - 1.0) * Math.abs(loss) * 0.5 * (Math.random() * 0.4 + 0.8);
+            }
+
+            loss = Math.max(0, Math.min(loss, 100));
+            data.push(+loss.toFixed(3));
+          }
+
+          lrChart.setAttribute('data', JSON.stringify(data));
+        });
+      </script>
+
+      <lv-grid cols="3" gap="md" style="margin-top: 1.5rem;">
+        <lv-callout type="info" title="Too Small (0.01)">
+          Converges, but painfully slowly. You might run out of compute budget before reaching a good minimum.
+        </lv-callout>
+        <lv-callout type="tip" title="Just Right (0.1)">
+          Smooth, steady convergence. The loss drops quickly and stabilizes near zero.
+        </lv-callout>
+        <lv-callout type="warning" title="Too Large (1.5+)">
+          The optimizer overshoots the minimum, bouncing back and forth. Loss may diverge to infinity.
+        </lv-callout>
+      </lv-grid>
+    </lv-section>
+
+    <!-- ═══════════════════════════════════════════
+         SECTION 6 — OPTIMIZERS COMPARED
+         ═══════════════════════════════════════════ -->
+    <lv-section title="Optimizers Compared">
+      <p class="section-intro">
+        Vanilla gradient descent is just the beginning. Modern optimizers add momentum,
+        adaptive learning rates, and other tricks to converge faster and more reliably.
+        Watch all three tackle the challenging Rosenbrock function simultaneously.
+      </p>
+
+      <lv-grid cols="3" gap="md">
+        <lv-card>
+          <div class="optimizer-label">SGD</div>
+          <lv-gradient-descent fn="rosenbrock" optimizer="sgd" lr="0.001" show-path speed="30" start="[-1.5, 1.5]"></lv-gradient-descent>
+          <p class="optimizer-desc">
+            Plain stochastic gradient descent. Follows the gradient directly. Can be slow in narrow valleys.
+          </p>
+        </lv-card>
+        <lv-card>
+          <div class="optimizer-label">Momentum</div>
+          <lv-gradient-descent fn="rosenbrock" optimizer="momentum" lr="0.001" show-path speed="30" start="[-1.5, 1.5]"></lv-gradient-descent>
+          <p class="optimizer-desc">
+            Adds a velocity term that accumulates past gradients. Builds up speed in consistent directions.
+          </p>
+        </lv-card>
+        <lv-card>
+          <div class="optimizer-label">Adam</div>
+          <lv-gradient-descent fn="rosenbrock" optimizer="adam" lr="0.05" show-path speed="30" start="[-1.5, 1.5]"></lv-gradient-descent>
+          <p class="optimizer-desc">
+            Combines momentum with per-parameter adaptive rates. The default choice for most deep learning.
+          </p>
+        </lv-card>
+      </lv-grid>
+
+      <lv-callout type="tip" title="Which optimizer should I use?" style="margin-top: 1.5rem;">
+        <strong>Adam</strong> is the safe default. It works well out of the box for most problems.
+        <strong>SGD with momentum</strong> can sometimes find better solutions for image classification
+        but requires more careful tuning. Try Adam first, then experiment.
+      </lv-callout>
+    </lv-section>
+
+    <!-- ═══════════════════════════════════════════
+         SECTION 7 — 3D LOSS LANDSCAPE
+         ═══════════════════════════════════════════ -->
+    <lv-section title="3D Loss Landscape">
+      <p class="section-intro">
+        Real loss surfaces are complex. They have peaks, valleys, saddle points, and flat
+        plateaus. Drag to rotate the surface below and explore the terrain the optimizer
+        must navigate.
+      </p>
+
+      <lv-card>
+        <lv-surface-3d
+          id="loss-surface-3d"
+          auto-rotate
+          x-label="Weight 1"
+          y-label="Weight 2"
+          z-label="Loss"
+        ></lv-surface-3d>
+      </lv-card>
+
+      <script type="module">
+        // Generate a loss surface with local and global minima
+        const surface3d = document.getElementById('loss-surface-3d');
+        const size = 40;
+        const grid = [];
+        for (let i = 0; i < size; i++) {
+          const row = [];
+          for (let j = 0; j < size; j++) {
+            const x = -3 + (6 * i) / (size - 1);
+            const y = -3 + (6 * j) / (size - 1);
+            // Himmelblau-like function with multiple minima
+            const val = (x * x + y - 11) ** 2 + (x + y * y - 7) ** 2;
+            row.push(+val.toFixed(2));
+          }
+          grid.push(row);
+        }
+        surface3d.setAttribute('data', JSON.stringify(grid));
+      </script>
+
+      <lv-grid cols="2" gap="md" style="margin-top: 1.5rem;">
+        <lv-callout type="info" title="Local Minimum">
+          A point where loss is lower than all nearby points, but not the lowest overall.
+          The optimizer can get "trapped" here if it cannot build enough momentum to escape.
+        </lv-callout>
+        <lv-callout type="info" title="Global Minimum">
+          The absolute lowest point on the entire loss surface. In deep learning, finding the
+          exact global minimum is often unnecessary - a good local minimum works well in practice.
+        </lv-callout>
+      </lv-grid>
+    </lv-section>
+
+    <!-- ═══════════════════════════════════════════
+         SECTION 8 — TEST YOURSELF
+         ═══════════════════════════════════════════ -->
+    <lv-section title="Test Yourself">
+
+      <p class="section-intro">
+        Let us see what you have learned. Answer the quiz, draw your prediction, and fill in the blanks.
+      </p>
+
+      <!-- Quiz -->
+      <lv-card style="margin-bottom: 1.5rem;">
+        <lv-quiz
+          question="What happens when the learning rate is too large?"
+          options='["Training is slower but more precise","The optimizer overshoots and loss may diverge","The model underfits the data","Gradients vanish to zero"]'
+          correct="1"
+          explanation="A large learning rate causes the optimizer to take steps that are too big, overshooting the minimum. The loss oscillates wildly and may diverge to infinity.">
+        </lv-quiz>
+      </lv-card>
+
+      <lv-card style="margin-bottom: 1.5rem;">
+        <lv-quiz
+          question="Which optimizer adapts the learning rate per parameter?"
+          options='["SGD","Momentum","Adam","None of the above"]'
+          correct="2"
+          explanation="Adam (Adaptive Moment Estimation) maintains per-parameter learning rates, combining the benefits of momentum and RMSProp.">
+        </lv-quiz>
+      </lv-card>
+
+      <!-- You-Draw Exercise -->
+      <lv-card style="margin-bottom: 1.5rem;">
+        <p style="color: var(--lv-text); font-weight: 600; margin: 0 0 0.5rem;">
+          Draw what you think the loss curve looks like with a very high learning rate
+        </p>
+        <p style="color: var(--lv-text-dim); font-size: 0.9rem; margin: 0 0 1rem;">
+          The first 5 points show a normal descent. Draw what happens next when the learning rate is cranked up.
+        </p>
+        <lv-you-draw
+          data="[10.0, 7.5, 5.6, 4.2, 3.2, 5.8, 9.1, 3.5, 11.2, 6.4, 14.0, 8.7, 18.5, 12.1, 22.0]"
+          reveal-at="5"
+          x-label="Training Step"
+          y-label="Loss"
+          reveal-label="Reveal actual loss curve">
+        </lv-you-draw>
+      </lv-card>
+
+      <!-- Fill in the blank -->
+      <lv-card>
+        <p style="color: var(--lv-text); font-weight: 600; margin: 0 0 1rem;">
+          Fill in the gradient descent update rule
+        </p>
+        <lv-fill-blank>
+          <p style="font-size: 1.1rem; line-height: 2;">
+            The gradient descent update rule is:
+            <lv-math>\theta_{t+1} = \theta_t</lv-math> <lv-blank answer="-" accept="minus|-"></lv-blank>
+            <lv-blank answer="alpha" accept="alpha|α|learning rate|lr"></lv-blank>
+            <lv-math>\cdot</lv-math>
+            <lv-blank answer="gradient" accept="gradient|∇L|nabla L|∇L(θ)|grad"></lv-blank>.
+            The symbol <lv-math>\alpha</lv-math> represents the
+            <lv-blank answer="learning rate" accept="learning rate|step size|lr"></lv-blank>.
+          </p>
+        </lv-fill-blank>
+      </lv-card>
+
+    </lv-section>
+
+    <!-- ═══════════════════════════════════════════
+         SECTION 9 — SUMMARY
+         ═══════════════════════════════════════════ -->
+    <lv-section title="Key Takeaways">
+      <lv-grid cols="3" gap="md">
+        <lv-card variant="glow">
+          <div class="takeaway-number">1</div>
+          <div class="takeaway-text">
+            <strong>Gradient descent</strong> finds the minimum of a loss function by repeatedly
+            stepping in the direction of steepest descent: the negative gradient.
+          </div>
+        </lv-card>
+        <lv-card variant="glow">
+          <div class="takeaway-number">2</div>
+          <div class="takeaway-text">
+            The <strong>learning rate</strong> controls step size. Too small is slow,
+            too large causes divergence. Finding the right balance is crucial.
+          </div>
+        </lv-card>
+        <lv-card variant="glow">
+          <div class="takeaway-number">3</div>
+          <div class="takeaway-text">
+            Modern optimizers like <strong>Adam</strong> add momentum and adaptive rates
+            to converge faster and more reliably than plain SGD.
+          </div>
+        </lv-card>
+      </lv-grid>
+
+      <lv-grid cols="2" gap="md" style="margin-top: 1rem;">
+        <lv-card variant="glow">
+          <div class="takeaway-number">4</div>
+          <div class="takeaway-text">
+            <strong>Backpropagation</strong> computes the gradient efficiently using the chain rule,
+            flowing error signals backward through the network.
+          </div>
+        </lv-card>
+        <lv-card variant="glow">
+          <div class="takeaway-number">5</div>
+          <div class="takeaway-text">
+            Real loss landscapes have <strong>local minima</strong> and <strong>saddle points</strong>,
+            but in practice, good local minima work just as well as global ones.
+          </div>
+        </lv-card>
+      </lv-grid>
+    </lv-section>
+
+    <!-- Navigation -->
+    <lv-nav prev="/demo/index.html" prev-label="Gallery" next="/demo/index.html" next-label="Gallery"></lv-nav>
+
+  </div>
+</lv-page>
+
+</body>
+</html>

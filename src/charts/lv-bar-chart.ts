@@ -15,6 +15,7 @@ const DEFAULT_PALETTE = [
 
 const css = /* css */ `
   :host { display: block; }
+  .sr-table { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
 
   .bar-list {
     display: flex;
@@ -187,7 +188,10 @@ class LvBarChart extends LvBaseElement {
       `;
     }).join('');
 
-    this.render(`<div class="bar-list">${items}</div>`);
+    const srTableRows = data.map(d => `<tr><td>${this._esc(d.label)}</td><td>${typeof d.value === 'number' ? (d.value % 1 ? d.value.toFixed(2) : d.value.toString()) : d.value}</td></tr>`).join('');
+    const srTable = `<table class="sr-table"><caption>Bar chart data</caption><thead><tr><th>Label</th><th>Value</th></tr></thead><tbody>${srTableRows}</tbody></table>`;
+
+    this.render(`<div class="bar-list" role="img" aria-label="Bar chart">${items}</div>${srTable}`);
 
     // If already animated, show bars immediately
     if (this._hasAnimated) {

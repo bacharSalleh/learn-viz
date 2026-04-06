@@ -162,7 +162,7 @@ class LvQuiz extends LvBaseElement {
     const explanation = this.getAttribute('explanation') || '';
 
     const optionsHtml = options.map((opt, i) => `
-      <div class="option" role="button" tabindex="0" data-index="${i}">
+      <div class="option" role="radio" aria-checked="false" tabindex="0" data-index="${i}">
         <span class="icon" aria-hidden="true"></span>
         <span class="label">${opt}</span>
       </div>
@@ -170,7 +170,7 @@ class LvQuiz extends LvBaseElement {
 
     this.render(`
       <div class="question">${question}</div>
-      <div class="options">${optionsHtml}</div>
+      <div class="options" role="group" aria-label="${question.replace(/"/g, '&quot;')}">${optionsHtml}</div>
       ${explanation ? `<div class="explanation"><div class="explanation-inner">${explanation}</div></div>` : ''}
     `);
   }

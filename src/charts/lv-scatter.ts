@@ -17,6 +17,7 @@ const DEFAULT_PALETTE = [
 const css = `
   :host { display: block; }
   svg { width: 100%; display: block; direction: ltr; }
+  .sr-table { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
   .point { cursor: pointer; transition: opacity 0.2s; }
   .point:hover { opacity: 0.9; }
   .grid line { stroke: var(--lv-border, #2a2a4a); stroke-opacity: 0.4; }
@@ -108,6 +109,8 @@ class LvScatter extends LvBaseElement {
 
   private _initSvg() {
     const svgEl = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svgEl.setAttribute('role', 'img');
+    svgEl.setAttribute('aria-label', 'Scatter plot');
     this._container!.appendChild(svgEl);
     this._svg = d3.select(svgEl);
     this._svg.append('g').attr('class', 'grid-group');
@@ -356,6 +359,17 @@ class LvScatter extends LvBaseElement {
         legendX += 14 + String(cluster).length * 7 + 20;
       }
     }
+
+    // Screen reader table
+    let srTable = this._container!.querySelector('.sr-table');
+    if (!srTable) {
+      srTable = document.createElement('table');
+      srTable.className = 'sr-table';
+      this._container!.appendChild(srTable);
+    }
+    const esc = (s: string) => s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+    const srRows = data.map(d => `<tr><td>${d.x}</td><td>${d.y}</td><td>${d.label ? esc(d.label) : ''}</td></tr>`).join('');
+    srTable.innerHTML = `<caption>Scatter plot data</caption><thead><tr><th>X</th><th>Y</th><th>Label</th></tr></thead><tbody>${srRows}</tbody>`;
   }
 }
 

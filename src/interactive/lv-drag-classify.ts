@@ -239,7 +239,7 @@ class LvDragClassify extends LvBaseElement {
     const poolHtml = poolItems
       .map((p) => {
         const idx = this._placements.indexOf(p);
-        return `<div class="chip" data-idx="${idx}">${this._esc(p.text)}<span class="tooltip"></span></div>`;
+        return `<div class="chip" role="option" data-idx="${idx}">${this._esc(p.text)}<span class="tooltip"></span></div>`;
       })
       .join('');
 
@@ -250,12 +250,12 @@ class LvDragClassify extends LvBaseElement {
         const itemsHtml = bucketItems
           .map((p) => {
             const idx = this._placements.indexOf(p);
-            return `<div class="chip" data-idx="${idx}">${this._esc(p.text)}<span class="tooltip"></span></div>`;
+            return `<div class="chip" role="option" data-idx="${idx}">${this._esc(p.text)}<span class="tooltip"></span></div>`;
           })
           .join('');
 
         return `
-        <div class="bucket" data-bucket="${this._esc(cat)}">
+        <div class="bucket" role="group" aria-label="${this._esc(cat)}" data-bucket="${this._esc(cat)}">
           <div class="bucket-header" style="border-color: ${color}">${this._esc(cat)}</div>
           <div class="bucket-items">${itemsHtml}</div>
         </div>`;
@@ -264,7 +264,7 @@ class LvDragClassify extends LvBaseElement {
 
     this.render(`
       <div class="pool-label">Items</div>
-      <div class="pool${emptyClass}">${poolHtml}</div>
+      <div class="pool${emptyClass}" role="group" aria-label="Items pool">${poolHtml}</div>
       <div class="buckets">${bucketsHtml}</div>
       <button class="btn submit-btn">${this._esc(submitLabel)}</button>
     `);

@@ -145,7 +145,7 @@ class LvTimeline extends LvBaseElement {
     for (let i = 0; i < this._items.length; i++) {
       const item = this._items[i];
       itemsHtml += `
-        <div class="tl-item" style="animation-delay: ${i * 100}ms; --_dot-color: ${item.color};">
+        <div class="tl-item" role="listitem" style="animation-delay: ${i * 100}ms; --_dot-color: ${item.color};">
           <div class="tl-dot"></div>
           <div class="tl-card">
             ${item.date ? `<div class="tl-date">${escapeHtml(item.date)}</div>` : ''}
@@ -155,7 +155,7 @@ class LvTimeline extends LvBaseElement {
         </div>`;
     }
 
-    this.render(`<div class="timeline">${itemsHtml}</div>`);
+    this.render(`<div class="timeline" role="list">${itemsHtml}</div>`);
   }
 
   animateIn(instant?: boolean) {

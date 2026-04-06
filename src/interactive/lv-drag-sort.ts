@@ -177,7 +177,7 @@ class LvDragSort extends LvBaseElement {
     const itemsHtml = this._order
       .map(
         (item, i) => `
-      <div class="item" draggable="false" tabindex="0" data-index="${i}">
+      <div class="item" draggable="false" tabindex="0" data-index="${i}" role="option" aria-grabbed="false">
         <span class="handle" aria-hidden="true">\u2261</span>
         <span class="item-text">${this._esc(item)}</span>
         <span class="status-icon"></span>
@@ -187,8 +187,8 @@ class LvDragSort extends LvBaseElement {
       .join('');
 
     this.render(`
-      <div class="label">${this._esc(label)}</div>
-      <div class="item-list">${itemsHtml}</div>
+      <div class="label" id="sort-label">${this._esc(label)}</div>
+      <div class="item-list" role="listbox" aria-labelledby="sort-label">${itemsHtml}</div>
       <button class="btn submit-btn">${this._esc(submitLabel)}</button>
     `);
 
@@ -314,7 +314,7 @@ class LvDragSort extends LvBaseElement {
     list.innerHTML = this._order
       .map(
         (item, i) => `
-      <div class="item" draggable="false" tabindex="0" data-index="${i}">
+      <div class="item" draggable="false" tabindex="0" data-index="${i}" role="option" aria-grabbed="false">
         <span class="handle" aria-hidden="true">\u2261</span>
         <span class="item-text">${this._esc(item)}</span>
         <span class="status-icon"></span>

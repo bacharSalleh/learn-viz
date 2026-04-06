@@ -4,6 +4,7 @@ import * as d3 from 'd3';
 const css = /* css */ `
   :host { display: block; }
   svg { width: 100%; max-width: 700px; margin: 0 auto; display: block; direction: ltr; }
+  .sr-table { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
   .cell { cursor: default; transition: transform 0.2s ease; transform-origin: center; }
   .cell:hover { transform: scale(1.08); }
   .cell-text { text-anchor: middle; dominant-baseline: central; font-size: 11px; font-weight: 600; pointer-events: none; }
@@ -143,10 +144,17 @@ class LvHeatmap extends LvBaseElement {
       }
     }
 
+    // Screen reader table
+    let srTableRows = '<tr><th></th>' + labels.map(l => `<th>${this._escapeHtml(l)}</th>`).join('') + '</tr>';
+    for (let r = 0; r < n; r++) {
+      srTableRows += `<tr><th>${this._escapeHtml(labels[r])}</th>` + (values[r] || []).map(v => `<td>${(v ?? 0).toFixed(2)}</td>`).join('') + '</tr>';
+    }
+
     // Tooltip element
     const html = `
       <div style="position: relative;">
-        <svg viewBox="0 0 ${svgW} ${svgH}">${svgContent}</svg>
+        <svg viewBox="0 0 ${svgW} ${svgH}" role="img" aria-label="Heatmap">${svgContent}</svg>
+        <table class="sr-table"><caption>Heatmap data</caption>${srTableRows}</table>
         <div class="tooltip"></div>
       </div>
     `;

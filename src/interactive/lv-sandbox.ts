@@ -94,13 +94,13 @@ class LvSandbox extends LvBaseElement {
     this.render(`<div class="sb-container">
       <div class="editor-wrap">
         <div class="line-numbers" id="line-nums"></div>
-        <textarea id="editor" spellcheck="false" ${editable ? '' : 'readonly'}>${this._esc(code)}</textarea>
+        <textarea id="editor" spellcheck="false" role="textbox" aria-label="Code editor" ${editable ? '' : 'readonly'}>${this._esc(code)}</textarea>
       </div>
       <div class="toolbar">
         <span class="lang">${this._esc(lang)}</span>
         <button id="btn-run">${this._esc(runLabel)}</button>
       </div>
-      <div class="output" id="output"><span class="placeholder">Output will appear here...</span></div>
+      <div class="output" id="output" role="log" aria-live="polite" aria-label="Code output"><span class="placeholder">Output will appear here...</span></div>
     </div>`);
 
     const editor = this.root.getElementById('editor') as HTMLTextAreaElement;

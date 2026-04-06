@@ -320,7 +320,7 @@ class LvRecursionTree extends LvBaseElement {
     const done = this._stepIdx >= this._steps.length - 1;
 
     const html = `<div class="rt-container">
-      <svg viewBox="0 0 ${svgW} ${svgH}" xmlns="http://www.w3.org/2000/svg" style="max-width:${Math.min(svgW, 800)}px;">
+      <svg viewBox="0 0 ${svgW} ${svgH}" xmlns="http://www.w3.org/2000/svg" style="max-width:${Math.min(svgW, 800)}px;" role="img" aria-label="Recursion tree">
         ${edgesSvg}
         ${nodesSvg}
       </svg>

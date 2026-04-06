@@ -111,6 +111,8 @@ class LvTree extends LvBaseElement {
 
   private _initSvg() {
     const svgEl = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svgEl.setAttribute('role', 'img');
+    svgEl.setAttribute('aria-label', 'Decision tree');
     this._container!.appendChild(svgEl);
     this._svg = d3.select(svgEl);
     this._svg.append('g').attr('class', 'links-group');

@@ -105,6 +105,8 @@ class LvScrolly extends LvBaseElement {
   }
 
   private _build(): void {
+    this.setAttribute('role', 'region');
+    this.setAttribute('aria-label', 'Scrollable narrative');
     this.render(`
       <div class="scrolly-grid">
         <div class="viz-col"><slot name="viz"></slot></div>
@@ -120,6 +122,7 @@ class LvScrolly extends LvBaseElement {
 
     // Activate the first step by default
     this._steps[0].classList.add('active');
+    this._steps[0].setAttribute('aria-current', 'step');
     this.setAttribute('data-active-step', '0');
 
     this._observer = new IntersectionObserver(
@@ -130,8 +133,12 @@ class LvScrolly extends LvBaseElement {
             if (index === -1) return;
 
             // Update active states
-            this._steps.forEach((s) => s.classList.remove('active'));
+            this._steps.forEach((s) => {
+              s.classList.remove('active');
+              s.removeAttribute('aria-current');
+            });
             entry.target.classList.add('active');
+            entry.target.setAttribute('aria-current', 'step');
 
             this.setAttribute('data-active-step', String(index));
 

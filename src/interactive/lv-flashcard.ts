@@ -210,7 +210,7 @@ class LvFlashcard extends LvBaseElement {
       const ok = this._ratings.filter(r => r.rating === 'ok').length;
       const hard = this._ratings.filter(r => r.rating === 'hard').length;
 
-      this.render(`<div class="fc-container">
+      this.render(`<div class="fc-container" role="region" aria-label="Flashcard">
         <div class="done">
           <h3>Session Complete</h3>
           <div class="stats">
@@ -230,15 +230,15 @@ class LvFlashcard extends LvBaseElement {
     const total = this._deck.length;
     const pct = Math.round((this._current / total) * 100);
 
-    this.render(`<div class="fc-container">
+    this.render(`<div class="fc-container" role="region" aria-label="Flashcard">
       <div class="progress">
         <div class="progress-text">Card ${this._current + 1} of ${total}</div>
         <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
       </div>
       <div class="card-wrapper" id="card-wrapper">
         <div class="card${this._flipped ? ' flipped' : ''}">
-          <div class="card-face card-front">${this._esc(card.front)}</div>
-          <div class="card-face card-back">${this._esc(card.back)}</div>
+          <div class="card-face card-front" aria-live="polite">${this._esc(card.front)}</div>
+          <div class="card-face card-back" aria-live="polite">${this._esc(card.back)}</div>
         </div>
       </div>
       <div class="ratings">

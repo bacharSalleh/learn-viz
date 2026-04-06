@@ -15,6 +15,7 @@ const DEFAULT_PALETTE = [
 const css = `
   :host { display: block; }
   svg { width: 100%; display: block; direction: ltr; }
+  .sr-table { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
   .arc { cursor: pointer; transition: opacity 0.2s; }
   .arc:hover { opacity: 0.9; }
   .arc-label {
@@ -96,6 +97,8 @@ class LvPie extends LvBaseElement {
 
   private _initSvg() {
     const svgEl = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svgEl.setAttribute('role', 'img');
+    svgEl.setAttribute('aria-label', 'Pie chart');
     this._container!.appendChild(svgEl);
     this._svg = d3.select(svgEl);
     this._svg.append('g').attr('class', 'arcs-group');
@@ -243,6 +246,16 @@ class LvPie extends LvBaseElement {
         }
       }
     }
+
+    // Screen reader table
+    let srTable = this._container!.querySelector('.sr-table');
+    if (!srTable) {
+      srTable = document.createElement('table');
+      srTable.className = 'sr-table';
+      this._container!.appendChild(srTable);
+    }
+    const srRows = data.map(d => `<tr><td>${d.label.replace(/&/g,'&amp;').replace(/</g,'&lt;')}</td><td>${d.value}</td></tr>`).join('');
+    srTable.innerHTML = `<caption>Pie chart data</caption><thead><tr><th>Label</th><th>Value</th></tr></thead><tbody>${srRows}</tbody>`;
 
     // Legend
     const legendGroup = this._svg.select<SVGGElement>('.legend-group');

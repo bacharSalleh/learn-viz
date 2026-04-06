@@ -71,7 +71,7 @@ class LvBlank extends LvBaseElement {
   private _build(): void {
     this.render(`
       <span class="blank-wrapper">
-        <input class="blank-input" type="text" autocomplete="off" spellcheck="false"/>
+        <input class="blank-input" type="text" autocomplete="off" spellcheck="false" aria-label="Fill in the blank"/>
         <span class="result-icon"></span>
         <span class="correct-answer"></span>
       </span>

@@ -277,7 +277,7 @@ class LvBackpropFlow extends LvBaseElement {
     const phaseText = this._phase === 'forward' ? 'Forward Pass' : this._phase === 'backward' ? 'Backward Pass' : '';
 
     const html = `<div class="bp-container">
-      <svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Computational graph">
         <defs>
           <marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
             <path d="M0,0 L8,3 L0,6 Z" fill="var(--lv-text-dim)"/>

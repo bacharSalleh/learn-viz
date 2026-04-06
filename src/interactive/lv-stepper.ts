@@ -235,6 +235,12 @@ class LvStepper extends LvBaseElement {
       counter.textContent = `${toArabicNumeral(index + 1)} / ${toArabicNumeral(this._total)}`;
     }
 
+    // Update aria-label on the steps container
+    const stepsContainer = this.root.querySelector('.steps');
+    if (stepsContainer) {
+      stepsContainer.setAttribute('aria-label', `Step ${index + 1} of ${this._total}`);
+    }
+
     // Update button states
     const prevBtn = this.root.querySelector('.prev') as HTMLButtonElement | null;
     const nextBtn = this.root.querySelector('.next') as HTMLButtonElement | null;

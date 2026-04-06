@@ -6,6 +6,7 @@ type DataPoint = { x: number; y: number };
 const css = `
   :host { display: block; }
   svg { width: 100%; display: block; direction: ltr; }
+  .sr-table { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
   .line { fill: none; stroke-linecap: round; stroke-linejoin: round; }
   .area { opacity: 0; transition: opacity 0.5s; }
   .area.visible { opacity: 1; }
@@ -40,7 +41,7 @@ class LvLineChart extends LvBaseElement {
   connectedCallback() {
     super.connectedCallback();
     this.adoptStyles(css);
-    this.root.innerHTML = `<svg></svg>`;
+    this.root.innerHTML = `<svg role="img" aria-label="Line chart"></svg>`;
     this._buildChart();
 
     this._resizeObs = new ResizeObserver(() => {
@@ -228,6 +229,16 @@ class LvLineChart extends LvBaseElement {
     if (showTooltip) {
       this._setupTooltip(g, data, xScale, yScale, color);
     }
+
+    // Add screen reader table
+    let srTable = this.root.querySelector('.sr-table');
+    if (!srTable) {
+      srTable = document.createElement('table');
+      srTable.className = 'sr-table';
+      this.root.appendChild(srTable);
+    }
+    const srRows = data.map(d => `<tr><td>${d.x}</td><td>${d.y}</td></tr>`).join('');
+    srTable.innerHTML = `<caption>Line chart data</caption><thead><tr><th>X</th><th>Y</th></tr></thead><tbody>${srRows}</tbody>`;
 
     this._built = true;
 

@@ -4,6 +4,7 @@ import * as d3 from 'd3';
 const css = `
   :host { display: block; margin: var(--lv-sp-4) 0; }
   .cm-container { width: 100%; overflow-x: auto; }
+  .sr-table { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
   svg { display: block; margin: 0 auto; }
   .cell-text { font-family: var(--lv-font-mono); font-size: 12px; pointer-events: none; }
   .header-text { font-family: var(--lv-font); font-size: 11px; fill: var(--lv-text-dim); }
@@ -164,10 +165,17 @@ class LvConfusionMatrix extends LvBaseElement {
     svg += `<text class="axis-label" x="${headerW + gridW / 2}" y="${svgH - 2}"
       text-anchor="middle">Predicted</text>`;
 
+    // Screen reader table
+    let srTableRows = '<tr><th></th>' + labels.map(l => `<th>${this._esc(l)}</th>`).join('') + '</tr>';
+    for (let r = 0; r < n; r++) {
+      srTableRows += `<tr><th>${this._esc(labels[r])}</th>` + rawValues[r].map(v => `<td>${v}</td>`).join('') + '</tr>';
+    }
+
     this.render(`<div class="cm-container">
       <svg viewBox="0 0 ${svgW} ${svgH}" role="img" aria-label="Confusion Matrix">
         ${svg}
       </svg>
+      <table class="sr-table"><caption>Confusion matrix data</caption>${srTableRows}</table>
     </div>`);
   }
 

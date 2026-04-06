@@ -359,8 +359,9 @@ class LvGraphAlgo extends LvBaseElement {
     this._queueState = [];
 
     const W = 500, H = 400;
+    const algo = this._getAlgorithm();
     this.render(`<div class="graph-container">
-      <svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}">
+      <svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="${algo.toUpperCase()} graph algorithm visualization">
         <g class="graph-group"></g>
       </svg>
       <div class="controls">
