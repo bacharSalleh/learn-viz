@@ -141,12 +141,18 @@ class LvFlashcard extends LvBaseElement {
     this._attachKeyListener();
   }
 
+  private _keyHandler = (e: KeyboardEvent) => {
+    if (e.code === 'Space') { e.preventDefault(); this._flip(); }
+  };
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    document.removeEventListener('keydown', this._keyHandler);
+  }
+
   private _attachKeyListener(): void {
-    const handler = (e: KeyboardEvent) => {
-      if (!this.isConnected) { document.removeEventListener('keydown', handler); return; }
-      if (e.code === 'Space') { e.preventDefault(); this._flip(); }
-    };
-    document.addEventListener('keydown', handler);
+    document.removeEventListener('keydown', this._keyHandler);
+    document.addEventListener('keydown', this._keyHandler);
   }
 
   private _flip(): void {

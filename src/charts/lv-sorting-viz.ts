@@ -117,7 +117,7 @@ class LvSortingViz extends LvBaseElement {
         while (j > 0) {
           steps.push({ type: 'compare', indices: [j - 1, j] });
           if (a[j - 1] > a[j]) {
-            [a[j - 1], a[j]] = [a[j - 1], a[j]];
+            [a[j - 1], a[j]] = [a[j], a[j - 1]];
             steps.push({ type: 'swap', indices: [j - 1, j] });
             j--;
           } else {

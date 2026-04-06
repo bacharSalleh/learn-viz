@@ -5584,10 +5584,10 @@ function ls(r) {
     return r;
   }, r;
 }
-function nt() {
+function et() {
   var r = ng();
   return r.copy = function() {
-    return tg(r, nt());
+    return tg(r, et());
   }, Wp.apply(r, arguments), ls(r);
 }
 function ig() {
@@ -5752,15 +5752,15 @@ function ha() {
       }
       var I = f * fe(x), q = f * qt(x), F = h * fe(y), N = h * qt(y);
       if (A > ht) {
-        var R = f * fe(v), J = f * qt(v), ut = h * fe(_), et = h * qt(_), G;
+        var R = f * fe(v), J = f * qt(v), ut = h * fe(_), nt = h * qt(_), G;
         if (m < Sn)
-          if (G = mg(I, q, ut, et, R, J, F, N)) {
+          if (G = mg(I, q, ut, nt, R, J, F, N)) {
             var he = I - G[0], jt = q - G[1], Vr = R - G[0], jr = J - G[1], Ls = 1 / qt(dg((he * Vr + jt * jr) / (Fe(he * he + jt * jt) * Fe(Vr * Vr + jr * jr))) / 2), Ps = Fe(G[0] * G[0] + G[1] * G[1]);
             T = ti(A, (h - Ps) / (Ls - 1)), M = ti(A, (f - Ps) / (Ls + 1));
           } else
             T = M = 0;
       }
-      S > ht ? M > ht ? (E = Yn(ut, et, I, q, f, M, b), L = Yn(R, J, F, N, f, M, b), o.moveTo(E.cx + E.x01, E.cy + E.y01), M < A ? o.arc(E.cx, E.cy, M, st(E.y01, E.x01), st(L.y01, L.x01), !b) : (o.arc(E.cx, E.cy, M, st(E.y01, E.x01), st(E.y11, E.x11), !b), o.arc(0, 0, f, st(E.cy + E.y11, E.cx + E.x11), st(L.cy + L.y11, L.cx + L.x11), !b), o.arc(L.cx, L.cy, M, st(L.y11, L.x11), st(L.y01, L.x01), !b))) : (o.moveTo(I, q), o.arc(0, 0, f, x, v, !b)) : o.moveTo(I, q), !(h > ht) || !(w > ht) ? o.lineTo(F, N) : T > ht ? (E = Yn(F, N, R, J, h, -T, b), L = Yn(I, q, ut, et, h, -T, b), o.lineTo(E.cx + E.x01, E.cy + E.y01), T < A ? o.arc(E.cx, E.cy, T, st(E.y01, E.x01), st(L.y01, L.x01), !b) : (o.arc(E.cx, E.cy, T, st(E.y01, E.x01), st(E.y11, E.x11), !b), o.arc(0, 0, h, st(E.cy + E.y11, E.cx + E.x11), st(L.cy + L.y11, L.cx + L.x11), b), o.arc(L.cx, L.cy, T, st(L.y11, L.x11), st(L.y01, L.x01), !b))) : o.arc(0, 0, h, y, _, b);
+      S > ht ? M > ht ? (E = Yn(ut, nt, I, q, f, M, b), L = Yn(R, J, F, N, f, M, b), o.moveTo(E.cx + E.x01, E.cy + E.y01), M < A ? o.arc(E.cx, E.cy, M, st(E.y01, E.x01), st(L.y01, L.x01), !b) : (o.arc(E.cx, E.cy, M, st(E.y01, E.x01), st(E.y11, E.x11), !b), o.arc(0, 0, f, st(E.cy + E.y11, E.cx + E.x11), st(L.cy + L.y11, L.cx + L.x11), !b), o.arc(L.cx, L.cy, M, st(L.y11, L.x11), st(L.y01, L.x01), !b))) : (o.moveTo(I, q), o.arc(0, 0, f, x, v, !b)) : o.moveTo(I, q), !(h > ht) || !(w > ht) ? o.lineTo(F, N) : T > ht ? (E = Yn(F, N, R, J, h, -T, b), L = Yn(I, q, ut, nt, h, -T, b), o.lineTo(E.cx + E.x01, E.cy + E.y01), T < A ? o.arc(E.cx, E.cy, T, st(E.y01, E.x01), st(L.y01, L.x01), !b) : (o.arc(E.cx, E.cy, T, st(E.y01, E.x01), st(E.y11, E.x11), !b), o.arc(0, 0, h, st(E.cy + E.y11, E.cx + E.x11), st(L.cy + L.y11, L.cx + L.x11), b), o.arc(L.cx, L.cy, T, st(L.y11, L.x11), st(L.y01, L.x01), !b))) : o.arc(0, 0, h, y, _, b);
     }
     if (o.closePath(), d) return o = null, d + "" || null;
   }
@@ -6277,7 +6277,7 @@ class Eg extends D {
       this.render('<div class="container"><em>No data</em></div>');
       return;
     }
-    const o = Gn - Mt.left - Mt.right, c = Wn - Mt.top - Mt.bottom, l = nt().domain([0, t.length - 1]).range([0, o]), d = Math.min(...t), u = Math.max(...t), h = (u - d) * 0.1 || 1, f = nt().domain([d - h, u + h]).range([c, 0]);
+    const o = Gn - Mt.left - Mt.right, c = Wn - Mt.top - Mt.bottom, l = et().domain([0, t.length - 1]).range([0, o]), d = Math.min(...t), u = Math.max(...t), h = (u - d) * 0.1 || 1, f = et().domain([d - h, u + h]).range([c, 0]);
     this._xScale = l, this._yScale = f;
     const g = t.slice(0, n), p = ie().x((A, T) => l(T)).y((A) => f(A)).curve(mn)(g) || "", m = l.ticks(8), b = f.ticks(6);
     let x = "";
@@ -6330,7 +6330,7 @@ class Eg extends D {
       return { svgX: h, svgY: f };
     }, s = (c) => {
       if (this._revealed) return;
-      c.preventDefault(), this._drawing = !0;
+      c.preventDefault(), this._drawing = !0, t.setPointerCapture(c.pointerId);
       const l = this.root.querySelector(".draw-prompt");
       l && l.remove();
       const { svgX: d, svgY: u } = i(c);
@@ -6706,6 +6706,9 @@ class Fg extends D {
     P(this, "_ratings", []);
     P(this, "_done", !1);
     P(this, "_storageKey", "lv-flashcard");
+    P(this, "_keyHandler", (t) => {
+      t.code === "Space" && (t.preventDefault(), this._flip());
+    });
   }
   static get observedAttributes() {
     return ["cards", "shuffle", "persist"];
@@ -6741,15 +6744,11 @@ class Fg extends D {
       }
     this._renderView(), this._attachKeyListener();
   }
+  disconnectedCallback() {
+    super.disconnectedCallback(), document.removeEventListener("keydown", this._keyHandler);
+  }
   _attachKeyListener() {
-    const t = (n) => {
-      if (!this.isConnected) {
-        document.removeEventListener("keydown", t);
-        return;
-      }
-      n.code === "Space" && (n.preventDefault(), this._flip());
-    };
-    document.addEventListener("keydown", t);
+    document.removeEventListener("keydown", this._keyHandler), document.addEventListener("keydown", this._keyHandler);
   }
   _flip() {
     if (this._done) return;
@@ -7444,7 +7443,7 @@ class Yg extends D {
     this._svg = d;
     const u = d.append("defs"), h = `lv-area-grad-${Math.random().toString(36).slice(2, 8)}`, f = u.append("linearGradient").attr("id", h).attr("x1", "0").attr("y1", "0").attr("x2", "0").attr("y2", "1");
     f.append("stop").attr("offset", "0%").attr("stop-color", i).attr("stop-opacity", 0.25), f.append("stop").attr("offset", "100%").attr("stop-color", i).attr("stop-opacity", 0);
-    const g = d.append("g").attr("transform", `translate(${Ge.left},${Ge.top})`), p = oe(t, ($) => $.x), m = oe(t, ($) => $.y), b = (m[1] - m[0]) * 0.1 || 1, x = nt().domain(p).range([0, pe]), v = nt().domain([m[0] - b, m[1] + b]).range([Yt, 0]);
+    const g = d.append("g").attr("transform", `translate(${Ge.left},${Ge.top})`), p = oe(t, ($) => $.x), m = oe(t, ($) => $.y), b = (m[1] - m[0]) * 0.1 || 1, x = et().domain(p).range([0, pe]), v = et().domain([m[0] - b, m[1] + b]).range([Yt, 0]);
     if (g.append("g").attr("class", "grid").attr("transform", `translate(0,${Yt})`).call(
       hr(x).tickSize(-Yt).tickFormat(() => "")
     ), g.append("g").attr("class", "grid").call(
@@ -7590,7 +7589,7 @@ class Wg extends D {
     if (!this._svg) return;
     const n = this._svg;
     n.selectAll("*").remove();
-    const i = this._generateData(), [s, a] = this._range, o = i.map((y) => y.y), c = xd(o) ?? -1, l = so(o) ?? 1, d = (l - c) * 0.15 || 0.5, u = c - d, h = l + d, f = { top: 20, right: 30, bottom: 30, left: 40 }, g = ma - f.left - f.right, p = _a - f.top - f.bottom, m = nt().domain([s, a]).range([0, g]), b = nt().domain([u, h]).range([p, 0]), x = n.append("g").attr("transform", `translate(${f.left},${f.top})`);
+    const i = this._generateData(), [s, a] = this._range, o = i.map((y) => y.y), c = xd(o) ?? -1, l = so(o) ?? 1, d = (l - c) * 0.15 || 0.5, u = c - d, h = l + d, f = { top: 20, right: 30, bottom: 30, left: 40 }, g = ma - f.left - f.right, p = _a - f.top - f.bottom, m = et().domain([s, a]).range([0, g]), b = et().domain([u, h]).range([p, 0]), x = n.append("g").attr("transform", `translate(${f.left},${f.top})`);
     this._drawGrid(x, m, b, g, p), this._drawAxes(x, m, b, g, p);
     const v = ie().x((y) => m(y.x)).y((y) => b(y.y)).curve(mn), _ = x.append("path").datum(i).attr("class", "fn-line").attr("d", v).attr("stroke", this._color).attr("stroke-width", 3);
     if (t) {
@@ -7717,7 +7716,7 @@ class Kg extends D {
     if (!this._svg) return;
     const n = this._data, i = this.hasAttribute("clusters"), s = this.hasAttribute("tooltip"), a = this.getAttribute("x-label") || "", o = this.getAttribute("y-label") || "", c = i ? [...new Set(n.map((C) => C.cluster).filter((C) => C != null))] : [], l = c.length > 0 ? 30 : 0, d = ni + l, u = ba - bt.left - bt.right, h = ni - bt.top - bt.bottom;
     this._svg.attr("viewBox", `0 0 ${ba} ${d}`);
-    const f = oe(n, (C) => C.x), g = oe(n, (C) => C.y), p = (f[1] - f[0]) * 0.05 || 1, m = (g[1] - g[0]) * 0.05 || 1, b = nt().domain([f[0] - p, f[1] + p]).range([0, u]), x = nt().domain([g[0] - m, g[1] + m]).range([h, 0]), v = this._svg.select(".grid-group").attr("transform", `translate(${bt.left},${bt.top})`);
+    const f = oe(n, (C) => C.x), g = oe(n, (C) => C.y), p = (f[1] - f[0]) * 0.05 || 1, m = (g[1] - g[0]) * 0.05 || 1, b = et().domain([f[0] - p, f[1] + p]).range([0, u]), x = et().domain([g[0] - m, g[1] + m]).range([h, 0]), v = this._svg.select(".grid-group").attr("transform", `translate(${bt.left},${bt.top})`);
     v.selectAll("*").remove();
     const _ = hr(b).tickSize(-h).tickFormat(() => "");
     v.append("g").attr("class", "grid").attr("transform", `translate(0,${h})`).call(_);
@@ -8027,10 +8026,10 @@ class i0 extends D {
       this.render('<div class="td-container"></div>');
       return;
     }
-    const o = rn - lt.left - lt.right, c = Kn - lt.top - lt.bottom, l = nt().domain([0, a - 1]).range([0, o]), d = Math.max(
+    const o = rn - lt.left - lt.right, c = Kn - lt.top - lt.bottom, l = et().domain([0, a - 1]).range([0, o]), d = Math.max(
       t.length ? Math.max(...t) : 0,
       n.length ? Math.max(...n) : 1
-    ) * 1.1, u = nt().domain([0, d]).range([c, 0]), h = i.length > 0, f = h ? Math.max(...i) * 1.2 : 1, g = nt().domain([0, f]).range([c, 0]), p = (S, $) => ie().x((k, A) => lt.left + l(A)).y((k) => lt.top + $(k)).curve(mn)(S) || "", m = [];
+    ) * 1.1, u = et().domain([0, d]).range([c, 0]), h = i.length > 0, f = h ? Math.max(...i) * 1.2 : 1, g = et().domain([0, f]).range([c, 0]), p = (S, $) => ie().x((k, A) => lt.left + l(A)).y((k) => lt.top + $(k)).curve(mn)(S) || "", m = [];
     t.length && m.push({ name: "Loss", color: "var(--lv-negative)", data: t, axis: "left" }), n.length && m.push({ name: "Accuracy", color: "var(--lv-positive)", data: n, axis: "left" }), h && m.push({ name: "Learning Rate", color: "var(--lv-accent2)", data: i, axis: "right" });
     const b = m.map(
       (S) => `<div class="legend-item"><div class="legend-dot" style="background:${S.color}"></div>${S.name}</div>`
@@ -8268,8 +8267,8 @@ function u0() {
           J += E(G, R) * jt, ut += jt;
         }
         if (!(ut > 0)) continue;
-        let et = (J / ut - R.y0) * z;
-        R.y0 += et, R.y1 += et, T(R);
+        let nt = (J / ut - R.y0) * z;
+        R.y0 += nt, R.y1 += nt, T(R);
       }
       l === void 0 && N.sort(Mr), $(N, I);
     }
@@ -8284,8 +8283,8 @@ function u0() {
           J += L(R, G) * jt, ut += jt;
         }
         if (!(ut > 0)) continue;
-        let et = (J / ut - R.y0) * z;
-        R.y0 += et, R.y1 += et, T(R);
+        let nt = (J / ut - R.y0) * z;
+        R.y0 += nt, R.y1 += nt, T(R);
       }
       l === void 0 && N.sort(Mr), $(N, I);
     }
@@ -8878,7 +8877,7 @@ class q0 extends D {
       for (let a = 1; a < n.length; a++) {
         let o = a;
         for (; o > 0 && (i.push({ type: "compare", indices: [o - 1, o] }), n[o - 1] > n[o]); )
-          [n[o - 1], n[o]] = [n[o - 1], n[o]], i.push({ type: "swap", indices: [o - 1, o] }), o--;
+          [n[o - 1], n[o]] = [n[o], n[o - 1]], i.push({ type: "swap", indices: [o - 1, o] }), o--;
       }
       for (let a = 0; a < n.length; a++) i.push({ type: "sorted", indices: [a] });
     } else if (s === "merge") {
@@ -9281,7 +9280,7 @@ class H0 extends D {
       this.render('<div class="dist-container"></div>');
       return;
     }
-    const b = nt().domain(f).range([0, l]), x = Math.max(...h.map(($) => $.y)) * 1.15, v = nt().domain([0, x]).range([d, 0]);
+    const b = et().domain(f).range([0, l]), x = Math.max(...h.map(($) => $.y)) * 1.15, v = et().domain([0, x]).range([d, 0]);
     let _ = "";
     const y = v.ticks(5);
     for (const $ of y)
@@ -9340,7 +9339,9 @@ class H0 extends D {
   _computeDistribution(t) {
     switch (t) {
       case "uniform": {
-        const n = this.jsonAttr("params", { a: 0, b: 1 }), i = n.a ?? 0, s = n.b ?? 1, a = 1 / (s - i), o = [i - 1, s + 1], c = [], l = 200;
+        const n = this.jsonAttr("params", { a: 0, b: 1 }), i = n.a ?? 0, s = n.b ?? 1;
+        if (s <= i) return { points: [{ x: i, y: 1 }], range: [i - 1, i + 1], mean: i, std: 0, mode: i };
+        const a = 1 / (s - i), o = [i - 1, s + 1], c = [], l = 200;
         for (let d = 0; d <= l; d++) {
           const u = o[0] + (o[1] - o[0]) * d / l;
           c.push({ x: u, y: u >= i && u <= s ? a : 0 });
@@ -9357,7 +9358,7 @@ class H0 extends D {
         return { points: a, range: [0, s], mean: i, std: Math.sqrt(i), mode: c };
       }
       case "binomial": {
-        const n = this.jsonAttr("params", { n: 20, p: 0.5 }), i = n.n ?? 20, s = n.p ?? 0.5, a = [];
+        const n = this.jsonAttr("params", { n: 20, p: 0.5 }), i = n.n ?? 20, s = Math.max(1e-15, Math.min(1 - 1e-15, n.p ?? 0.5)), a = [];
         let o = 0, c = 0;
         for (let l = 0; l <= i; l++) {
           const d = this._logComb(i, l) + l * Math.log(s) + (i - l) * Math.log(1 - s), u = Math.exp(d);
@@ -9448,7 +9449,7 @@ class j0 extends D {
   _build() {
     const t = Math.max(1, Math.min(5, parseInt(this.getAttribute("degree") || "1", 10))), n = this.hasAttribute("interactive"), i = this.hasAttribute("show-r2"), s = this.hasAttribute("show-equation"), a = this._points, o = 500, c = 350, l = this._margin, d = o - l.left - l.right, u = c - l.top - l.bottom;
     if (!a.length) {
-      this.render(`<div class="reg-container">
+      this._xScale = et().domain([0, 10]).range([0, d]), this._yScale = et().domain([0, 10]).range([u, 0]), this.render(`<div class="reg-container">
         <svg viewBox="0 0 ${o} ${c}" role="img" aria-label="Regression chart">
           <g transform="translate(${l.left},${l.top})">
             <text x="${d / 2}" y="${u / 2}" text-anchor="middle" fill="var(--lv-text-dim)" font-family="var(--lv-font)" font-size="13">Click to add points</text>
@@ -9457,7 +9458,7 @@ class j0 extends D {
       </div>`), n && this._attachInteraction();
       return;
     }
-    const h = oe(a, (w) => w.x), f = oe(a, (w) => w.y), g = (h[1] - h[0]) * 0.15 || 1, p = (f[1] - f[0]) * 0.15 || 1, m = nt().domain([h[0] - g, h[1] + g]).range([0, d]), b = nt().domain([f[0] - p, f[1] + p]).range([u, 0]);
+    const h = oe(a, (w) => w.x), f = oe(a, (w) => w.y), g = (h[1] - h[0]) * 0.15 || 1, p = (f[1] - f[0]) * 0.15 || 1, m = et().domain([h[0] - g, h[1] + g]).range([0, d]), b = et().domain([f[0] - p, f[1] + p]).range([u, 0]);
     this._xScale = m, this._yScale = b;
     let x = "";
     for (const w of m.ticks(8))
@@ -9824,7 +9825,7 @@ class W0 extends D {
       this.render('<div class="db-container"></div>');
       return;
     }
-    const h = oe(t, (L) => L.x), f = oe(t, (L) => L.y), g = (h[1] - h[0]) * 0.2 || 1, p = (f[1] - f[0]) * 0.2 || 1, m = h[0] - g, b = h[1] + g, x = f[0] - p, v = f[1] + p, _ = nt().domain([m, b]).range([0, d]), y = nt().domain([v, x]).range([0, u]), w = this._fitModel(t, n, a);
+    const h = oe(t, (L) => L.x), f = oe(t, (L) => L.y), g = (h[1] - h[0]) * 0.2 || 1, p = (f[1] - f[0]) * 0.2 || 1, m = h[0] - g, b = h[1] + g, x = f[0] - p, v = f[1] + p, _ = et().domain([m, b]).range([0, d]), y = et().domain([v, x]).range([0, u]), w = this._fitModel(t, n, a);
     let S = "";
     const $ = d / i, k = u / i;
     for (let L = 0; L < i; L++)
@@ -12223,8 +12224,8 @@ var Va, ne, Be, Cs, ye, ja, Ms, Jm = function() {
   var n = e._gsap || new Cl(e);
   if ("x" in n && !t && !n.uncache)
     return n;
-  var i = e.style, s = n.scaleX < 0, a = "px", o = "deg", c = getComputedStyle(e), l = kt(e, _t) || "0", d, u, h, f, g, p, m, b, x, v, _, y, w, S, $, k, A, T, M, E, L, C, z, I, q, F, N, R, J, ut, et, G;
-  return d = u = h = p = m = b = x = v = _ = 0, f = g = 1, n.svg = !!(e.getCTM && Hl(e)), c.translate && ((c.translate !== "none" || c.scale !== "none" || c.rotate !== "none") && (i[K] = (c.translate !== "none" ? "translate3d(" + (c.translate + " 0 0").split(" ").slice(0, 3).join(", ") + ") " : "") + (c.rotate !== "none" ? "rotate(" + c.rotate + ") " : "") + (c.scale !== "none" ? "scale(" + c.scale.split(" ").join(",") + ") " : "") + (c[K] !== "none" ? c[K] : "")), i.scale = i.rotate = i.translate = "none"), S = Ts(e, n.svg), n.svg && (n.uncache ? (q = e.getBBox(), l = n.xOrigin - q.x + "px " + (n.yOrigin - q.y) + "px", I = "") : I = !t && e.getAttribute("data-svg-origin"), Ui(e, I || l, !!I || n.originIsAbsolute, n.smooth !== !1, S)), y = n.xOrigin || 0, w = n.yOrigin || 0, S !== Pn && (T = S[0], M = S[1], E = S[2], L = S[3], d = C = S[4], u = z = S[5], S.length === 6 ? (f = Math.sqrt(T * T + M * M), g = Math.sqrt(L * L + E * E), p = T || M ? ze(M, T) * be : 0, x = E || L ? ze(E, L) * be + p : 0, x && (g *= Math.abs(Math.cos(x * He))), n.svg && (d -= y - (y * T + w * E), u -= w - (y * M + w * L))) : (G = S[6], ut = S[7], N = S[8], R = S[9], J = S[10], et = S[11], d = S[12], u = S[13], h = S[14], $ = ze(G, J), m = $ * be, $ && (k = Math.cos(-$), A = Math.sin(-$), I = C * k + N * A, q = z * k + R * A, F = G * k + J * A, N = C * -A + N * k, R = z * -A + R * k, J = G * -A + J * k, et = ut * -A + et * k, C = I, z = q, G = F), $ = ze(-E, J), b = $ * be, $ && (k = Math.cos(-$), A = Math.sin(-$), I = T * k - N * A, q = M * k - R * A, F = E * k - J * A, et = L * A + et * k, T = I, M = q, E = F), $ = ze(M, T), p = $ * be, $ && (k = Math.cos($), A = Math.sin($), I = T * k + M * A, q = C * k + z * A, M = M * k - T * A, z = z * k - C * A, T = I, C = q), m && Math.abs(m) + Math.abs(p) > 359.9 && (m = p = 0, b = 180 - b), f = Q(Math.sqrt(T * T + M * M + E * E)), g = Q(Math.sqrt(z * z + G * G)), $ = ze(C, z), x = Math.abs($) > 2e-4 ? $ * be : 0, _ = et ? 1 / (et < 0 ? -et : et) : 0), n.svg && (I = e.getAttribute("transform"), n.forceCSS = e.setAttribute("transform", "") || !jl(kt(e, K)), I && e.setAttribute("transform", I))), Math.abs(x) > 90 && Math.abs(x) < 270 && (s ? (f *= -1, x += p <= 0 ? 180 : -180, p += p <= 0 ? 180 : -180) : (g *= -1, x += x <= 0 ? 180 : -180)), t = t || n.uncache, n.x = d - ((n.xPercent = d && (!t && n.xPercent || (Math.round(e.offsetWidth / 2) === Math.round(-d) ? -50 : 0))) ? e.offsetWidth * n.xPercent / 100 : 0) + a, n.y = u - ((n.yPercent = u && (!t && n.yPercent || (Math.round(e.offsetHeight / 2) === Math.round(-u) ? -50 : 0))) ? e.offsetHeight * n.yPercent / 100 : 0) + a, n.z = h + a, n.scaleX = Q(f), n.scaleY = Q(g), n.rotation = Q(p) + o, n.rotationX = Q(m) + o, n.rotationY = Q(b) + o, n.skewX = x + o, n.skewY = v + o, n.transformPerspective = _ + a, (n.zOrigin = parseFloat(l.split(" ")[2]) || !t && n.zOrigin || 0) && (i[_t] = Fr(l)), n.xOffset = n.yOffset = 0, n.force3D = $t.force3D, n.renderTransform = n.svg ? v_ : Ol ? Xl : __, n.uncache = 0, n;
+  var i = e.style, s = n.scaleX < 0, a = "px", o = "deg", c = getComputedStyle(e), l = kt(e, _t) || "0", d, u, h, f, g, p, m, b, x, v, _, y, w, S, $, k, A, T, M, E, L, C, z, I, q, F, N, R, J, ut, nt, G;
+  return d = u = h = p = m = b = x = v = _ = 0, f = g = 1, n.svg = !!(e.getCTM && Hl(e)), c.translate && ((c.translate !== "none" || c.scale !== "none" || c.rotate !== "none") && (i[K] = (c.translate !== "none" ? "translate3d(" + (c.translate + " 0 0").split(" ").slice(0, 3).join(", ") + ") " : "") + (c.rotate !== "none" ? "rotate(" + c.rotate + ") " : "") + (c.scale !== "none" ? "scale(" + c.scale.split(" ").join(",") + ") " : "") + (c[K] !== "none" ? c[K] : "")), i.scale = i.rotate = i.translate = "none"), S = Ts(e, n.svg), n.svg && (n.uncache ? (q = e.getBBox(), l = n.xOrigin - q.x + "px " + (n.yOrigin - q.y) + "px", I = "") : I = !t && e.getAttribute("data-svg-origin"), Ui(e, I || l, !!I || n.originIsAbsolute, n.smooth !== !1, S)), y = n.xOrigin || 0, w = n.yOrigin || 0, S !== Pn && (T = S[0], M = S[1], E = S[2], L = S[3], d = C = S[4], u = z = S[5], S.length === 6 ? (f = Math.sqrt(T * T + M * M), g = Math.sqrt(L * L + E * E), p = T || M ? ze(M, T) * be : 0, x = E || L ? ze(E, L) * be + p : 0, x && (g *= Math.abs(Math.cos(x * He))), n.svg && (d -= y - (y * T + w * E), u -= w - (y * M + w * L))) : (G = S[6], ut = S[7], N = S[8], R = S[9], J = S[10], nt = S[11], d = S[12], u = S[13], h = S[14], $ = ze(G, J), m = $ * be, $ && (k = Math.cos(-$), A = Math.sin(-$), I = C * k + N * A, q = z * k + R * A, F = G * k + J * A, N = C * -A + N * k, R = z * -A + R * k, J = G * -A + J * k, nt = ut * -A + nt * k, C = I, z = q, G = F), $ = ze(-E, J), b = $ * be, $ && (k = Math.cos(-$), A = Math.sin(-$), I = T * k - N * A, q = M * k - R * A, F = E * k - J * A, nt = L * A + nt * k, T = I, M = q, E = F), $ = ze(M, T), p = $ * be, $ && (k = Math.cos($), A = Math.sin($), I = T * k + M * A, q = C * k + z * A, M = M * k - T * A, z = z * k - C * A, T = I, C = q), m && Math.abs(m) + Math.abs(p) > 359.9 && (m = p = 0, b = 180 - b), f = Q(Math.sqrt(T * T + M * M + E * E)), g = Q(Math.sqrt(z * z + G * G)), $ = ze(C, z), x = Math.abs($) > 2e-4 ? $ * be : 0, _ = nt ? 1 / (nt < 0 ? -nt : nt) : 0), n.svg && (I = e.getAttribute("transform"), n.forceCSS = e.setAttribute("transform", "") || !jl(kt(e, K)), I && e.setAttribute("transform", I))), Math.abs(x) > 90 && Math.abs(x) < 270 && (s ? (f *= -1, x += p <= 0 ? 180 : -180, p += p <= 0 ? 180 : -180) : (g *= -1, x += x <= 0 ? 180 : -180)), t = t || n.uncache, n.x = d - ((n.xPercent = d && (!t && n.xPercent || (Math.round(e.offsetWidth / 2) === Math.round(-d) ? -50 : 0))) ? e.offsetWidth * n.xPercent / 100 : 0) + a, n.y = u - ((n.yPercent = u && (!t && n.yPercent || (Math.round(e.offsetHeight / 2) === Math.round(-u) ? -50 : 0))) ? e.offsetHeight * n.yPercent / 100 : 0) + a, n.z = h + a, n.scaleX = Q(f), n.scaleY = Q(g), n.rotation = Q(p) + o, n.rotationX = Q(m) + o, n.rotationY = Q(b) + o, n.skewX = x + o, n.skewY = v + o, n.transformPerspective = _ + a, (n.zOrigin = parseFloat(l.split(" ")[2]) || !t && n.zOrigin || 0) && (i[_t] = Fr(l)), n.xOffset = n.yOffset = 0, n.force3D = $t.force3D, n.renderTransform = n.svg ? v_ : Ol ? Xl : __, n.uncache = 0, n;
 }, Fr = function(e) {
   return (e = e.split(" "))[0] + " " + e[1];
 }, mi = function(e, t, n) {
@@ -13421,7 +13422,7 @@ class z_ extends D {
               u.children = [p], u.result = p.result * p.result;
             else {
               const m = s("pow", [h, f - 1]);
-              u.children = [p, m], u.result = h * m.result;
+              u.children = [m], u.result = h * m.result;
             }
           }
           break;

@@ -145,7 +145,7 @@ class LvRecursionTree extends LvBaseElement {
               node.result = c1.result! * c1.result!;
             } else {
               const c2 = build('pow', [base, exp - 1]);
-              node.children = [c1, c2];
+              node.children = [c2];
               node.result = base * c2.result!;
             }
           }

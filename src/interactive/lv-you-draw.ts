@@ -286,6 +286,7 @@ class LvYouDraw extends LvBaseElement {
       if (this._revealed) return;
       e.preventDefault();
       this._drawing = true;
+      drawArea.setPointerCapture(e.pointerId);
       // Clear the draw prompt
       const prompt = this.root.querySelector('.draw-prompt');
       if (prompt) prompt.remove();

@@ -69,6 +69,9 @@ class LvRegressionFit extends LvBaseElement {
     const ih = H - m.top - m.bottom;
 
     if (!points.length) {
+      // Set default scales so interactive clicks work on empty chart
+      this._xScale = d3.scaleLinear().domain([0, 10]).range([0, iw]);
+      this._yScale = d3.scaleLinear().domain([0, 10]).range([ih, 0]);
       this.render(`<div class="reg-container">
         <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Regression chart">
           <g transform="translate(${m.left},${m.top})">

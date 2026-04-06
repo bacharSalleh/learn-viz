@@ -172,6 +172,7 @@ class LvDistribution extends LvBaseElement {
       case 'uniform': {
         const p = this.jsonAttr('params', { a: 0, b: 1 });
         const a = p.a ?? 0, b = p.b ?? 1;
+        if (b <= a) return { points: [{ x: a, y: 1 }], range: [a - 1, a + 1] as [number, number], mean: a, std: 0, mode: a };
         const density = 1 / (b - a);
         const range: [number, number] = [a - 1, b + 1];
         const pts: DistPoint[] = [];
@@ -197,7 +198,7 @@ class LvDistribution extends LvBaseElement {
       }
       case 'binomial': {
         const p = this.jsonAttr('params', { n: 20, p: 0.5 });
-        const n = p.n ?? 20, prob = p.p ?? 0.5;
+        const n = p.n ?? 20, prob = Math.max(1e-15, Math.min(1 - 1e-15, p.p ?? 0.5));
         const pts: DistPoint[] = [];
         let modeVal = 0, modeK = 0;
         for (let k = 0; k <= n; k++) {
