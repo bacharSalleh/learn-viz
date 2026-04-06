@@ -6,6 +6,9 @@ import './theme/tokens.css';
 import './theme/dark.css';
 import './theme/light.css';
 import './theme/utilities.css';
+import './theme/theme-cyberpunk.css';
+import './theme/theme-academic.css';
+import './theme/theme-forest.css';
 
 // Core (must load first)
 export { LvBaseElement } from './core/base-element.js';

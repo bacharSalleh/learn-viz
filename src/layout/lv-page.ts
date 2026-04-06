@@ -17,6 +17,10 @@ const css = /* css */ `
   :host([theme="light"]) {
     color-scheme: light;
   }
+
+  :host([theme="cyberpunk"]) { color-scheme: dark; }
+  :host([theme="academic"])  { color-scheme: dark; }
+  :host([theme="forest"])    { color-scheme: dark; }
 `;
 
 class LvPage extends LvBaseElement {
@@ -37,6 +41,8 @@ class LvPage extends LvBaseElement {
   private _render() {
     const dir = this.getAttribute('dir') || 'ltr';
     this.setAttribute('dir', dir);
+    const theme = this.getAttribute('theme') || 'dark';
+    this.setAttribute('data-theme', theme);
     this.render(`<slot></slot>`);
   }
 }

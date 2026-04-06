@@ -1,0 +1,56 @@
+/* ═══════════════════════════════════════════════════════════
+   Theme: Academic
+   Warm muted tones, scholarly, calm, low-glow.
+   ═══════════════════════════════════════════════════════════ */
+
+[data-theme="academic"],
+:host([theme="academic"]) {
+  color-scheme: dark;
+
+  /* ── Surface ─────────────────────────────────────────── */
+  --lv-bg:          #1a1714;
+  --lv-bg-raised:   #231f1b;
+  --lv-bg-card:     #2b2621;
+  --lv-bg-hover:    #342e28;
+  --lv-border:      #4a4035;
+  --lv-border-focus:#6b5c4e;
+
+  /* ── Text ────────────────────────────────────────────── */
+  --lv-text:     #e8e0d4;
+  --lv-text-dim: #9a8e7e;
+  --lv-text-inv: #1a1714;
+
+  /* ── Accent ──────────────────────────────────────────── */
+  --lv-accent:      #d4a574;
+  --lv-accent-dim:  #d4a57422;
+  --lv-accent2:     #8b9dc3;
+  --lv-accent2-dim: #8b9dc322;
+
+  /* ── Semantic ────────────────────────────────────────── */
+  --lv-positive: #7dad7a;
+  --lv-warning:  #d4a03c;
+  --lv-negative: #c47474;
+  --lv-info:     #8b9dc3;
+  --lv-orange:   #c48840;
+
+  /* ── Chart palette ───────────────────────────────────── */
+  --lv-chart-0: #d4a574;
+  --lv-chart-1: #8b9dc3;
+  --lv-chart-2: #7dad7a;
+  --lv-chart-3: #c4886e;
+  --lv-chart-4: #a3b5c9;
+  --lv-chart-5: #c9a95a;
+  --lv-chart-6: #9e7bb5;
+  --lv-chart-7: #6b9e8a;
+
+  /* ── Glow ────────────────────────────────────────────── */
+  --lv-glow-color:   #d4a574;
+  --lv-glow-spread:  0px;
+  --lv-glow-opacity: 0;
+
+  /* ── Shadows ─────────────────────────────────────────── */
+  --lv-shadow-sm:  0 1px 3px rgba(0, 0, 0, 0.2);
+  --lv-shadow-md:  0 4px 12px rgba(0, 0, 0, 0.25);
+  --lv-shadow-lg:  0 8px 30px rgba(0, 0, 0, 0.3);
+  --lv-shadow-glow:0 0 0px transparent;
+}

@@ -74,6 +74,11 @@
   --lv-shadow-lg:   0 8px 40px rgba(0,0,0,0.5);
   --lv-shadow-glow: 0 0 24px var(--lv-accent-dim);
 
+  /* Glow (theme-customizable) */
+  --lv-glow-color: var(--lv-accent);
+  --lv-glow-spread: 12px;
+  --lv-glow-opacity: 0.15;
+
   /* ── Transitions ── */
   --lv-ease:     cubic-bezier(0.4, 0, 0.2, 1);
   --lv-ease-out: cubic-bezier(0, 0, 0.2, 1);

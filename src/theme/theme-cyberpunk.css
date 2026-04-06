@@ -1,0 +1,56 @@
+/* ═══════════════════════════════════════════════════════════
+   Theme: Cyberpunk
+   Hot pink, electric cyan, intense glows, high contrast.
+   ═══════════════════════════════════════════════════════════ */
+
+[data-theme="cyberpunk"],
+:host([theme="cyberpunk"]) {
+  color-scheme: dark;
+
+  /* ── Surface ─────────────────────────────────────────── */
+  --lv-bg:          #0d0011;
+  --lv-bg-raised:   #1a0025;
+  --lv-bg-card:     #220033;
+  --lv-bg-hover:    #2e0044;
+  --lv-border:      #4a0066;
+  --lv-border-focus:#6b008f;
+
+  /* ── Text ────────────────────────────────────────────── */
+  --lv-text:     #f0e0ff;
+  --lv-text-dim: #9966bb;
+  --lv-text-inv: #0d0011;
+
+  /* ── Accent ──────────────────────────────────────────── */
+  --lv-accent:      #ff2d75;
+  --lv-accent-dim:  #ff2d7522;
+  --lv-accent2:     #00f0ff;
+  --lv-accent2-dim: #00f0ff22;
+
+  /* ── Semantic ────────────────────────────────────────── */
+  --lv-positive: #39ff14;
+  --lv-warning:  #ffe400;
+  --lv-negative: #ff003c;
+  --lv-info:     #00f0ff;
+  --lv-orange:   #ff6600;
+
+  /* ── Chart palette ───────────────────────────────────── */
+  --lv-chart-0: #ff2d75;
+  --lv-chart-1: #00f0ff;
+  --lv-chart-2: #39ff14;
+  --lv-chart-3: #ffe400;
+  --lv-chart-4: #ff6600;
+  --lv-chart-5: #bf00ff;
+  --lv-chart-6: #ff0099;
+  --lv-chart-7: #00ff88;
+
+  /* ── Glow ────────────────────────────────────────────── */
+  --lv-glow-color:   #ff2d75;
+  --lv-glow-spread:  20px;
+  --lv-glow-opacity: 0.3;
+
+  /* ── Shadows ─────────────────────────────────────────── */
+  --lv-shadow-sm:  0 1px 3px rgba(255, 45, 117, 0.15);
+  --lv-shadow-md:  0 4px 12px rgba(255, 45, 117, 0.2);
+  --lv-shadow-lg:  0 8px 30px rgba(255, 45, 117, 0.25);
+  --lv-shadow-glow:0 0 20px rgba(255, 45, 117, 0.4);
+}

@@ -35,3 +35,39 @@ let _id = 0;
 export function uid(prefix = 'lv'): string {
   return `${prefix}-${++_id}`;
 }
+
+/* ── On-demand script / stylesheet loader ─────────────────────── */
+
+const _scriptCache = new Map<string, Promise<void>>();
+const _styleCache  = new Map<string, Promise<void>>();
+
+/** Load an external JS file once. Returns cached promise on repeat calls. */
+export function loadScript(url: string): Promise<void> {
+  let p = _scriptCache.get(url);
+  if (p) return p;
+  p = new Promise<void>((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = url;
+    s.onload  = () => resolve();
+    s.onerror = () => { _scriptCache.delete(url); reject(new Error(`Failed to load ${url}`)); };
+    document.head.appendChild(s);
+  });
+  _scriptCache.set(url, p);
+  return p;
+}
+
+/** Load an external CSS file once. Returns cached promise on repeat calls. */
+export function loadStylesheet(url: string): Promise<void> {
+  let p = _styleCache.get(url);
+  if (p) return p;
+  p = new Promise<void>((resolve, reject) => {
+    const l = document.createElement('link');
+    l.rel = 'stylesheet';
+    l.href = url;
+    l.onload  = () => resolve();
+    l.onerror = () => { _styleCache.delete(url); reject(new Error(`Failed to load ${url}`)); };
+    document.head.appendChild(l);
+  });
+  _styleCache.set(url, p);
+  return p;
+}

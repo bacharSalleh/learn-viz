@@ -1,0 +1,56 @@
+/* ═══════════════════════════════════════════════════════════
+   Theme: Forest
+   Organic greens, earthy browns, natural feel, soft glow.
+   ═══════════════════════════════════════════════════════════ */
+
+[data-theme="forest"],
+:host([theme="forest"]) {
+  color-scheme: dark;
+
+  /* ── Surface ─────────────────────────────────────────── */
+  --lv-bg:          #0a1208;
+  --lv-bg-raised:   #121c0e;
+  --lv-bg-card:     #1a2616;
+  --lv-bg-hover:    #22301d;
+  --lv-border:      #2e4a25;
+  --lv-border-focus:#3f6633;
+
+  /* ── Text ────────────────────────────────────────────── */
+  --lv-text:     #dce8d4;
+  --lv-text-dim: #7a9a6e;
+  --lv-text-inv: #0a1208;
+
+  /* ── Accent ──────────────────────────────────────────── */
+  --lv-accent:      #4ade80;
+  --lv-accent-dim:  #4ade8022;
+  --lv-accent2:     #a78bfa;
+  --lv-accent2-dim: #a78bfa22;
+
+  /* ── Semantic ────────────────────────────────────────── */
+  --lv-positive: #22c55e;
+  --lv-warning:  #eab308;
+  --lv-negative: #ef4444;
+  --lv-info:     #4ade80;
+  --lv-orange:   #d97706;
+
+  /* ── Chart palette ───────────────────────────────────── */
+  --lv-chart-0: #4ade80;
+  --lv-chart-1: #a78bfa;
+  --lv-chart-2: #f59e0b;
+  --lv-chart-3: #38bdf8;
+  --lv-chart-4: #fb7185;
+  --lv-chart-5: #34d399;
+  --lv-chart-6: #c084fc;
+  --lv-chart-7: #a3e635;
+
+  /* ── Glow ────────────────────────────────────────────── */
+  --lv-glow-color:   #4ade80;
+  --lv-glow-spread:  10px;
+  --lv-glow-opacity: 0.15;
+
+  /* ── Shadows ─────────────────────────────────────────── */
+  --lv-shadow-sm:  0 1px 3px rgba(74, 222, 128, 0.08);
+  --lv-shadow-md:  0 4px 12px rgba(74, 222, 128, 0.1);
+  --lv-shadow-lg:  0 8px 30px rgba(74, 222, 128, 0.12);
+  --lv-shadow-glow:0 0 10px rgba(74, 222, 128, 0.2);
+}
