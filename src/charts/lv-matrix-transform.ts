@@ -5,11 +5,8 @@ const css = `
   :host { display: block; margin: var(--lv-sp-4) 0; }
   .mt-container { width: 100%; }
   svg { display: block; margin: 0 auto; }
-  .matrix-label {
-    font-family: var(--lv-font-mono, monospace); font-size: 12px; fill: var(--lv-text-dim, #aaa);
-  }
-  .eigen-label {
-    font-family: var(--lv-font-mono, monospace); font-size: 10px; fill: #ffd93d;
+  .matrix-label, .eigen-label {
+    font-family: monospace;
   }
 `;
 
@@ -200,23 +197,29 @@ class LvMatrixTransform extends LvBaseElement {
     const labels = d3.select(this.root.querySelector('svg')!).select<SVGGElement>('.labels');
     labels.selectAll('*').remove();
     const range = 3;
-    // Top-left corner in SVG coords
-    const x = -range + 0.15, y = -range + 0.3;
+    const x = -range + 0.15, y = -range + 0.35;
+    const fs = 0.24;
+
+    // Background rect for readability
+    labels.append('rect')
+      .attr('x', x - 0.08).attr('y', y - fs - 0.05)
+      .attr('width', 2.2).attr('height', this.hasAttribute('show-eigen') ? 1.8 : 0.8)
+      .attr('rx', 0.06).attr('fill', 'rgba(0,0,0,0.6)');
+
     labels.append('text').attr('class', 'matrix-label')
-      .attr('x', x).attr('y', y).attr('font-size', '0.28')
+      .attr('x', x).attr('y', y).attr('font-size', fs).attr('fill', '#aaa')
       .text(`[${m[0][0].toFixed(1)}, ${m[0][1].toFixed(1)}]`);
     labels.append('text').attr('class', 'matrix-label')
-      .attr('x', x).attr('y', y + 0.32).attr('font-size', '0.28')
+      .attr('x', x).attr('y', y + fs * 1.3).attr('font-size', fs).attr('fill', '#aaa')
       .text(`[${m[1][0].toFixed(1)}, ${m[1][1].toFixed(1)}]`);
 
-    // Eigen info
     if (this.hasAttribute('show-eigen')) {
       const eigens = this._computeEigen(m);
       eigens.forEach((ev, i) => {
         if (ev.real) {
           labels.append('text').attr('class', 'eigen-label')
-            .attr('x', x).attr('y', y + 0.7 + i * 0.3).attr('font-size', '0.22')
-            .text(`\u03BB${i + 1}=${ev.value.toFixed(2)}`);
+            .attr('x', x).attr('y', y + fs * 2.8 + i * fs * 1.3).attr('font-size', fs * 0.85).attr('fill', '#ffd93d')
+            .text(`\u03BB${i + 1} = ${ev.value.toFixed(2)}`);
         }
       });
     }

@@ -122,20 +122,20 @@ const css = /* css */ `
   .chip .tooltip {
     display: none;
     position: absolute;
-    top: -32px;
+    top: -28px;
     left: 50%;
     transform: translateX(-50%);
     background: var(--lv-text);
-    color: var(--lv-bg-card);
-    font-size: 0.75rem;
-    padding: 4px 8px;
+    color: var(--lv-bg);
+    font-size: 0.7rem;
+    padding: 3px 8px;
     border-radius: 4px;
     white-space: nowrap;
     pointer-events: none;
     z-index: 10;
   }
 
-  .chip.incorrect .tooltip {
+  .chip.incorrect .tooltip.has-text {
     display: block;
   }
 
@@ -411,7 +411,10 @@ class LvDragClassify extends LvBaseElement {
         el.classList.add('incorrect');
         allCorrect = false;
         const tooltip = el.querySelector('.tooltip') as HTMLElement;
-        if (tooltip) tooltip.textContent = `\u2192 ${p.category}`;
+        if (tooltip) {
+          tooltip.textContent = `\u2192 ${p.category}`;
+          tooltip.classList.add('has-text');
+        }
       }
     });
 

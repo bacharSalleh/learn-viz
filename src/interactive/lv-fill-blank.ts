@@ -4,8 +4,12 @@ import { LvBaseElement } from '../core/base-element.js';
 
 const blankCss = `
   :host {
-    display: inline-block;
+    display: inline;
     vertical-align: baseline;
+  }
+  .blank-wrapper {
+    display: inline;
+    position: relative;
   }
   .blank-input {
     display: inline-block;
@@ -15,7 +19,7 @@ const blankCss = `
     border-bottom: 2px solid var(--lv-border);
     background: transparent;
     font-family: var(--lv-font-mono);
-    font-size: inherit;
+    font-size: 0.9em;
     color: var(--lv-text);
     text-align: center;
     padding: 2px 8px;
@@ -34,8 +38,8 @@ const blankCss = `
   }
   .result-icon {
     display: none;
-    margin-inline-start: 4px;
-    font-size: 0.9em;
+    margin-inline-start: 2px;
+    font-size: 0.8em;
   }
   .result-icon.show { display: inline; }
   .result-icon.correct { color: var(--lv-positive); }
@@ -43,11 +47,10 @@ const blankCss = `
   .correct-answer {
     display: none;
     font-family: var(--lv-font-mono);
-    font-size: 0.8em;
+    font-size: 0.75em;
     color: var(--lv-positive);
-    margin-top: 2px;
   }
-  .correct-answer.show { display: block; }
+  .correct-answer.show { display: inline; margin-inline-start: 4px; }
 `;
 
 class LvBlank extends LvBaseElement {

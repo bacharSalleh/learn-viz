@@ -2625,20 +2625,20 @@ const Ds = ["#3b82f6", "#8b5cf6", "#06b6d4", "#22c55e", "#f59e0b", "#ef4444", "#
   .chip .tooltip {
     display: none;
     position: absolute;
-    top: -32px;
+    top: -28px;
     left: 50%;
     transform: translateX(-50%);
     background: var(--lv-text);
-    color: var(--lv-bg-card);
-    font-size: 0.75rem;
-    padding: 4px 8px;
+    color: var(--lv-bg);
+    font-size: 0.7rem;
+    padding: 3px 8px;
     border-radius: 4px;
     white-space: nowrap;
     pointer-events: none;
     z-index: 10;
   }
 
-  .chip.incorrect .tooltip {
+  .chip.incorrect .tooltip.has-text {
     display: block;
   }
 
@@ -2790,7 +2790,7 @@ class sd extends D {
       else {
         s.classList.add("incorrect"), t = !1;
         const l = s.querySelector(".tooltip");
-        l && (l.textContent = `→ ${o.category}`);
+        l && (l.textContent = `→ ${o.category}`, l.classList.add("has-text"));
       }
     }), this.dispatchEvent(
       new CustomEvent("lv-classify-check", {
@@ -6438,8 +6438,12 @@ class Eg extends D {
 customElements.define("lv-you-draw", Eg);
 const Tg = `
   :host {
-    display: inline-block;
+    display: inline;
     vertical-align: baseline;
+  }
+  .blank-wrapper {
+    display: inline;
+    position: relative;
   }
   .blank-input {
     display: inline-block;
@@ -6449,7 +6453,7 @@ const Tg = `
     border-bottom: 2px solid var(--lv-border);
     background: transparent;
     font-family: var(--lv-font-mono);
-    font-size: inherit;
+    font-size: 0.9em;
     color: var(--lv-text);
     text-align: center;
     padding: 2px 8px;
@@ -6468,8 +6472,8 @@ const Tg = `
   }
   .result-icon {
     display: none;
-    margin-inline-start: 4px;
-    font-size: 0.9em;
+    margin-inline-start: 2px;
+    font-size: 0.8em;
   }
   .result-icon.show { display: inline; }
   .result-icon.correct { color: var(--lv-positive); }
@@ -6477,11 +6481,10 @@ const Tg = `
   .correct-answer {
     display: none;
     font-family: var(--lv-font-mono);
-    font-size: 0.8em;
+    font-size: 0.75em;
     color: var(--lv-positive);
-    margin-top: 2px;
   }
-  .correct-answer.show { display: block; }
+  .correct-answer.show { display: inline; margin-inline-start: 4px; }
 `;
 class Lg extends D {
   static get observedAttributes() {
@@ -8982,11 +8985,8 @@ const N0 = `
   :host { display: block; margin: var(--lv-sp-4) 0; }
   .mt-container { width: 100%; }
   svg { display: block; margin: 0 auto; }
-  .matrix-label {
-    font-family: var(--lv-font-mono, monospace); font-size: 12px; fill: var(--lv-text-dim, #aaa);
-  }
-  .eigen-label {
-    font-family: var(--lv-font-mono, monospace); font-size: 10px; fill: #ffd93d;
+  .matrix-label, .eigen-label {
+    font-family: monospace;
   }
 `;
 class D0 extends D {
@@ -9078,9 +9078,9 @@ class D0 extends D {
   _drawMatrixLabel(t) {
     const n = X(this.root.querySelector("svg")).select(".labels");
     n.selectAll("*").remove();
-    const i = -3 + 0.15, s = -3 + 0.3;
-    n.append("text").attr("class", "matrix-label").attr("x", i).attr("y", s).attr("font-size", "0.28").text(`[${t[0][0].toFixed(1)}, ${t[0][1].toFixed(1)}]`), n.append("text").attr("class", "matrix-label").attr("x", i).attr("y", s + 0.32).attr("font-size", "0.28").text(`[${t[1][0].toFixed(1)}, ${t[1][1].toFixed(1)}]`), this.hasAttribute("show-eigen") && this._computeEigen(t).forEach((o, c) => {
-      o.real && n.append("text").attr("class", "eigen-label").attr("x", i).attr("y", s + 0.7 + c * 0.3).attr("font-size", "0.22").text(`λ${c + 1}=${o.value.toFixed(2)}`);
+    const i = -3 + 0.15, s = -3 + 0.35, a = 0.24;
+    n.append("rect").attr("x", i - 0.08).attr("y", s - a - 0.05).attr("width", 2.2).attr("height", this.hasAttribute("show-eigen") ? 1.8 : 0.8).attr("rx", 0.06).attr("fill", "rgba(0,0,0,0.6)"), n.append("text").attr("class", "matrix-label").attr("x", i).attr("y", s).attr("font-size", a).attr("fill", "#aaa").text(`[${t[0][0].toFixed(1)}, ${t[0][1].toFixed(1)}]`), n.append("text").attr("class", "matrix-label").attr("x", i).attr("y", s + a * 1.3).attr("font-size", a).attr("fill", "#aaa").text(`[${t[1][0].toFixed(1)}, ${t[1][1].toFixed(1)}]`), this.hasAttribute("show-eigen") && this._computeEigen(t).forEach((c, l) => {
+      c.real && n.append("text").attr("class", "eigen-label").attr("x", i).attr("y", s + a * 2.8 + l * a * 1.3).attr("font-size", a * 0.85).attr("fill", "#ffd93d").text(`λ${l + 1} = ${c.value.toFixed(2)}`);
     });
   }
   _computeEigen(t) {
