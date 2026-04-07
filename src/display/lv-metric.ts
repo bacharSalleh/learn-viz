@@ -39,6 +39,14 @@ class LvMetric extends LvBaseElement {
   }
 
   private _observer: IntersectionObserver | null = null;
+  private _animFrame: number | null = null;
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    if (this._animFrame !== null) { cancelAnimationFrame(this._animFrame); this._animFrame = null; }
+    this._observer?.disconnect();
+    this._observer = null;
+  }
 
   connectedCallback() {
     super.connectedCallback?.();
@@ -46,12 +54,6 @@ class LvMetric extends LvBaseElement {
     this.render(html);
     this._update();
     this._setupObserver();
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback?.();
-    this._observer?.disconnect();
-    this._observer = null;
   }
 
   handleAttributeChange(_name: string, _old: string | null, _new: string | null) {
@@ -110,9 +112,9 @@ class LvMetric extends LvBaseElement {
       const eased = 1 - Math.pow(1 - t, 3); // ease-out cubic
       const current = target * eased;
       valEl.textContent = (this.getAttribute('prefix') || '') + formatNum(current) + (this.getAttribute('suffix') || '');
-      if (t < 1) requestAnimationFrame(tick);
+      if (t < 1) this._animFrame = requestAnimationFrame(tick);
     };
-    requestAnimationFrame(tick);
+    this._animFrame = requestAnimationFrame(tick);
   }
 }
 

@@ -161,17 +161,18 @@ class LvQuiz extends LvBaseElement {
     const options = this._options;
     const explanation = this.getAttribute('explanation') || '';
 
+    const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     const optionsHtml = options.map((opt, i) => `
       <div class="option" role="radio" aria-checked="false" tabindex="0" data-index="${i}">
         <span class="icon" aria-hidden="true"></span>
-        <span class="label">${opt}</span>
+        <span class="label">${esc(opt)}</span>
       </div>
     `).join('');
 
     this.render(`
-      <div class="question">${question}</div>
-      <div class="options" role="group" aria-label="${question.replace(/"/g, '&quot;')}">${optionsHtml}</div>
-      ${explanation ? `<div class="explanation"><div class="explanation-inner">${explanation}</div></div>` : ''}
+      <div class="question">${esc(question)}</div>
+      <div class="options" role="group" aria-label="${esc(question)}">${optionsHtml}</div>
+      ${explanation ? `<div class="explanation"><div class="explanation-inner">${esc(explanation)}</div></div>` : ''}
     `);
   }
 

@@ -33,6 +33,8 @@ class LvSurface3d extends LvBaseElement {
   }
 
   private _buildScene(): void {
+    if (this._raf) { cancelAnimationFrame(this._raf); this._raf = null; }
+    if (this._renderer) { this._renderer.dispose(); this._renderer = null; }
     const grid: number[][] = this.jsonAttr('data', []);
     const wireframe = this.hasAttribute('wireframe');
     const autoRotate = this.hasAttribute('auto-rotate');

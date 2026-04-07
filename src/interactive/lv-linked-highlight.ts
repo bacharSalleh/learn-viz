@@ -28,6 +28,7 @@ const groupRegistry = new Map<string, Set<LvLinkedHighlight>>();
 
 class LvLinkedHighlight extends LvBaseElement {
   private _group = 'default';
+  private _bound = false;
 
   static get observedAttributes() {
     return ['group'];
@@ -47,6 +48,9 @@ class LvLinkedHighlight extends LvBaseElement {
   disconnectedCallback() {
     super.disconnectedCallback();
     this._unregister();
+    this.removeEventListener('mouseover', this._onMouseOver);
+    this.removeEventListener('mouseout', this._onMouseOut);
+    this._bound = false;
   }
 
   handleAttributeChange(name: string, oldValue: string | null, newValue: string | null) {
@@ -75,18 +79,10 @@ class LvLinkedHighlight extends LvBaseElement {
   }
 
   private _attachSlotListeners(): void {
-    const slot = this.root.querySelector('slot');
-    if (!slot) return;
-
-    const bind = () => {
-      // Use event delegation on the host element (light DOM)
-      this.addEventListener('mouseover', this._onMouseOver);
-      this.addEventListener('mouseout', this._onMouseOut);
-    };
-
-    // Bind immediately and also on slot change
-    bind();
-    slot.addEventListener('slotchange', bind);
+    if (this._bound) return;
+    this._bound = true;
+    this.addEventListener('mouseover', this._onMouseOver);
+    this.addEventListener('mouseout', this._onMouseOut);
   }
 
   private _onMouseOver = (e: Event): void => {

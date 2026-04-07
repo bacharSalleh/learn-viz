@@ -42,6 +42,8 @@ class LvScatter3d extends LvBaseElement {
   }
 
   private _buildScene(): void {
+    if (this._raf) { cancelAnimationFrame(this._raf); this._raf = null; }
+    if (this._renderer) { this._renderer.dispose(); this._renderer = null; }
     const data: Scatter3dDatum[] = this.jsonAttr('data', []);
     const xLabel = this.getAttribute('x-label') || 'X';
     const yLabel = this.getAttribute('y-label') || 'Y';

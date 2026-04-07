@@ -228,7 +228,7 @@ class LvSortingViz extends LvBaseElement {
     const n = this._arr.length;
     const W = 500, H = 260;
     const barW = W / n;
-    const maxVal = Math.max(...this._arr);
+    const maxVal = Math.max(...this._arr, 1);
 
     if (step.type === 'compare') {
       svg.selectAll<SVGRectElement, unknown>('.bar-rect').attr('fill', (_d, i) => {
@@ -261,7 +261,7 @@ class LvSortingViz extends LvBaseElement {
     const W = 500, H = 260;
     const n = arr.length;
     const barW = (W - 20) / n;
-    const maxVal = Math.max(...arr);
+    const maxVal = Math.max(...arr, 1);
 
     const rects = g.selectAll<SVGRectElement, number>('.bar-rect').data(arr);
 

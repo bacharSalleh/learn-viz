@@ -87,7 +87,10 @@ class LvMermaid extends LvBaseElement {
       if (output) output.innerHTML = svg;
     } catch (err: any) {
       const output = this.root.getElementById('output');
-      if (output) output.innerHTML = `<div class="mermaid-error">Diagram error: ${err.message || err}</div>`;
+      if (output) {
+        const msg = String(err.message || err).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        output.innerHTML = `<div class="mermaid-error">Diagram error: ${msg}</div>`;
+      }
     }
   }
 }

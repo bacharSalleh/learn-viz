@@ -118,6 +118,11 @@ class LvSlider extends LvBaseElement {
     return ['min', 'max', 'step', 'value', 'label', 'name', 'color'];
   }
 
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    if (this._popTimeout) { clearTimeout(this._popTimeout); this._popTimeout = null; }
+  }
+
   connectedCallback() {
     super.connectedCallback();
     this.adoptStyles(css);

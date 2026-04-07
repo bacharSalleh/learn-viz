@@ -68,9 +68,13 @@ class LvStep extends LvBaseElement {
     return this.getAttribute('title') || '';
   }
 
+  private _esc(s: string): string {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
   private _render() {
     this.render(`
-      ${this._title ? `<div class="title">${this._title}</div>` : ''}
+      ${this._title ? `<div class="title">${this._esc(this._title)}</div>` : ''}
       <slot></slot>
     `);
   }

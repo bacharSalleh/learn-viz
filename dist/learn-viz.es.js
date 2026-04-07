@@ -722,17 +722,18 @@ class yc extends R {
   constructor() {
     super(...arguments);
     z(this, "_observer", null);
+    z(this, "_animFrame", null);
   }
   static get observedAttributes() {
     return ["value", "label", "prefix", "suffix", "color", "animated"];
   }
+  disconnectedCallback() {
+    var t;
+    super.disconnectedCallback(), this._animFrame !== null && (cancelAnimationFrame(this._animFrame), this._animFrame = null), (t = this._observer) == null || t.disconnect(), this._observer = null;
+  }
   connectedCallback() {
     var t;
     (t = super.connectedCallback) == null || t.call(this), this.adoptStyles(bc), this.render(xc), this._update(), this._setupObserver();
-  }
-  disconnectedCallback() {
-    var t, n;
-    (t = super.disconnectedCallback) == null || t.call(this), (n = this._observer) == null || n.disconnect(), this._observer = null;
   }
   handleAttributeChange(t, n, i) {
     this.root.querySelector(".val") && this._update();
@@ -764,9 +765,9 @@ class yc extends R {
     if (isNaN(n)) return;
     const i = 1200, s = performance.now(), a = this.root.querySelector(".val"), o = (c) => {
       const l = Math.min((c - s) / i, 1), d = 1 - Math.pow(1 - l, 3), h = n * d;
-      a.textContent = (this.getAttribute("prefix") || "") + Jl(h) + (this.getAttribute("suffix") || ""), l < 1 && requestAnimationFrame(o);
+      a.textContent = (this.getAttribute("prefix") || "") + Jl(h) + (this.getAttribute("suffix") || ""), l < 1 && (this._animFrame = requestAnimationFrame(o));
     };
-    requestAnimationFrame(o);
+    this._animFrame = requestAnimationFrame(o);
   }
 }
 customElements.define("lv-metric", yc);
@@ -1490,16 +1491,16 @@ class Oc extends R {
     return parseInt(this.getAttribute("correct") || "0", 10);
   }
   _render() {
-    const t = this.getAttribute("question") || "", n = this._options, i = this.getAttribute("explanation") || "", s = n.map((a, o) => `
-      <div class="option" role="radio" aria-checked="false" tabindex="0" data-index="${o}">
+    const t = this.getAttribute("question") || "", n = this._options, i = this.getAttribute("explanation") || "", s = (o) => o.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"), a = n.map((o, c) => `
+      <div class="option" role="radio" aria-checked="false" tabindex="0" data-index="${c}">
         <span class="icon" aria-hidden="true"></span>
-        <span class="label">${a}</span>
+        <span class="label">${s(o)}</span>
       </div>
     `).join("");
     this.render(`
-      <div class="question">${t}</div>
-      <div class="options" role="group" aria-label="${t.replace(/"/g, "&quot;")}">${s}</div>
-      ${i ? `<div class="explanation"><div class="explanation-inner">${i}</div></div>` : ""}
+      <div class="question">${s(t)}</div>
+      <div class="options" role="group" aria-label="${s(t)}">${a}</div>
+      ${i ? `<div class="explanation"><div class="explanation-inner">${s(i)}</div></div>` : ""}
     `);
   }
   _attachListeners() {
@@ -1789,6 +1790,9 @@ class Vc extends R {
   static get observedAttributes() {
     return ["min", "max", "step", "value", "label", "name", "color"];
   }
+  disconnectedCallback() {
+    super.disconnectedCallback(), this._popTimeout && (clearTimeout(this._popTimeout), this._popTimeout = null);
+  }
   connectedCallback() {
     super.connectedCallback(), this.adoptStyles(jc), this._render(), this._bind(), this._updateTrack();
   }
@@ -1995,9 +1999,12 @@ class Uc extends R {
   get _title() {
     return this.getAttribute("title") || "";
   }
+  _esc(e) {
+    return e.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
   _render() {
     this.render(`
-      ${this._title ? `<div class="title">${this._title}</div>` : ""}
+      ${this._title ? `<div class="title">${this._esc(this._title)}</div>` : ""}
       <slot></slot>
     `);
   }
@@ -2836,6 +2843,7 @@ class ld extends R {
   constructor() {
     super(...arguments);
     z(this, "_group", "default");
+    z(this, "_bound", !1);
     z(this, "_onMouseOver", (t) => {
       var s, a;
       const n = (a = (s = t.target).closest) == null ? void 0 : a.call(s, "[data-link]");
@@ -2858,7 +2866,7 @@ class ld extends R {
     super.connectedCallback(), this.adoptStyles(ad), od(), this.render("<slot></slot>"), this._group = this.getAttribute("group") || "default", this._register(), this._attachSlotListeners();
   }
   disconnectedCallback() {
-    super.disconnectedCallback(), this._unregister();
+    super.disconnectedCallback(), this._unregister(), this.removeEventListener("mouseover", this._onMouseOver), this.removeEventListener("mouseout", this._onMouseOut), this._bound = !1;
   }
   handleAttributeChange(t, n, i) {
     t === "group" && (this._unregister(), this._group = i || "default", this._register());
@@ -2873,12 +2881,7 @@ class ld extends R {
     t && (t.delete(this), t.size === 0 && Pe.delete(this._group));
   }
   _attachSlotListeners() {
-    const t = this.root.querySelector("slot");
-    if (!t) return;
-    const n = () => {
-      this.addEventListener("mouseover", this._onMouseOver), this.addEventListener("mouseout", this._onMouseOut);
-    };
-    n(), t.addEventListener("slotchange", n);
+    this._bound || (this._bound = !0, this.addEventListener("mouseover", this._onMouseOver), this.addEventListener("mouseout", this._onMouseOut));
   }
   _highlightAll(t, n) {
     const i = Pe.get(this._group);
@@ -8597,7 +8600,7 @@ class M0 extends R {
     const c = eo.canvas(o), l = o.getContext("2d");
     if (!l) return;
     l.scale(2, 2);
-    const d = Math.max(...t.map((m) => m.value)), h = i - a.left - a.right, u = s - a.top - a.bottom, f = h / t.length * 0.7, g = h / t.length * 0.3;
+    const d = Math.max(...t.map((m) => m.value), 1e-3), h = i - a.left - a.right, u = s - a.top - a.bottom, f = h / t.length * 0.7, g = h / t.length * 0.3;
     c.line(a.left, s - a.bottom, i - a.right, s - a.bottom, { roughness: n * 0.5, stroke: "#888" }), c.line(a.left, a.top, a.left, s - a.bottom, { roughness: n * 0.5, stroke: "#888" });
     const p = this.isRtl;
     t.forEach((m, b) => {
@@ -8725,6 +8728,7 @@ class P0 extends R {
     this.isConnected && this._buildScene();
   }
   _buildScene() {
+    this._raf && (cancelAnimationFrame(this._raf), this._raf = null), this._renderer && (this._renderer.dispose(), this._renderer = null);
     const t = this.jsonAttr("data", []);
     this.getAttribute("x-label"), this.getAttribute("y-label"), this.getAttribute("z-label");
     const n = this.hasAttribute("clusters"), i = this.hasAttribute("auto-rotate");
@@ -8793,6 +8797,7 @@ class I0 extends R {
     this.isConnected && this._buildScene();
   }
   _buildScene() {
+    this._raf && (cancelAnimationFrame(this._raf), this._raf = null), this._renderer && (this._renderer.dispose(), this._renderer = null);
     const t = this.jsonAttr("data", []), n = this.hasAttribute("wireframe"), i = this.hasAttribute("auto-rotate");
     if (this.render('<div class="scene-container" id="scene"></div>'), !t.length || !t[0].length) return;
     const s = this.root.getElementById("scene");
@@ -8963,7 +8968,7 @@ class q0 extends R {
   }
   _applyStep(t) {
     const n = G(this.root.querySelector("svg"));
-    if (this._arr.length, Math.max(...this._arr), t.type === "compare")
+    if (this._arr.length, Math.max(...this._arr, 1), t.type === "compare")
       n.selectAll(".bar-rect").attr("fill", (i, s) => t.indices.includes(s) ? "#ffd93d" : n.selectAll(".bar-rect").nodes()[s].dataset.sorted === "true" ? "#22c55e" : "#00d4ff");
     else if (t.type === "swap") {
       const [i, s] = t.indices;
@@ -8976,7 +8981,7 @@ class q0 extends R {
   _drawBars(t, n) {
     const s = G(this.root.querySelector("svg")).select(".bars-group");
     if (s.empty()) return;
-    const a = 500, o = 260, c = t.length, l = (a - 20) / c, d = Math.max(...t);
+    const a = 500, o = 260, c = t.length, l = (a - 20) / c, d = Math.max(...t, 1);
     s.selectAll(".bar-rect").data(t).join(
       (u) => u.append("rect").attr("class", "bar-rect").attr("x", (f, g) => 10 + g * l + 1).attr("width", Math.max(l - 2, 1)).attr("y", (f) => o - f / d * (o - 20)).attr("height", (f) => f / d * (o - 20)).attr("rx", 2).attr("fill", "#00d4ff"),
       (u) => u.attr("x", (f, g) => 10 + g * l + 1).attr("width", Math.max(l - 2, 1)).attr("y", (f) => o - f / d * (o - 20)).attr("height", (f) => f / d * (o - 20)).attr("fill", (f, g) => u.nodes()[g].dataset.sorted === "true" ? "#22c55e" : n && n.includes(g) ? "#ffd93d" : "#00d4ff")
@@ -12833,7 +12838,10 @@ class C_ extends R {
         o && (o.innerHTML = a);
       } catch (s) {
         const a = this.root.getElementById("output");
-        a && (a.innerHTML = `<div class="mermaid-error">Diagram error: ${s.message || s}</div>`);
+        if (a) {
+          const o = String(s.message || s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+          a.innerHTML = `<div class="mermaid-error">Diagram error: ${o}</div>`;
+        }
       }
     }
   }

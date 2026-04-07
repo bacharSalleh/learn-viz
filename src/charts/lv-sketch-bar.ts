@@ -72,7 +72,7 @@ class LvSketchBar extends LvBaseElement {
     // Scale for retina
     ctx.scale(2, 2);
 
-    const maxVal = Math.max(...data.map(d => d.value));
+    const maxVal = Math.max(...data.map(d => d.value), 0.001);
     const iw = W - pad.left - pad.right;
     const ih = H - pad.top - pad.bottom;
     const barW = iw / data.length * 0.7;
