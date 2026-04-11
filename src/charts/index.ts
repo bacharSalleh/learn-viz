@@ -19,3 +19,4 @@ import './lv-regression-fit.js';
 import './lv-gradient-descent.js';
 import './lv-decision-boundary.js';
 import './lv-attention-map.js';
+import './lv-canvas-chart.js';

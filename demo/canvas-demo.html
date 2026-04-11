@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Canvas Components Demo</title>
+  <script type="module" src="/src/index.ts"></script>
+</head>
+<body>
+<lv-page theme="dark">
+  <lv-hero number="C" title="Canvas Rendering" subtitle="High-performance charts and neural network diagrams powered by HTML Canvas 2D"></lv-hero>
+
+  <div class="lv-container">
+
+    <!-- ── Section 1: Multi-Series Distribution Chart ── -->
+    <lv-section title="Distribution Chart — Canvas">
+      <p class="lv-text-dim">Multi-series smooth curves rendered on Canvas with interactive tooltips, toggle-able legend, and clip-reveal animation. Inspired by ngrok's parameter distribution charts.</p>
+
+      <lv-canvas-chart id="dist-chart" smooth legend tooltip gridlines
+        x-label="Parameter value range"
+        y-label="% of parameters in range"
+        y-format="%">
+      </lv-canvas-chart>
+    </lv-section>
+
+    <!-- ── Section 2: Line Chart with Area Fill ── -->
+    <lv-section title="Training Loss — Canvas">
+      <p class="lv-text-dim">Area-filled line chart showing training and validation loss curves.</p>
+
+      <lv-canvas-chart id="loss-chart" smooth legend tooltip gridlines
+        x-label="Epoch" y-label="Loss">
+      </lv-canvas-chart>
+    </lv-section>
+
+    <!-- ── Section 3: Straight Line Chart ── -->
+    <lv-section title="Benchmark Comparison — Canvas">
+      <p class="lv-text-dim">Multi-series chart with <code>smooth="false"</code> for straight line segments.</p>
+
+      <lv-canvas-chart id="bench-chart" smooth="false" legend tooltip gridlines
+        x-label="Model Size (B)" y-label="Score">
+      </lv-canvas-chart>
+    </lv-section>
+
+    <!-- ── Section 4: Neural Network — Simple ── -->
+    <lv-section title="Simple Neural Network">
+      <p class="lv-text-dim">A basic feedforward network with input/output labels and colored borders. Hover nodes and edges for details.</p>
+
+      <lv-neural-net
+        layers='[2, 4, 3, 2]'
+        values='[[2.0, 1.0], [0.5, -0.3, 0.8, 0.1], [1.2, -0.5, 0.9], [13.4, 25.3]]'
+        input-labels="x₁, x₂"
+        output-labels="ŷ₁, ŷ₂"
+        input-colors="#f59e0b, #f59e0b"
+        output-colors="#22c55e, #22c55e"
+        animate>
+      </lv-neural-net>
+    </lv-section>
+
+    <!-- ── Section 5: Neural Network — Weighted ── -->
+    <lv-section title="Weighted Neural Network">
+      <p class="lv-text-dim">Edges thickness and opacity reflect weight magnitudes. Positive weights use accent color, negative use muted.</p>
+
+      <lv-neural-net id="weighted-net"
+        layers='[3, 5, 4, 2]'
+        input-labels="x₁, x₂, x₃"
+        output-labels="class A, class B"
+        input-colors="#f59e0b, #f59e0b, #f59e0b"
+        output-colors="#3b82f6, #ef4444"
+        animate>
+      </lv-neural-net>
+    </lv-section>
+
+    <!-- ── Section 6: Neural Network — Deep ── -->
+    <lv-section title="Deep Network">
+      <p class="lv-text-dim">A deeper architecture with the forward-pass layer-by-layer animation.</p>
+
+      <lv-neural-net
+        layers='[2, 6, 8, 6, 4, 2]'
+        input-labels="in₁, in₂"
+        output-labels="out₁, out₂"
+        input-colors="#a855f7, #a855f7"
+        output-colors="#06b6d4, #06b6d4"
+        animate>
+      </lv-neural-net>
+    </lv-section>
+
+    <!-- ── Section 7: Canvas Chart with Controls Slot ── -->
+    <lv-section title="Interactive Distribution with Controls">
+      <p class="lv-text-dim">Using the <code>&lt;slot name="controls"&gt;</code> to add a slider that adjusts the distribution spread.</p>
+
+      <lv-playground>
+        <lv-slider slot="controls" name="spread" min="0.5" max="3" step="0.1" value="1" label="Spread"></lv-slider>
+        <div slot="output">
+          <lv-canvas-chart id="interactive-dist" smooth legend tooltip gridlines
+            x-label="x" y-label="Density">
+          </lv-canvas-chart>
+        </div>
+      </lv-playground>
+    </lv-section>
+
+    <lv-nav prev="index.html" prev-label="Gallery"></lv-nav>
+  </div>
+</lv-page>
+
+<script type="module">
+  // ── Helper: Generate gaussian curve data ──
+  function gaussian(mean, std, xMin, xMax, n = 100) {
+    const pts = [];
+    const step = (xMax - xMin) / n;
+    for (let i = 0; i <= n; i++) {
+      const x = xMin + i * step;
+      const y = (1 / (std * Math.sqrt(2 * Math.PI))) * Math.exp(-0.5 * ((x - mean) / std) ** 2);
+      pts.push({ x, y: y * 100 }); // as percentage
+    }
+    return pts;
+  }
+
+  // ── Distribution Chart Data (like ngrok) ──
+  const distChart = document.getElementById('dist-chart');
+  distChart.setAttribute('data', JSON.stringify([
+    { label: 'Qwen3 Coder',  color: '#f59e0b', values: gaussian(0.002, 0.018, -0.1, 0.1), type: 'line' },
+    { label: 'DeepSeek R1',   color: '#ef4444', values: gaussian(0.001, 0.016, -0.1, 0.1), type: 'line' },
+    { label: 'GLM4.7 Flash',  color: '#06b6d4', values: gaussian(0.0, 0.025, -0.1, 0.1), type: 'line' },
+    { label: 'Voxtral Mini',  color: '#22c55e', values: gaussian(0.001, 0.012, -0.1, 0.1), type: 'line' },
+    { label: 'GPT OSS',       color: '#3b82f6', values: gaussian(0.0, 0.022, -0.1, 0.1), type: 'line' },
+    { label: 'LFM2.5',        color: '#d946ef', values: gaussian(-0.001, 0.020, -0.1, 0.1), type: 'line' },
+  ]));
+
+  // ── Training Loss Chart Data ──
+  const lossChart = document.getElementById('loss-chart');
+  const trainLoss = [];
+  const valLoss = [];
+  for (let i = 0; i <= 50; i++) {
+    trainLoss.push({ x: i, y: 2.5 * Math.exp(-0.06 * i) + 0.08 + Math.random() * 0.03 });
+    valLoss.push({ x: i, y: 2.8 * Math.exp(-0.05 * i) + 0.15 + Math.random() * 0.05 });
+  }
+  lossChart.setAttribute('data', JSON.stringify([
+    { label: 'Train Loss', color: '#3b82f6', values: trainLoss, type: 'area' },
+    { label: 'Val Loss',   color: '#ef4444', values: valLoss, type: 'area' },
+  ]));
+
+  // ── Benchmark Chart Data ──
+  const benchChart = document.getElementById('bench-chart');
+  benchChart.setAttribute('data', JSON.stringify([
+    { label: 'MMLU', color: '#22c55e', values: [
+      {x:1,y:45},{x:3,y:58},{x:7,y:68},{x:13,y:74},{x:34,y:79},{x:70,y:83}
+    ]},
+    { label: 'HumanEval', color: '#3b82f6', values: [
+      {x:1,y:30},{x:3,y:48},{x:7,y:62},{x:13,y:71},{x:34,y:78},{x:70,y:85}
+    ]},
+    { label: 'MATH', color: '#f59e0b', values: [
+      {x:1,y:18},{x:3,y:32},{x:7,y:45},{x:13,y:55},{x:34,y:64},{x:70,y:72}
+    ]},
+  ]));
+
+  // ── Weighted Neural Network: generate random weights ──
+  const weightedNet = document.getElementById('weighted-net');
+  function randWeights(srcCount, dstCount) {
+    const w = [];
+    for (let i = 0; i < srcCount * dstCount; i++) {
+      w.push(+(Math.random() * 2 - 1).toFixed(2));
+    }
+    return w;
+  }
+  weightedNet.setAttribute('weights', JSON.stringify([
+    randWeights(3, 5),
+    randWeights(5, 4),
+    randWeights(4, 2),
+  ]));
+
+  // ── Interactive Distribution ──
+  function updateInteractiveDist(spread) {
+    const chart = document.getElementById('interactive-dist');
+    chart.setAttribute('data', JSON.stringify([
+      { label: 'Normal',   color: '#3b82f6', values: gaussian(0, spread, -6, 6).map(p => ({x: p.x, y: p.y})), type: 'area' },
+      { label: 'Bimodal',  color: '#22c55e', values: (() => {
+        const pts = [];
+        for (let i = 0; i <= 100; i++) {
+          const x = -6 + i * 0.12;
+          const y1 = (0.5 / (spread * Math.sqrt(2 * Math.PI))) * Math.exp(-0.5 * ((x + 2) / spread) ** 2);
+          const y2 = (0.5 / (spread * Math.sqrt(2 * Math.PI))) * Math.exp(-0.5 * ((x - 2) / spread) ** 2);
+          pts.push({ x, y: (y1 + y2) * 100 });
+        }
+        return pts;
+      })(), type: 'area' },
+    ]));
+  }
+
+  updateInteractiveDist(1);
+
+  document.querySelector('lv-playground').addEventListener('lv-params-change', (e) => {
+    updateInteractiveDist(e.detail.spread);
+  });
+</script>
+</body>
+</html>

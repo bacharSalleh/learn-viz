@@ -6,3 +6,4 @@ import './lv-mermaid.js';
 import './lv-graph-algo.js';
 import './lv-backprop-flow.js';
 import './lv-recursion-tree.js';
+import './lv-neural-net.js';
